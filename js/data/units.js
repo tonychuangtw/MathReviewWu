@@ -2243,15 +2243,121 @@ var MATH_UNITS = [
     examples:[
       { q:'等腰三角形一個底角是 $65^\\circ$，求頂角。',
         steps:['兩底角相等：$65^\\circ+65^\\circ=130^\\circ$。','頂角 $=180-130=50^\\circ$。'],
-        ans:'$50^\\circ$' } ] }
+        ans:'$50^\\circ$' } ] },
+
+  { id:'u44c4', title:'等腰三角形的其他性質、直角判別與正三角形', body:
+    '<p>2、等腰三角形底邊的<b class="key">中垂線</b>會<b class="key">通過頂點</b>，且<b class="key">平分頂角</b>。</p>'+
+    '<p>3、等腰三角形的<b class="key">頂角平分線</b>會<b class="key">垂直平分底邊</b>（用 SAS 全等證明 $\\overline{BD}=\\overline{CD}$、$\\angle ADB=\\angle ADC=90^\\circ$）。</p>'+
+    '<p>四、【<b class="key">由邊長判別直角三角形</b>】：若三角形滿足一邊長的平方等於另兩邊長的平方和，則此三角形為<b class="key">直角三角形</b>（畢氏定理的逆定理）。</p>'+
+    '<p>五、【<b class="key">正三角形的判別性質</b>】：1、正三角形<b class="key">三個邊等長</b>且<b class="key">三個角都等於 $60^\\circ$</b>；2、正三角形的高 $=\\dfrac{\\sqrt{3}}{2}a$；3、正三角形的面積 $=\\dfrac{\\sqrt{3}}{4}a^2$。</p>',
+    examples:[
+      { q:'三邊為 7、24、25 的三角形是什麼三角形？',
+        steps:['檢查：$7^2+24^2=49+576=625=25^2$。','滿足畢氏逆定理 → 直角三角形。'],
+        ans:'直角三角形' },
+      { q:'邊長 10 的正三角形，高與面積各是多少？',
+        steps:['高 $=\\dfrac{\\sqrt{3}}{2}\\times 10=5\\sqrt{3}$。','面積 $=\\dfrac{\\sqrt{3}}{4}\\times 100=25\\sqrt{3}$。'],
+        ans:'高 $5\\sqrt{3}$；面積 $25\\sqrt{3}$' } ] }
+]},
+
+{ id:'u45', book:4, sec:'3-4', title:'三角形邊角關係', page:72, concepts:[
+  { id:'u45c1', title:'三角形的三邊長關係', body:
+    '<p>1、任意<b class="key">兩邊之和大於第三邊</b>：$a+b>c$、$b+c>a$、$c+a>b$。</p>'+
+    '<p>2、任意<b class="key">兩邊之差小於第三邊</b>：$|a-b|<c$、$|b-c|<a$、$|c-a|<b$。</p>'+
+    '<p>3、<b class="key">結論</b>：$|a-b|<c<a+b$。</p>',
+    examples:[
+      { q:'兩邊長 5、9，第三邊 $x$ 的範圍？若 $x$ 是整數有幾種可能？',
+        steps:['$|9-5|<x<9+5$ → $4<x<14$。','整數：5～13，共 9 種。'],
+        ans:'$4<x<14$；9 種' },
+      { q:'邊長 3、4、8 能組成三角形嗎？',
+        steps:['檢查兩邊和：$3+4=7<8$。','違反兩邊之和大於第三邊 → 不能。'],
+        ans:'不能' } ] },
+
+  { id:'u45c2', title:'三角形的外角大於任一內對角', body:
+    '<p>由外角定理 $\\angle 1=\\angle A+\\angle B$，所以 <b class="key">$\\angle 1>\\angle A$ 且 $\\angle 1>\\angle B$</b>（外角大於任一遠內角）。</p>',
+    examples:[
+      { q:'$\\triangle ABC$ 中 $\\angle C$ 的外角為 $95^\\circ$，$\\angle A$ 可能是 $100^\\circ$ 嗎？',
+        steps:['外角必大於遠內角 $\\angle A$。','$100^\\circ>95^\\circ$ 矛盾 → 不可能。'],
+        ans:'不可能' } ] },
+
+  { id:'u45c3', title:'三角形的邊角關係', body:
+    '<p>1、<b class="key">等邊對等角，等角對等邊</b>。</p>'+
+    '<p>2、【<b class="key">大邊對大角</b>】：當 $\\overline{AC}>\\overline{BC}$ 時 ⇒ $\\angle B>\\angle A$。</p>'+
+    '<p>3、【<b class="key">大角對大邊</b>】：當 $\\angle C>\\angle B$ 時 ⇒ $\\overline{AB}>\\overline{AC}$。</p>',
+    examples:[
+      { q:'$\\triangle ABC$ 中 $\\angle A=70^\\circ$、$\\angle B=60^\\circ$、$\\angle C=50^\\circ$，哪條邊最長？',
+        steps:['大角對大邊：最大角 $\\angle A$ 對邊 $\\overline{BC}$。'],
+        ans:'$\\overline{BC}$ 最長' },
+      { q:'$\\triangle ABC$ 三邊 $\\overline{AB}=6$、$\\overline{BC}=8$、$\\overline{CA}=10$，比較三內角大小。',
+        steps:['大邊對大角：$\\overline{CA}>\\overline{BC}>\\overline{AB}$。','對角依序：$\\angle B>\\angle A>\\angle C$。'],
+        ans:'$\\angle B>\\angle A>\\angle C$' } ] },
+
+  { id:'u45c4', title:'樞紐定理與逆樞紐定理', body:
+    '<p>已知兩個三角形的<b class="key">兩組邊分別對應相等</b>（不同三角形）：</p>'+
+    '<p>1、<b class="key">樞紐定理</b>：若 $\\angle D>\\angle A$，則 $\\overline{EF}>\\overline{BC}$（夾角愈大，對邊愈長——像時鐘兩針張愈開，針尖距離愈遠）。</p>'+
+    '<p>2、<b class="key">逆樞紐定理</b>：若 $\\overline{EF}>\\overline{BC}$，則 $\\angle D>\\angle A$。</p>',
+    examples:[
+      { q:'時鐘 3 點與 5 點時，時針分針針尖的距離哪個遠？用什麼定理說明？',
+        steps:['兩針長度固定（兩組邊相等），5 點時夾角較大。','樞紐定理：夾角大 → 對邊（針尖距離）大。'],
+        ans:'5 點較遠（樞紐定理）' } ] },
+
+  { id:'u45c5', title:'特殊直角三角形邊長比與三線段判別', body:
+    '<p>六、特殊直角三角形的邊長比：</p>'+
+    '<p>1、$30^\\circ$、$60^\\circ$、$90^\\circ$ 的直角三角形：三邊比為 <b class="key">$1:\\sqrt{3}:2$</b>（$30^\\circ$ 對 1、$60^\\circ$ 對 $\\sqrt{3}$、$90^\\circ$ 對 2）。</p>'+
+    '<p>2、$45^\\circ$、$45^\\circ$、$90^\\circ$ 的直角三角形：邊長比 <b class="key">$1:1:\\sqrt{2}$</b>。</p>'+
+    '<p>七、正三角形邊長為 $a$：高 $=\\dfrac{\\sqrt{3}}{2}a$、面積 $=\\dfrac{\\sqrt{3}}{4}a^2$。</p>'+
+    '<p>【<b class="key">三線段形成三角形的判別</b>】：已知三條線段，如果兩條<b class="key">較短</b>線段的和大於<b class="key">最長</b>線段，則此三線段可以形成一個三角形。</p>',
+    examples:[
+      { q:'$30^\\circ$–$60^\\circ$–$90^\\circ$ 三角形斜邊 12，求另兩邊。',
+        steps:['比 $1:\\sqrt{3}:2$，斜邊對應 2 → 單位 $=6$。','$30^\\circ$ 對邊 $=6$；$60^\\circ$ 對邊 $=6\\sqrt{3}$。'],
+        ans:'$6$ 與 $6\\sqrt{3}$' },
+      { q:'等腰直角三角形股長 5，斜邊多長？',
+        steps:['比 $1:1:\\sqrt{2}$。','斜邊 $=5\\sqrt{2}$。'],
+        ans:'$5\\sqrt{2}$' } ] }
+]},
+
+{ id:'u46', book:4, sec:'4-1', title:'平行', page:74, concepts:[
+  { id:'u46c1', title:'平行線的意義與性質', body:
+    '<p>一、平行線的意義：<b class="key">兩直線可以找到一條共同的垂直線</b>。</p>'+
+    '<p>二、平行的符號：<b class="key">∥</b>。</p>'+
+    '<p>三、平行線的性質：</p>'+
+    '<p>1、已知 $L_1\\parallel L_2$，則 (1) $L_1$ 與 $L_2$ <b class="key">永不相交</b>；(2) $L_1$ 與 $L_2$ 的距離<b class="key">處處相等</b>。</p>'+
+    '<p>2、已知 $L_1\\parallel L_2$，若直線 $M\\perp L_1$，則 <b class="key">$M\\perp L_2$</b>。</p>'+
+    '<p>3、已知 $L_1\\parallel L_2$、$L_2\\parallel L_3$，則 <b class="key">$L_1\\parallel L_2\\parallel L_3$</b>（平行具遞移性）。</p>',
+    examples:[
+      { q:'鐵軌為什麼處處等寬？用平行線的哪個性質解釋？',
+        steps:['兩軌平行。','平行線間的距離處處相等。'],
+        ans:'平行線距離處處相等' } ] },
+
+  { id:'u46c2', title:'截線與截角', body:
+    '<p>兩條直線 $L_1$、$L_2$ 被一條直線 $L$ 所截，形成八個交角，則稱 $L$ 為<b class="key">截線</b>，八個交角 $\\angle 1\\sim\\angle 8$ 為<b class="key">截角</b>（上方 $L_1$ 處為 $\\angle 1\\angle 2\\angle 3\\angle 4$、下方 $L_2$ 處為 $\\angle 5\\angle 6\\angle 7\\angle 8$）：</p>'+
+    '<p>1、<b class="key">同位角</b>：<b class="key">相對位置相同的角</b>（4 組）：$\\angle 1$ 與 $\\angle 5$、$\\angle 2$ 與 $\\angle 6$、$\\angle 3$ 與 $\\angle 7$、$\\angle 4$ 與 $\\angle 8$。</p>'+
+    '<p>2、<b class="key">內錯角</b>：<b class="key">兩直線內交錯的角</b>（2 組）：$\\angle 3$ 與 $\\angle 6$、$\\angle 4$ 與 $\\angle 5$。</p>'+
+    '<p>3、<b class="key">同側內角</b>：<b class="key">兩直線內同側的角</b>（2 組）：$\\angle 3$ 與 $\\angle 5$、$\\angle 4$ 與 $\\angle 6$。</p>'+
+    '<p>4、<b class="key">外錯角</b>：<b class="key">兩直線外交錯的角</b>（2 組）：$\\angle 1$ 與 $\\angle 8$、$\\angle 2$ 與 $\\angle 7$。</p>'+
+    '<p>5、<b class="key">同側外角</b>：<b class="key">兩直線外同側的角</b>（2 組）：$\\angle 1$ 與 $\\angle 7$、$\\angle 2$ 與 $\\angle 8$。</p>',
+    examples:[
+      { q:'截線圖中，內錯角和同位角各有幾組？',
+        steps:['內錯角 2 組、同位角 4 組。'],
+        ans:'內錯角 2 組；同位角 4 組' } ] },
+
+  { id:'u46c3', title:'平行線的截線性質', body:
+    '<p>已知兩平行線被一直線所截，則：</p>'+
+    '<p>1、同位角<b class="key">相等</b>。</p>'+
+    '<p>2、內錯角<b class="key">相等</b>。</p>'+
+    '<p>3、同側內角<b class="key">互補</b>。</p>',
+    examples:[
+      { q:'$L_1\\parallel L_2$ 被截線所截，一個同側內角為 $68^\\circ$，它的同側內角夥伴、內錯角夥伴各幾度？',
+        steps:['同側內角互補：$180-68=112^\\circ$。','內錯角相等：$68^\\circ$。'],
+        ans:'$112^\\circ$；$68^\\circ$' },
+      { q:'截線與 $L_1$ 成 $75^\\circ$，$L_1\\parallel L_2$，截線與 $L_2$ 成幾度？',
+        steps:['同位角相等。','也是 $75^\\circ$。'],
+        ans:'$75^\\circ$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u45',book:4,sec:'3-4',title:'三角形邊角關係',page:72},
-  {id:'u46',book:4,sec:'4-1',title:'平行',page:74},
   {id:'u47',book:4,sec:'4-2',title:'平行四邊形',page:76},
   {id:'u48',book:4,sec:'4-3',title:'特殊四邊形',page:78},
   {id:'u49',book:5,sec:'1-1',title:'比例線段',page:82},
