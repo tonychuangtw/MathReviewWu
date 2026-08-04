@@ -2534,15 +2534,108 @@ var MATH_UNITS = [
     examples:[
       { q:'以 $O$ 為中心把 $\\triangle ABC$ 放大 3 倍，若 $\\overline{OA}=2$，$\\overline{OA&#39;}$ 是多少？若 $\\overline{BC}=5$，$\\overline{B&#39;C&#39;}$ 呢？',
         steps:['$\\overline{OA&#39;}=3\\times 2=6$。','對應邊長 $r$ 倍：$\\overline{B&#39;C&#39;}=15$。'],
-        ans:'$6$；$15$' } ] }
+        ans:'$6$；$15$' } ] },
+
+  { id:'u50c3', title:'相似多邊形', body:
+    '<p>意義：(1) <b class="key">長得很像</b>；(2) <b class="key">經過縮小或放大後的圖形</b>；(3) <b class="key">放大後的角度不變</b>且<b class="key">每一邊放大的倍數相同</b>。</p>'+
+    '<p>定義：(1) <b class="key">對應角相等</b>且 (2) <b class="key">對應邊成比例</b>。符號：<b class="key">$\\sim$</b>，讀作「<b class="key">相似於</b>」。</p>'+
+    '<p>(1) 兩個圖形中，如果其中一個經過縮放後，會與另一個<b class="key">全等</b>，此時我們就稱這兩個圖形<b class="key">相似</b>。</p>'+
+    '<p>(2) 兩個相似的多邊形，對應邊會<b class="key">成比例</b>，對應角會<b class="key">相等</b>。</p>'+
+    '<p>(3) 任意兩個正 $n$ 邊形都<b class="key">相似</b>（兩正三角形、兩正方形、兩等腰直角三角形也必相似）。</p>'+
+    '<p>(4) 兩個邊數大於 3 的多邊形，如果只有<b class="key">對應邊成比例</b>或<b class="key">對應角相等</b>，則這兩個多邊形<b class="key">不一定</b>相似（例：兩長方形對應角都相等但不一定相似；兩菱形對應邊成比例但不一定相似）。</p>',
+    examples:[
+      { q:'任兩個正方形一定相似嗎？任兩個長方形呢？',
+        steps:['正方形：角全 90°、四邊等長 → 對應角相等且邊成比例 → 一定相似。','長方形：角相等但長寬比可能不同 → 不一定。'],
+        ans:'正方形一定；長方形不一定' } ] },
+
+  { id:'u50c4', title:'三角形的相似性質（AA、SAS、SSS）', body:
+    '<p>(1) <b class="key">AA（AAA）相似性質</b>：若兩個三角形的兩組（三組）<b class="key">對應角</b>相等，則這兩個三角形相似。</p>'+
+    '<div class="inline-ex">例：$\\triangle ABC$ 與 $\\triangle DEF$ 中，若 $\\angle A=\\angle D$、$\\angle B=\\angle E$，則 $\\triangle ABC\\sim\\triangle DEF$。</div>'+
+    '<p>(2) <b class="key">SAS 相似性質</b>：若兩個三角形有一組<b class="key">對應角</b>相等，且夾此等角的兩組<b class="key">對應邊</b>成比例，則這兩個三角形相似。</p>'+
+    '<div class="inline-ex">例：若 $\\angle A=\\angle D$，$\\dfrac{\\overline{AB}}{\\overline{DE}}=\\dfrac{\\overline{AC}}{\\overline{DF}}$，則 $\\triangle ABC\\sim\\triangle DEF$。</div>'+
+    '<p>(3) <b class="key">SSS 相似性質</b>：若兩個三角形的三組<b class="key">對應邊</b>成比例，則這兩個三角形相似。</p>'+
+    '<div class="inline-ex">例：若 $\\dfrac{\\overline{AB}}{\\overline{DE}}=\\dfrac{\\overline{BC}}{\\overline{EF}}=\\dfrac{\\overline{AC}}{\\overline{DF}}$，則 $\\triangle ABC\\sim\\triangle DEF$。</div>',
+    examples:[
+      { q:'兩三角形三邊分別為 3、4、5 與 6、8、10，相似嗎？依據？',
+        steps:['$\\dfrac{3}{6}=\\dfrac{4}{8}=\\dfrac{5}{10}=\\dfrac{1}{2}$。','三邊成比例 → SSS 相似。'],
+        ans:'相似（SSS）' },
+      { q:'$\\triangle ABC\\sim\\triangle DEF$，$\\overline{AB}=4$、$\\overline{DE}=10$、$\\overline{BC}=6$，求 $\\overline{EF}$。',
+        steps:['相似比 $=4:10=2:5$。','$\\overline{EF}=6\\times\\dfrac{5}{2}=15$。'],
+        ans:'$15$' } ] }
+]},
+
+{ id:'u51', book:5, sec:'1-3', title:'相似三角形的應用', page:87, concepts:[
+  { id:'u51c1', title:'簡易測量與對應線段、面積關係', body:
+    '<p>1、<b class="key">簡易測量</b>：利用相似三角形<b class="key">對應邊成比例</b>的性質，可以進行簡易測量（影子量塔高等）。</p>'+
+    '<p>2、相似三角形的對應線段與面積關係：</p>'+
+    '<p>(1) 對應邊的比＝對應<b class="key">高</b>的比＝對應<b class="key">角平分線</b>的比＝對應<b class="key">中線</b>的比。</p>'+
+    '<p>(2) 面積的比＝對應<b class="key">邊長平方</b>比。</p>',
+    examples:[
+      { q:'身高 1.6 公尺的人影長 2 公尺，同時刻樹影長 15 公尺，樹多高？',
+        steps:['相似三角形：$\\dfrac{樹高}{15}=\\dfrac{1.6}{2}$。','樹高 $=15\\times 0.8=12$ 公尺。'],
+        ans:'12 公尺' },
+      { q:'兩相似三角形相似比 $2:3$，面積比是多少？小三角形面積 20，大的呢？',
+        steps:['面積比＝邊長平方比 $=4:9$。','$20\\times\\dfrac{9}{4}=45$。'],
+        ans:'$4:9$；$45$' } ] },
+
+  { id:'u51c2', title:'直角三角形的相似關係（母子相似）', body:
+    '<p>直角 $\\triangle ABC$ 中，$\\angle BAC=90^\\circ$，$\\overline{AD}\\perp\\overline{BC}$ 於 $D$ 點，則：</p>'+
+    '<p>(1) <b class="key">$\\triangle ABC\\sim\\triangle DBA\\sim\\triangle DAC$</b>。</p>'+
+    '<p>(2) <b class="key">$\\overline{AB}^2=\\overline{BD}\\times\\overline{BC}$</b>。</p>'+
+    '<p>(3) <b class="key">$\\overline{AC}^2=\\overline{CD}\\times\\overline{BC}$</b>。</p>'+
+    '<p>(4) <b class="key">$\\overline{AD}^2=\\overline{BD}\\times\\overline{CD}$</b>。</p>',
+    examples:[
+      { q:'直角三角形斜邊被高分成 $\\overline{BD}=4$、$\\overline{DC}=9$，求斜邊上的高 $\\overline{AD}$。',
+        steps:['母子相似：$\\overline{AD}^2=\\overline{BD}\\times\\overline{CD}=36$。','$\\overline{AD}=6$。'],
+        ans:'$6$' },
+      { q:'承上，求股 $\\overline{AB}$。',
+        steps:['$\\overline{AB}^2=\\overline{BD}\\times\\overline{BC}=4\\times 13=52$。','$\\overline{AB}=2\\sqrt{13}$。'],
+        ans:'$2\\sqrt{13}$' } ] },
+
+  { id:'u51c3', title:'多邊形各邊中點連線性質', body:
+    '<p>(1) 三角形三邊中點連線性質：$\\triangle ABC$ 中，$D$、$E$、$F$ 分別為三邊中點，則：① $\\triangle DEF\\sim\\triangle ABC$；② $\\triangle DEF$ 周長 $=\\dfrac{1}{2}\\triangle ABC$ 周長；③ $\\triangle DEF$ 面積 $=\\dfrac{1}{4}\\triangle ABC$ 面積。</p>'+
+    '<p>(2) 四邊形四邊中點連線性質：四邊形 $ABCD$ 中，$E$、$F$、$G$、$H$ 為各邊中點，$\\overline{AC}$、$\\overline{DB}$ 為對角線，則：① 四邊形 $EFGH$ 是<b class="key">平行四邊形</b>；② 四邊形 $EFGH$ 周長 $=\\overline{DB}+\\overline{AC}$；③ 四邊形 $EFGH$ 面積 $=\\dfrac{1}{2}\\times$ 四邊形 $ABCD$ 面積。</p>',
+    examples:[
+      { q:'$\\triangle ABC$ 周長 36、面積 48，其三邊中點構成的 $\\triangle DEF$ 周長與面積？',
+        steps:['周長減半：18。','面積四分之一：12。'],
+        ans:'周長 18；面積 12' } ] }
+]},
+
+{ id:'u52', book:5, sec:'2-1', title:'點、直線、圓的關係', page:88, concepts:[
+  { id:'u52c1', title:'點與圓、直線與圓的位置關係', body:
+    '<p>1、點與圓的位置關係（$r$ 為半徑）：點在<b class="key">圓內</b>：$\\overline{OP}<r$；點在<b class="key">圓上</b>：$\\overline{OP}=r$；點在<b class="key">圓外</b>：$\\overline{OP}>r$。</p>'+
+    '<p>2、直線與圓的位置關係（$\\overline{OP}$ 為圓心到直線的距離）：</p>'+
+    '<p>・<b class="key">不相交</b>：交點 <b class="key">0</b> 個，$\\overline{OP}>r$。</p>'+
+    '<p>・<b class="key">割線</b>：交點 <b class="key">2</b> 個，$\\overline{OP}<r$。</p>'+
+    '<p>・<b class="key">切線</b>：交點 <b class="key">1</b> 個，$\\overline{OP}=r$（切線 ⊥ 過切點的半徑）。</p>',
+    examples:[
+      { q:'圓半徑 5，圓心到直線 $L$ 的距離為 5、到直線 $M$ 的距離為 3，$L$、$M$ 各與圓什麼關係？',
+        steps:['$L$：距離 $=r$ → 切線（1 交點）。','$M$：距離 $<r$ → 割線（2 交點）。'],
+        ans:'$L$ 切線；$M$ 割線' } ] },
+
+  { id:'u52c2', title:'圓的切線段長性質', body:
+    '<p>設 $P$ 為圓 $O$ 外一點，$\\overline{PA}$、$\\overline{PB}$ 分別切圓 $O$ 於 $A$、$B$ 兩點，則：</p>'+
+    '<p>(1) <b class="key">$\\overline{PA}=\\overline{PB}$</b>（切線段等長）。</p>'+
+    '<p>(2) $\\overline{PO}$ <b class="key">平分</b> $\\angle APB$。</p>'+
+    '<p>(3) $\\overline{PO}$ <b class="key">垂直平分</b> $\\overline{AB}$。</p>',
+    examples:[
+      { q:'$P$ 到圓心 $O$ 距離 13，圓半徑 5，求切線段 $\\overline{PA}$。',
+        steps:['切線垂直半徑 → 直角三角形 $OAP$。','$\\overline{PA}=\\sqrt{13^2-5^2}=12$。'],
+        ans:'$12$' } ] },
+
+  { id:'u52c3', title:'圓外切四邊形', body:
+    '<p>四邊形 $ABCD$ 的四邊分別與圓 $O$ 相切，稱四邊形 $ABCD$ 為圓 $O$ 的<b class="key">外切四邊形</b>，且稱圓 $O$ 為四邊形 $ABCD$ 的<b class="key">內切圓</b>。</p>'+
+    '<p>若一個四邊形為圓 $O$ 的外切四邊形，則此四邊形<b class="key">兩組對邊的和會相等</b>：$\\overline{AD}+\\overline{BC}=\\overline{AB}+\\overline{CD}$。</p>',
+    examples:[
+      { q:'圓外切四邊形三邊依序為 7、9、12，求第四邊。',
+        steps:['對邊和相等：$7+12=9+x$。','$x=10$。'],
+        ans:'$10$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u51',book:5,sec:'1-3',title:'相似三角形的應用',page:87},
-  {id:'u52',book:5,sec:'2-1',title:'點、直線、圓的關係',page:88},
   {id:'u53',book:5,sec:'2-2',title:'圓心角、圓周角與弦切角',page:91},
   {id:'u54',book:5,sec:'3-1',title:'推理證明',page:93},
   {id:'u55',book:5,sec:'3-2',title:'外心、內心、重心',page:94},
