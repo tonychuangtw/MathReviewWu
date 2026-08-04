@@ -1021,15 +1021,165 @@ var MATH_UNITS = [
       { q:'門票全票 100 元、半票 60 元，共賣 30 張、收入 2600 元，全票賣幾張？',
         steps:['設全票 $x$ 張、半票 $y$ 張：$x+y=30$、$100x+60y=2600$。','第一式 ×60：$60x+60y=1800$，相減：$40x=800$ → $x=20$。','$y=10$，驗算：$2000+600=2600$ ✓。'],
         ans:'全票 20 張' } ] }
+]},
+
+{ id:'u19', book:2, sec:'3-1', title:'比例式', page:29, concepts:[
+  { id:'u19c1', title:'比、比值', body:
+    '<p>(1) <b class="key">比</b>：設 $a$、$b$ 為 <b class="key">2</b> 個數，且 $b\\neq 0$，則 $a$ 與 $b$ 的比記為 <b class="key">$a:b$</b>，其中 $a$ 稱為比的<b class="key">前項</b>，$b$ 稱為比的<b class="key">後項</b>。</p>'+
+    '<p>(2) <b class="key">比值</b>：$a:b$（$b\\neq 0$）的比值為 <b class="key">$\\dfrac{a}{b}$</b>，表示前項是後項的 $\\dfrac{a}{b}$ 倍。</p>',
+    examples:[
+      { q:'寫出 $15:6$ 的前項、後項與比值。',
+        steps:['前項 15、後項 6。','比值 $=\\dfrac{15}{6}=\\dfrac{5}{2}$。'],
+        ans:'前項 15、後項 6、比值 $\\dfrac{5}{2}$' } ] },
+
+  { id:'u19c2', title:'比的相等', body:
+    '<p>(1) 如果 $a:b$ 與 $c:d$ 兩個比的<b class="key">比值相等</b>（即 $\\dfrac{a}{b}=\\dfrac{c}{d}$），則它們的<b class="key">比就相等</b>，記為 <b class="key">$a:b=c:d$</b>。</p>'+
+    '<p>(2) $a:b=(a\\times m):(b\\times m)$、$a:b=(a\\div m):(b\\div m)$，$m\\neq 0$。</p>'+
+    '<p>※ <b class="key">繁分數</b>：一個分數的分子或分母也是分數時，就稱為繁分數。</p>'+
+    '<div class="inline-ex">例如：$\\dfrac{\\ \\frac{2}{7}\\ }{\\ \\frac{4}{5}\\ }=\\dfrac{2}{7}\\div\\dfrac{4}{5}$。</div>',
+    examples:[
+      { q:'判斷 $6:9$ 與 $10:15$ 是否相等。',
+        steps:['比值：$\\dfrac{6}{9}=\\dfrac{2}{3}$、$\\dfrac{10}{15}=\\dfrac{2}{3}$。','比值相等 → 兩比相等。'],
+        ans:'相等' },
+      { q:'化簡繁分數 $\\dfrac{\\ \\frac{3}{4}\\ }{\\ \\frac{9}{8}\\ }$。',
+        steps:['寫成除法：$\\dfrac{3}{4}\\div\\dfrac{9}{8}=\\dfrac{3}{4}\\times\\dfrac{8}{9}$。','約分：$=\\dfrac{2}{3}$。'],
+        ans:'$\\dfrac{2}{3}$' } ] },
+
+  { id:'u19c3', title:'比的運算性質', body:
+    '<p>(1) 因為 $\\dfrac{a}{b}=\\dfrac{a\\times m}{b\\times m}$（$m\\neq 0$），所以 <b class="key">$a:b=(a\\times m):(b\\times m)$</b>。</p>'+
+    '<div class="inline-ex">例：$3:5=(3\\times 2):(5\\times 2)$；$7:(-9)=[7\\times(-3)]:[(-9)\\times(-3)]$。</div>'+
+    '<p>(2) 因為 $\\dfrac{a}{b}=\\dfrac{a\\div m}{b\\div m}$（$m\\neq 0$），所以 <b class="key">$a:b=(a\\div m):(b\\div m)$</b>。</p>'+
+    '<div class="inline-ex">例：$12:8=(12\\div 4):(8\\div 4)$；$30:(-25)=(30\\div 5):[(-25)\\div 5]$。</div>',
+    examples:[
+      { q:'把 $\\dfrac{2}{3}:\\dfrac{1}{2}$ 化成整數比。',
+        steps:['兩項同乘分母的最小公倍數 6。','$\\left(\\dfrac{2}{3}\\times 6\\right):\\left(\\dfrac{1}{2}\\times 6\\right)=4:3$。'],
+        ans:'$4:3$' } ] },
+
+  { id:'u19c4', title:'最簡整數比', body:
+    '<p>當 $a$、$b$ 都是<b class="key">整數，且它們的最大公因數是 1</b> 時，我們稱 $a:b$ 是<b class="key">最簡整數比</b>，此時比值 $\\dfrac{a}{b}$ 會是<b class="key">最簡分數</b>。</p>',
+    examples:[
+      { q:'把 $24:36$ 化成最簡整數比。',
+        steps:['$(24,36)=12$。','兩項同除 12：$2:3$。'],
+        ans:'$2:3$' },
+      { q:'把 $0.4:1.2$ 化成最簡整數比。',
+        steps:['同乘 10 化整數：$4:12$。','同除 $(4,12)=4$：$1:3$。'],
+        ans:'$1:3$' } ] },
+
+  { id:'u19c5', title:'比例式', body:
+    '<p>(1) 當 $a:b$ 和 $c:d$（$b\\neq 0$，$d\\neq 0$）兩個<b class="key">比相等</b>時，可以記為 $a:b=c:d$，這個等式通常稱為<b class="key">比例式</b>，其中 $a$ 和 $d$ 稱為這個比例式的<b class="key">外項</b>，$b$ 和 $c$ 稱為這個比例式的<b class="key">內項</b>。</p>'+
+    '<p>(2) 比例式的<b class="key">外項乘積等於內項乘積</b>，也就是若 $a:b=c:d$，則 <b class="key">$a\\times d=b\\times c$</b>。</p>',
+    examples:[
+      { q:'解比例式 $x:6=5:3$。',
+        steps:['外項乘積＝內項乘積：$3x=30$。','$x=10$。'],
+        ans:'$x=10$' },
+      { q:'糖與水以 $2:7$ 調配糖水，若糖用 30 克，水要幾克？',
+        steps:['設水 $x$ 克：$2:7=30:x$。','$2x=210$ → $x=105$。'],
+        ans:'105 克' } ] },
+
+  { id:'u19c6', title:'比例式的性質', body:
+    '<p>設 $a$、$b$ 都是不為 0 的數，且 $x:y=a:b$，則：</p>'+
+    '<p>(1) <b class="key">$\\dfrac{x}{a}=\\dfrac{y}{b}$</b>（或 $x:a=y:b$）。</p>'+
+    '<p>(2) 可設 <b class="key">$x=ar$、$y=br$</b>（$r\\neq 0$）。</p>'+
+    '<div class="inline-ex">例：若 $x:y=4:3$，則 $\\dfrac{x}{4}=\\dfrac{y}{3}$，且可設 $x=4r$、$y=3r$，$r\\neq 0$。</div>',
+    examples:[
+      { q:'已知 $x:y=5:2$ 且 $x+y=28$，求 $x$、$y$。',
+        steps:['設 $x=5r$、$y=2r$。','$5r+2r=28$ → $r=4$。','$x=20$、$y=8$。'],
+        ans:'$x=20$、$y=8$' },
+      { q:'甲、乙兩人分 3600 元，若甲：乙 $=7:5$，兩人各得多少？',
+        steps:['設甲 $=7r$、乙 $=5r$：$12r=3600$ → $r=300$。','甲 $=2100$、乙 $=1500$。'],
+        ans:'甲 2100 元、乙 1500 元' } ] }
+]},
+
+{ id:'u20', book:2, sec:'3-2', title:'連比例', page:31, concepts:[
+  { id:'u20c1', title:'連比、連比例式', body:
+    '<p>設 $a$、$b$、$c$ 都是不為 0 的數：</p>'+
+    '<p>(1) <b class="key">$a:b:c$</b> 這樣的比稱為<b class="key">連比</b>。</p>'+
+    '<p>(2) $x:y=a:b$、$y:z=b:c$、$x:z=a:c$，可以表示成 <b class="key">$x:y:z=a:b:c$</b>，稱為<b class="key">連比例式</b>。</p>'+
+    '<div class="inline-ex">例(1)：若 $x:y=3:5$、$y:z=5:4$，則 $x:y:z=<b class="key">3:5:4</b>$。<br>例(2)：若 $x:y=2:3$、$x:z=2:4$，則 $x:y:z=<b class="key">2:3:4</b>$。<br>例(3)：若 $y:z=5:4$、$x:z=3:4$，則 $x:y:z=<b class="key">3:5:4</b>$。</div>',
+    examples:[
+      { q:'若 $x:y=2:5$、$y:z=3:4$，求 $x:y:z$。',
+        steps:['$y$ 在兩比中分別是 5 和 3，取 $[5,3]=15$ 統一。','$x:y=2:5=6:15$；$y:z=3:4=15:20$。','合併：$x:y:z=6:15:20$。'],
+        ans:'$6:15:20$' } ] },
+
+  { id:'u20c2', title:'連比的運算性質', body:
+    '<p>若 $a$、$b$、$c$ 是三個不為 0 的數，則：</p>'+
+    '<p>(1) $a:b:c=(a\\times m):(b\\times m):(c\\times m)$（$m\\neq 0$）。</p>'+
+    '<p>(2) $a:b:c=(a\\div m):(b\\div m):(c\\div m)$（$m\\neq 0$）。</p>'+
+    '<div class="inline-ex">例：$12:16:20=(12\\div 4):(16\\div 4):(20\\div 4)=3:4:5$。</div>',
+    examples:[
+      { q:'把 $\\dfrac{1}{2}:\\dfrac{2}{3}:\\dfrac{5}{6}$ 化成整數比。',
+        steps:['同乘分母的最小公倍數 $[2,3,6]=6$。','$3:4:5$。'],
+        ans:'$3:4:5$' } ] },
+
+  { id:'u20c3', title:'連比例式的意義', body:
+    '<p>三個不為 0 的數 $x$、$y$、$z$，若滿足 $x:y:z=a:b:c$，就稱為連比例式，其意義為 <b class="key">$x:y=a:b$、$y:z=b:c$、$z:x=c:a$</b>。</p>'+
+    '<div class="inline-ex">例：若 $x:y:z=3:4:5$，則 $x:y=3:4$、$y:z=4:5$、$x:z=3:5$。</div>',
+    examples:[
+      { q:'若 $x:y:z=2:7:9$，寫出 $x:z$ 與 $y:z$。',
+        steps:['直接取對應項：$x:z=2:9$。','$y:z=7:9$。'],
+        ans:'$x:z=2:9$；$y:z=7:9$' } ] },
+
+  { id:'u20c4', title:'最簡整數比（三項）', body:
+    '<p>設 $a$、$b$、$c$ 都是不為 0 的整數，且三數的<b class="key">最大公因數是 1</b>，則稱 $a:b:c$ 為<b class="key">最簡整數比</b>。</p>'+
+    '<div class="inline-ex">例：$2:3:4$ 是最簡整數比，而 $3:6:9$ 不是最簡整數比。</div>',
+    examples:[
+      { q:'把 $18:24:30$ 化成最簡整數比。',
+        steps:['$(18,24,30)=6$。','同除 6：$3:4:5$。'],
+        ans:'$3:4:5$' } ] },
+
+  { id:'u20c5', title:'連比例式的性質', body:
+    '<p>設 $a$、$b$、$c$ 都是不為 0 的數，且 $x:y:z=a:b:c$，則：</p>'+
+    '<p>(1) $x:y:z=ma:mb:mc$，$m\\neq 0$。</p>'+
+    '<p>(2) $\\dfrac{x}{a}=\\dfrac{y}{b}=\\dfrac{z}{c}$。</p>'+
+    '<p>(3) 可設 <b class="key">$x=ar$、$y=br$、$z=cr$</b>，$r\\neq 0$。</p>'+
+    '<div class="inline-ex">例：若 $x:y:z=2:3:4$，則 $x:y:z=2m:3m:4m$（$m\\neq 0$）、$\\dfrac{x}{2}=\\dfrac{y}{3}=\\dfrac{z}{4}$，且可設 $x=2r$、$y=3r$、$z=4r$（$r\\neq 0$）。</div>',
+    examples:[
+      { q:'三角形三邊長比為 $3:4:5$，周長 60，求三邊長。',
+        steps:['設三邊 $3r$、$4r$、$5r$。','$3r+4r+5r=12r=60$ → $r=5$。','三邊 15、20、25。'],
+        ans:'15、20、25' },
+      { q:'已知 $x:y:z=1:2:5$ 且 $x+y+z=32$，求 $z-x$。',
+        steps:['設 $x=r$、$y=2r$、$z=5r$：$8r=32$ → $r=4$。','$z-x=5r-r=4r=16$。'],
+        ans:'$16$' } ] }
+]},
+
+{ id:'u21', book:2, sec:'3-3', title:'正比、反比', page:32, concepts:[
+  { id:'u21c1', title:'定義名詞', body:
+    '<p><b class="key">常數</b>：<b class="key">固定不變的數</b>。</p>'+
+    '<p><b class="key">變數</b>：<b class="key">會變動的數</b>。</p>'+
+    '<p>(1) 自變數（$x$）：<b class="key">自己會改變的數</b>。</p>'+
+    '<p>(2) 應變數（$y$）：<b class="key">因應 $x$ 改變，而改變的數</b>。</p>',
+    examples:[
+      { q:'「一枝筆 12 元，買 $x$ 枝共 $y$ 元」中，哪個是常數？哪個是自變數、應變數？',
+        steps:['12（單價）固定不變 → 常數。','$x$ 自己變 → 自變數；$y$ 跟著 $x$ 變 → 應變數。'],
+        ans:'常數 12；自變數 $x$；應變數 $y$' } ] },
+
+  { id:'u21c2', title:'正比', body:
+    '<p>兩個變數 $x$、$y$，當 $x$ 值改變時，$y$ 值也隨著改變，且保持 $y$ 值為 $x$ 值的某個<b class="key">固定倍數</b>（以 $k$ 倍表示，$k\\neq 0$），可以寫成關係式 <b class="key">$\\dfrac{y}{x}=k$</b> 或 <b class="key">$y=kx$</b>，那麼我們就說「$y$ 與 $x$ <b class="key">成正比</b>」。</p>'+
+    '<div class="inline-ex">例：買一株 10 元的康乃馨 $x$ 株，總價為 $y$ 元，則 $y=10x$，$y$ 與 $x$ 成正比。</div>',
+    examples:[
+      { q:'已知 $y$ 與 $x$ 成正比，且 $x=4$ 時 $y=10$，求 $x=6$ 時的 $y$。',
+        steps:['$y=kx$ → $k=\\dfrac{10}{4}=\\dfrac{5}{2}$。','$y=\\dfrac{5}{2}\\times 6=15$。'],
+        ans:'$y=15$' },
+      { q:'時速固定 60 公里，行駛 $x$ 小時的距離 $y$ 公里。$y$ 與 $x$ 成正比嗎？$k$ 是多少？',
+        steps:['$y=60x$，是 $y=kx$ 的形式。','固定倍數 $k=60$。'],
+        ans:'成正比，$k=60$' } ] },
+
+  { id:'u21c3', title:'反比', body:
+    '<p>兩個不為 0 的變數 $x$、$y$，當 $x$ 值改變時，$y$ 值也隨著改變，且保持 $x$ 值和 $y$ 值的<b class="key">乘積</b>是某個<b class="key">固定的數</b>（以 $k$ 表示，$k\\neq 0$），可以寫成關係式 <b class="key">$xy=k$</b>，那麼我們就說「$y$ 與 $x$ <b class="key">成反比</b>」。</p>'+
+    '<div class="inline-ex">例：買 $x$ 株 $y$ 元的康乃馨，共花 500 元，則 $xy=500$，$y$ 與 $x$ 成反比。</div>',
+    examples:[
+      { q:'已知 $y$ 與 $x$ 成反比，且 $x=3$ 時 $y=8$，求 $x=6$ 時的 $y$。',
+        steps:['$xy=k$ → $k=3\\times 8=24$。','$6y=24$ → $y=4$。'],
+        ans:'$y=4$' },
+      { q:'一件工作 12 人做要 10 天完成，若工作量固定，$x$ 人做要 $y$ 天，寫出關係式並求 8 人要幾天。',
+        steps:['總工作量 $=12\\times 10=120$（人日）固定 → $xy=120$，成反比。','$8y=120$ → $y=15$。'],
+        ans:'$xy=120$；15 天' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u19',book:2,sec:'3-1',title:'比例式',page:29},
-  {id:'u20',book:2,sec:'3-2',title:'連比例',page:31},
-  {id:'u21',book:2,sec:'3-3',title:'正比、反比',page:32},
   {id:'u22',book:2,sec:'4-1',title:'變數與函數',page:33},
   {id:'u23',book:2,sec:'4-2',title:'線型函數的圖形',page:35},
   {id:'u24',book:2,sec:'5-1',title:'一元一次不等式',page:36},
