@@ -168,6 +168,105 @@ figs['u11-balance'] = function () {
   return svg(560, 152, b);
 };
 
+/* 座標平面基礎工具：軸 + 格線 */
+function axes(opt) {
+  var cx = opt.cx, cy = opt.cy, px = opt.px, range = opt.range;
+  var b = '';
+  for (var i = -range; i <= range; i++) {
+    if (i === 0) continue;
+    b += line(cx + i * px, cy - range * px, cx + i * px, cy + range * px, '#eceadf', 1);
+    b += line(cx - range * px, cy + i * px, cx + range * px, cy + i * px, '#eceadf', 1);
+  }
+  b += line(cx - range * px - 12, cy, cx + range * px + 18, cy, INK, 2, ' marker-end="url(#arr)"');
+  b += line(cx, cy + range * px + 12, cx, cy - range * px - 18, INK, 2, ' marker-end="url(#arr)"');
+  b += txt(cx + range * px + 24, cy + 5, 'x', { size: 15, bold: 1, anchor: 'start' });
+  b += txt(cx, cy - range * px - 24, 'y', { size: 15, bold: 1 });
+  b += txt(cx - 10, cy + 16, 'O', { size: 13, fill: SOFT });
+  return b;
+}
+
+/* 2-1 直角坐標平面：A(4,3) */
+figs['u15-plane'] = function () {
+  var cx = 260, cy = 150, px = 26, R = 5;
+  var b = axes({ cx: cx, cy: cy, px: px, range: R });
+  var ax = cx + 4 * px, ay = cy - 3 * px;
+  b += line(ax, cy, ax, ay, BLUE, 1.5, ' stroke-dasharray="4 3"');
+  b += line(cx, ay, ax, ay, BLUE, 1.5, ' stroke-dasharray="4 3"');
+  b += '<circle cx="' + ax + '" cy="' + ay + '" r="5" fill="' + RED + '"/>';
+  b += txt(ax + 12, ay - 8, 'A(4,3)', { fill: RED, size: 15, bold: 1, anchor: 'start' });
+  b += txt(ax, cy + 16, '4', { fill: BLUE, size: 13 });
+  b += txt(cx - 10, ay + 5, '3', { fill: BLUE, size: 13 });
+  b += txt(cx + R * px - 20, cy + 30, 'x 軸（水平）', { fill: SOFT, size: 12 });
+  b += txt(cx + 46, cy - R * px + 8, 'y 軸（鉛垂）', { fill: SOFT, size: 12 });
+  return svg(520, 300, b);
+};
+
+/* 2-1 象限 */
+figs['u15-quadrants'] = function () {
+  var cx = 260, cy = 148, px = 26, R = 5;
+  var b = '';
+  var q = [
+    { x: 1, y: -1, t: '第一象限', s: '(+,+)', f: 'rgba(224,122,47,.10)' },
+    { x: -1, y: -1, t: '第二象限', s: '(−,+)', f: 'rgba(58,110,165,.10)' },
+    { x: -1, y: 1, t: '第三象限', s: '(−,−)', f: 'rgba(46,125,50,.10)' },
+    { x: 1, y: 1, t: '第四象限', s: '(+,−)', f: 'rgba(192,57,43,.10)' }
+  ];
+  q.forEach(function (o) {
+    b += '<rect x="' + (o.x > 0 ? cx : cx - R * px) + '" y="' + (o.y > 0 ? cy : cy - R * px) + '" width="' + (R * px) + '" height="' + (R * px) + '" fill="' + o.f + '"/>';
+    b += txt(cx + o.x * R * px / 2, cy + o.y * R * px / 2 - 6, o.t, { size: 15, bold: 1 });
+    b += txt(cx + o.x * R * px / 2, cy + o.y * R * px / 2 + 14, o.s, { size: 14, fill: SOFT });
+  });
+  b += axes({ cx: cx, cy: cy, px: px, range: R });
+  b += txt(cx + R * px + 6, cy - 14, '(m,0) 在 x 軸', { fill: SOFT, size: 12, anchor: 'end' });
+  b += txt(cx + 8, cy - R * px + 4, '(0,n) 在 y 軸', { fill: SOFT, size: 12, anchor: 'start' });
+  return svg(520, 296, b);
+};
+
+/* 2-2 y=3x+2 直線圖 */
+figs['u16-line'] = function () {
+  var cx = 240, cy = 160, px = 28, R = 5;
+  var b = axes({ cx: cx, cy: cy, px: px, range: R });
+  function P(x, y) { return [cx + x * px, cy - y * px]; }
+  var p1 = P(-2, -4), p2 = P(1.2, 5.6);
+  b += line(p1[0], p1[1], p2[0], p2[1], BLUE, 2.5);
+  [[0, 2], [1, 5]].forEach(function (pt) {
+    var p = P(pt[0], pt[1]);
+    b += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="5" fill="' + RED + '"/>';
+    b += txt(p[0] + 12, p[1] + 2, '(' + pt[0] + ',' + pt[1] + ')', { fill: RED, size: 13, anchor: 'start' });
+  });
+  b += txt(cx + 3.4 * px, cy - 3.4 * px, 'y = 3x + 2', { fill: BLUE, size: 15, bold: 1, anchor: 'start' });
+  b += txt(cx, cy + R * px + 24, '找 2 組解 → 描點 → 連成直線', { size: 13, fill: SOFT });
+  return svg(520, 330, b);
+};
+
+/* 2-2 聯立方程式三種圖形關係 */
+figs['u16-three'] = function () {
+  var b = '', W = 186;
+  function mini(ox, title, sub, draw) {
+    var r = '<rect x="' + ox + '" y="18" width="170" height="150" rx="10" fill="#faf8f0" stroke="#e3dfd0"/>';
+    var cx = ox + 85, cy = 96;
+    r += line(cx - 70, cy, cx + 70, cy, SOFT, 1.5) + line(cx, cy + 62, cx, cy - 62, SOFT, 1.5);
+    r += draw(cx, cy);
+    r += txt(cx, 190, title, { size: 14, bold: 1 });
+    r += txt(cx, 208, sub, { size: 12, fill: SOFT });
+    return r;
+  }
+  b += mini(10, '交於一點', '恰一組解', function (cx, cy) {
+    return line(cx - 60, cy + 44, cx + 60, cy - 44, BLUE, 2.2) +
+      line(cx - 60, cy - 30, cx + 60, cy + 30, ORANGE, 2.2) +
+      '<circle cx="' + (cx - 5) + '" cy="' + (cy + 3) + '" r="4.5" fill="' + RED + '"/>';
+  });
+  b += mini(10 + W, '平行', '無解', function (cx, cy) {
+    return line(cx - 60, cy + 40, cx + 60, cy - 40, BLUE, 2.2) +
+      line(cx - 60, cy + 62, cx + 60, cy - 18, ORANGE, 2.2);
+  });
+  b += mini(10 + 2 * W, '重合', '無限多組解', function (cx, cy) {
+    return line(cx - 60, cy + 40, cx + 60, cy - 40, BLUE, 4.5) +
+      line(cx - 60, cy + 40, cx + 60, cy - 40, ORANGE, 1.8, ' stroke-dasharray="7 6"');
+  });
+  return svg(570, 222, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
