@@ -124,6 +124,33 @@ figs['u01-abs'] = function () {
   return svg(560, 118, b);
 };
 
+/* 1-2 異號數相加：(-3)+(+1) 數線示意 */
+figs['u02-add'] = function () {
+  var nl = numberLine({ from: -5, to: 2, y: 70, x0: 60, px: 62 });
+  var b = nl.body;
+  b += line(nl.X(0), 34, nl.X(-3), 34, BLUE, 2.5, ' marker-end="url(#arrB)"');
+  b += txt((nl.X(0) + nl.X(-3)) / 2, 24, '先走 −3', { fill: BLUE, size: 14, bold: 1 });
+  b += line(nl.X(-3), 50, nl.X(-2), 50, RED, 2.5, ' marker-end="url(#arrR)"');
+  b += txt(nl.X(-2.5), 62 - 18, '再走 +1', { fill: RED, size: 13, bold: 1 });
+  b += '<circle cx="' + nl.X(-2) + '" cy="70" r="6" fill="' + ORANGE + '"/>';
+  b += txt(nl.X(-2), 112, '(−3)+(+1)=−2', { fill: ORANGE, size: 15, bold: 1 });
+  return svg(560, 126, b);
+};
+
+/* 1-2 兩點距離：A(−7) B(5) */
+figs['u02-dist'] = function () {
+  var nl = numberLine({ from: -8, to: 6, y: 66, x0: 36, px: 36, labels: { '-8':'', '-6':'-6', '-5':'', '-3':'', '-1':'', 1:'', 3:'', 5:'5' } });
+  var nl2 = numberLine({ from: -8, to: 6, y: 66, x0: 36, px: 36 });
+  var b = nl2.body;
+  b += '<circle cx="' + nl2.X(-7) + '" cy="66" r="6" fill="' + BLUE + '"/>';
+  b += '<circle cx="' + nl2.X(5) + '" cy="66" r="6" fill="' + ORANGE + '"/>';
+  b += txt(nl2.X(-7), 40, 'A(−7)', { fill: BLUE, size: 14, bold: 1 });
+  b += txt(nl2.X(5), 40, 'B(5)', { fill: ORANGE, size: 14, bold: 1 });
+  b += line(nl2.X(-7), 100, nl2.X(5), 100, GREEN, 2.5, ' marker-start="url(#arr)" marker-end="url(#arr)"');
+  b += txt(nl2.X(-1), 122, '距離 = 5−(−7) = 12（大減小）', { fill: GREEN, size: 14, bold: 1 });
+  return svg(560, 134, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
