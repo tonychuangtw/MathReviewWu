@@ -301,6 +301,43 @@ figs['u24-ineq'] = function () {
   return svg(580, 180, b);
 };
 
+/* 3-1-1 (a+b)² 面積圖 */
+figs['u26-square'] = function () {
+  var ox = 150, oy = 30, A = 150, B = 70;
+  var b = '';
+  b += '<rect x="' + ox + '" y="' + oy + '" width="' + A + '" height="' + A + '" fill="rgba(58,110,165,.16)" stroke="' + BLUE + '" stroke-width="2"/>';
+  b += '<rect x="' + (ox + A) + '" y="' + oy + '" width="' + B + '" height="' + A + '" fill="rgba(224,122,47,.16)" stroke="' + ORANGE + '" stroke-width="2"/>';
+  b += '<rect x="' + ox + '" y="' + (oy + A) + '" width="' + A + '" height="' + B + '" fill="rgba(224,122,47,.16)" stroke="' + ORANGE + '" stroke-width="2"/>';
+  b += '<rect x="' + (ox + A) + '" y="' + (oy + A) + '" width="' + B + '" height="' + B + '" fill="rgba(46,125,50,.16)" stroke="' + GREEN + '" stroke-width="2"/>';
+  b += txt(ox + A / 2, oy + A / 2 + 6, 'a²', { size: 22, bold: 1, fill: BLUE });
+  b += txt(ox + A + B / 2, oy + A / 2 + 5, 'ab', { size: 17, bold: 1, fill: ORANGE });
+  b += txt(ox + A / 2, oy + A + B / 2 + 5, 'ab', { size: 17, bold: 1, fill: ORANGE });
+  b += txt(ox + A + B / 2, oy + A + B / 2 + 5, 'b²', { size: 16, bold: 1, fill: GREEN });
+  b += txt(ox + A / 2, oy - 10, 'a', { size: 15 }) + txt(ox + A + B / 2, oy - 10, 'b', { size: 15 });
+  b += txt(ox - 14, oy + A / 2 + 5, 'a', { size: 15 }) + txt(ox - 14, oy + A + B / 2 + 5, 'b', { size: 15 });
+  b += txt(ox + (A + B) / 2, oy + A + B + 34, '(a+b)² = a² + 2ab + b²', { size: 17, bold: 1 });
+  return svg(520, 300, b);
+};
+
+/* 3-1-1 平方差面積圖 */
+figs['u26-diffsq'] = function () {
+  var b = '';
+  var ox = 40, oy = 40, A = 150, B = 60;
+  b += '<rect x="' + ox + '" y="' + oy + '" width="' + A + '" height="' + A + '" fill="rgba(58,110,165,.14)" stroke="' + BLUE + '" stroke-width="2"/>';
+  b += '<rect x="' + ox + '" y="' + oy + '" width="' + B + '" height="' + B + '" fill="#fdfcf7" stroke="' + RED + '" stroke-width="2" stroke-dasharray="5 4"/>';
+  b += txt(ox + B / 2, oy + B / 2 + 5, 'b²', { size: 15, fill: RED });
+  b += txt(ox + A / 2 + 25, oy + A / 2 + 25, 'a² − b²', { size: 18, bold: 1, fill: BLUE });
+  b += txt(ox + A / 2, oy + A + 20, 'a', { size: 14 });
+  b += txt(280, 130, '⟹', { size: 26, fill: SOFT });
+  var ox2 = 320, oy2 = 70, W = 210, H = 90;
+  b += '<rect x="' + ox2 + '" y="' + oy2 + '" width="' + W + '" height="' + H + '" fill="rgba(46,125,50,.14)" stroke="' + GREEN + '" stroke-width="2"/>';
+  b += txt(ox2 + W / 2, oy2 + H / 2 + 6, '(a+b)(a−b)', { size: 17, bold: 1, fill: GREEN });
+  b += txt(ox2 + W / 2, oy2 - 10, 'a+b', { size: 14 });
+  b += txt(ox2 - 20, oy2 + H / 2 + 5, 'a−b', { size: 13 });
+  b += txt(285, 230, '剪下拼接：a² − b² = (a+b)(a−b)', { size: 16, bold: 1 });
+  return svg(570, 250, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
