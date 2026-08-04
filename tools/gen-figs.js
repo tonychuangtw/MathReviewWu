@@ -267,6 +267,40 @@ figs['u16-three'] = function () {
   return svg(570, 222, b);
 };
 
+/* 5-1 不等式解的圖示 */
+figs['u24-ineq'] = function () {
+  var b = '';
+  function ray(ox, oy, label, closed, dir) {
+    var ax = ox + 60;
+    b += line(ox, oy, ox + 120, oy, INK, 2) ;
+    b += line(ax, oy - 5, ax, oy + 5, INK, 1.5);
+    b += txt(ax, oy + 20, 'a', { size: 13 });
+    b += line(ax, oy - 14, dir > 0 ? ox + 118 : ox + 2, oy - 14, BLUE, 2.5, ' marker-end="url(#arrB)"');
+    b += '<circle cx="' + ax + '" cy="' + (oy - 14) + '" r="5" fill="' + (closed ? BLUE : '#fdfcf7') + '" stroke="' + BLUE + '" stroke-width="2"/>';
+    b += txt(ax, oy - 30, label, { size: 14, bold: 1, fill: BLUE });
+  }
+  ray(20, 56, 'x < a', false, -1);
+  ray(160, 56, 'x ≤ a', true, -1);
+  ray(300, 56, 'x > a', false, 1);
+  ray(440, 56, 'x ≥ a', true, 1);
+  // 區間
+  function seg(ox, oy, label, closed) {
+    var a1 = ox + 30, a2 = ox + 110;
+    b += line(ox, oy, ox + 140, oy, INK, 2);
+    [a1, a2].forEach(function (x, i) {
+      b += line(x, oy - 5, x, oy + 5, INK, 1.5);
+      b += txt(x, oy + 20, i ? 'b' : 'a', { size: 13 });
+      b += '<circle cx="' + x + '" cy="' + (oy - 14) + '" r="5" fill="' + (closed ? BLUE : '#fdfcf7') + '" stroke="' + BLUE + '" stroke-width="2"/>';
+    });
+    b += line(a1 + 5, oy - 14, a2 - 5, oy - 14, BLUE, 2.5);
+    b += txt((a1 + a2) / 2, oy - 30, label, { size: 14, bold: 1, fill: BLUE });
+  }
+  seg(90, 132, 'a < x < b', false);
+  seg(330, 132, 'a ≤ x ≤ b', true);
+  b += txt(285, 168, '空心＝不含端點（＞、＜）；實心＝含端點（≧、≦）', { size: 13, fill: SOFT });
+  return svg(580, 180, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
