@@ -52,10 +52,12 @@ t('觀念卡欄位完整', function () {
   });
 });
 
-t('每個觀念至少 1 題例題，例題欄位完整', function () {
+t('每個觀念恰好 基礎(易)/一般(中)/精熟(難) 各一題，欄位完整', function () {
   UNITS.forEach(function (u) {
     u.concepts.forEach(function (c) {
-      assert(c.examples && c.examples.length >= 1, c.id + ' 沒有例題');
+      assert(c.examples && c.examples.length === 3, c.id + ' 例題數 ' + (c.examples || []).length + ' ≠ 3');
+      var ds = c.examples.map(function (e) { return e.d; }).join('');
+      assert(ds === '易中難', c.id + ' 難度序 [' + ds + '] 應為 易中難');
       c.examples.forEach(function (ex, i) {
         assert(ex.q && ex.q.length > 5, c.id + ' 例' + (i + 1) + ' q 缺');
         assert(ex.steps && ex.steps.length >= 1, c.id + ' 例' + (i + 1) + ' steps 缺');
