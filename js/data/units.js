@@ -1524,15 +1524,134 @@ var MATH_UNITS = [
     examples:[
       { q:'$\\sqrt{2}$、$\\sqrt{9}$、$0.5$、$\\pi$ 哪些是有理數？',
         steps:['$\\sqrt{9}=3=\\dfrac{3}{1}$、$0.5=\\dfrac{1}{2}$ → 有理數。','$\\sqrt{2}$、$\\pi$ 無法寫成分數 → 無理數。'],
-        ans:'$\\sqrt{9}$、$0.5$ 是有理數' } ] }
+        ans:'$\\sqrt{9}$、$0.5$ 是有理數' } ] },
+
+  { id:'u29c5', title:'平方根的意義', body:
+    '<p>(1) $a>0$，如果一個數的平方等於 $a$，這個數就稱為 $a$ 的<b class="key">平方根</b>（又稱為二次方根）。</p>'+
+    '<p>(2) $\\sqrt{a}$ 表示正數 $a$ 的<b class="key">正平方根</b>。</p>'+
+    '<p>(3) $-\\sqrt{a}$ 表示正數 $a$ 的<b class="key">負平方根</b>。</p>'+
+    '<div class="inline-ex">例：2 的平方根為 $\\pm\\sqrt{2}$，且 $(\\pm\\sqrt{2})^2=2$，其中 $\\sqrt{2}$ 為正平方根，$-\\sqrt{2}$ 為負平方根。</div>'+
+    '<p>整理：① 若 <b class="key">$a>0$</b>，則 $a$ 的平方根為 <b class="key">$\\pm\\sqrt{a}$</b>；② 對於每個正數 $a$，$(\\pm\\sqrt{a})^2=<b class="key">a</b>$；③ 若 <b class="key">$a=0$</b>，則 $a$ 的平方根為 <b class="key">0</b>，即 $\\sqrt{0}=0$；④ 若 <b class="key">$a<0$</b>，則 $a$ <b class="key">沒有平方根</b>。</p>',
+    examples:[
+      { q:'求 36 的平方根與 $\\sqrt{36}$，兩者一樣嗎？',
+        steps:['36 的平方根：平方等於 36 的數 → $\\pm 6$（兩個）。','$\\sqrt{36}$ 只表示正平方根 → $6$。'],
+        ans:'平方根 $\\pm 6$；$\\sqrt{36}=6$，不一樣' },
+      { q:'$-9$ 有平方根嗎？為什麼？',
+        steps:['任何數的平方都 $\\ge 0$，不可能等於 $-9$。','$a<0$ 沒有平方根。'],
+        ans:'沒有' } ] }
+]},
+
+{ id:'u30', book:3, sec:'2-2', title:'根式的運算', page:46, concepts:[
+  { id:'u30c1', title:'根式的表示', body:
+    '<p>若 $a\\neq 0$、$b\\ge 0$，則 $a\\times\\sqrt{b}$ 寫成 <b class="key">$a\\sqrt{b}$</b>；$\\sqrt{b}\\div a$ 寫成 <b class="key">$\\dfrac{\\sqrt{b}}{a}$</b> 或 <b class="key">$\\dfrac{1}{a}\\sqrt{b}$</b>。</p>'+
+    '<div class="inline-ex">例：$5\\times\\sqrt{3}=5\\sqrt{3}$；$\\sqrt{7}\\div 2=\\dfrac{\\sqrt{7}}{2}=\\dfrac{1}{2}\\sqrt{7}$。</div>',
+    examples:[
+      { q:'把 $\\sqrt{5}\\times(-3)$ 與 $\\sqrt{11}\\div 4$ 用簡記寫出。',
+        steps:['$-3\\sqrt{5}$。','$\\dfrac{\\sqrt{11}}{4}$（或 $\\dfrac{1}{4}\\sqrt{11}$）。'],
+        ans:'$-3\\sqrt{5}$；$\\dfrac{\\sqrt{11}}{4}$' } ] },
+
+  { id:'u30c2', title:'根式的乘法運算', body:
+    '<p>若 $a\\ge 0$、$b\\ge 0$，則 <b class="key">$\\sqrt{a}\\times\\sqrt{b}=\\sqrt{a\\times b}$</b>。</p>'+
+    '<div class="inline-ex">例：$\\sqrt{2}\\times\\sqrt{5}=\\sqrt{2\\times 5}=\\sqrt{10}$。</div>',
+    examples:[
+      { q:'計算 $\\sqrt{3}\\times\\sqrt{12}$。',
+        steps:['$=\\sqrt{3\\times 12}=\\sqrt{36}$。','$=6$。'],
+        ans:'$6$' },
+      { q:'計算 $2\\sqrt{5}\\times 3\\sqrt{10}$。',
+        steps:['數字乘數字、根式乘根式：$6\\sqrt{50}$。','$\\sqrt{50}=\\sqrt{25\\times 2}=5\\sqrt{2}$ → $6\\times 5\\sqrt{2}=30\\sqrt{2}$。'],
+        ans:'$30\\sqrt{2}$' } ] },
+
+  { id:'u30c3', title:'根式的除法運算', body:
+    '<p>若 $a\\ge 0$、$b>0$，則 <b class="key">$\\dfrac{\\sqrt{a}}{\\sqrt{b}}=\\sqrt{\\dfrac{a}{b}}$</b>；$\\sqrt{a}\\div\\sqrt{b}=\\sqrt{\\dfrac{a}{b}}$。</p>'+
+    '<div class="inline-ex">例：$\\dfrac{\\sqrt{2}}{\\sqrt{5}}=\\sqrt{\\dfrac{2}{5}}$；$\\sqrt{35}\\div\\sqrt{5}=\\sqrt{\\dfrac{35}{5}}=\\sqrt{7}$。</div>',
+    examples:[
+      { q:'計算 $\\sqrt{48}\\div\\sqrt{3}$。',
+        steps:['$=\\sqrt{48\\div 3}=\\sqrt{16}$。','$=4$。'],
+        ans:'$4$' } ] },
+
+  { id:'u30c4', title:'最簡根式', body:
+    '<p>一個數 $a\\sqrt{b}$，其中 $a$ 為整數、分數或小數，$b$ 為正整數，且 $b$ 的標準分解式中<b class="key">質因數的次數都是 1</b>，我們稱 $a\\sqrt{b}$ 為<b class="key">最簡根式</b>。</p>'+
+    '<div class="inline-ex">例：$3\\sqrt{2}$、$-7\\sqrt{3}$、$\\dfrac{1}{2}\\sqrt{6}$ 都是最簡根式。</div>',
+    examples:[
+      { q:'把 $\\sqrt{72}$ 化成最簡根式。',
+        steps:['$72=2^3\\times 3^2=36\\times 2$。','$\\sqrt{72}=\\sqrt{36}\\times\\sqrt{2}=6\\sqrt{2}$。'],
+        ans:'$6\\sqrt{2}$' } ] },
+
+  { id:'u30c5', title:'分母有理化', body:
+    '<p>將分母化為<b class="key">不帶有根式</b>的過程，稱為<b class="key">分母有理化</b>。</p>'+
+    '<p>(1) 分母為單一根號：分子分母同乘該根號。</p>'+
+    '<div class="inline-ex">例：$\\dfrac{1}{\\sqrt{5}}=\\dfrac{1}{\\sqrt{5}\\times\\sqrt{5}}\\times\\sqrt{5}=\\dfrac{\\sqrt{5}}{(\\sqrt{5})^2}=\\dfrac{\\sqrt{5}}{5}$。</div>'+
+    '<p>(2) 乘以<b class="key">共軛根式</b>：利用平方差公式消根號。</p>'+
+    '<div class="inline-ex">例：$\\dfrac{1}{\\sqrt{5}-\\sqrt{3}}=\\dfrac{\\sqrt{5}+\\sqrt{3}}{(\\sqrt{5}-\\sqrt{3})(\\sqrt{5}+\\sqrt{3})}=\\dfrac{\\sqrt{5}+\\sqrt{3}}{(\\sqrt{5})^2-(\\sqrt{3})^2}=\\dfrac{\\sqrt{5}+\\sqrt{3}}{2}$。</div>',
+    examples:[
+      { q:'將 $\\dfrac{6}{\\sqrt{3}}$ 分母有理化。',
+        steps:['分子分母同乘 $\\sqrt{3}$：$\\dfrac{6\\sqrt{3}}{3}$。','$=2\\sqrt{3}$。'],
+        ans:'$2\\sqrt{3}$' },
+      { q:'將 $\\dfrac{2}{\\sqrt{7}+\\sqrt{5}}$ 分母有理化。',
+        steps:['同乘共軛 $\\sqrt{7}-\\sqrt{5}$：$\\dfrac{2(\\sqrt{7}-\\sqrt{5})}{7-5}$。','$=\\dfrac{2(\\sqrt{7}-\\sqrt{5})}{2}=\\sqrt{7}-\\sqrt{5}$。'],
+        ans:'$\\sqrt{7}-\\sqrt{5}$' } ] },
+
+  { id:'u30c6', title:'根式的加減運算（同類方根）', body:
+    '<p>根式的加減運算是將<b class="key">同類方根</b>合併，不同類則<b class="key">不能加減運算</b>。</p>'+
+    '<div class="inline-ex">例：$2\\sqrt{3}+4\\sqrt{6}+3\\sqrt{3}-3\\sqrt{6}=(2\\sqrt{3}+3\\sqrt{3})+(4\\sqrt{6}-3\\sqrt{6})=5\\sqrt{3}+\\sqrt{6}$。</div>',
+    examples:[
+      { q:'計算 $\\sqrt{8}+\\sqrt{18}$。',
+        steps:['先化最簡根式：$\\sqrt{8}=2\\sqrt{2}$、$\\sqrt{18}=3\\sqrt{2}$。','同類方根合併：$5\\sqrt{2}$。'],
+        ans:'$5\\sqrt{2}$' },
+      { q:'計算 $3\\sqrt{5}-\\sqrt{20}+\\sqrt{12}$。',
+        steps:['$\\sqrt{20}=2\\sqrt{5}$、$\\sqrt{12}=2\\sqrt{3}$。','$3\\sqrt{5}-2\\sqrt{5}=\\sqrt{5}$；$2\\sqrt{3}$ 不同類不能併。'],
+        ans:'$\\sqrt{5}+2\\sqrt{3}$' } ] }
+]},
+
+{ id:'u31', book:3, sec:'2-3', title:'畢氏定理', page:47, concepts:[
+  { id:'u31c1', title:'畢氏定理', body:
+    '<p>1. 畢氏定理：任意直角三角形，其<b class="key">兩股平方和</b>等於<b class="key">斜邊平方</b>。</p>'+
+    '<div class="inline-ex">例：直角三角形 $ABC$ 中，$a^2+b^2=c^2$（$c$ 為斜邊）。</div>'+
+    '<p>註：常見的直角三角形三邊長 $a$、$b$、$c$ 分別有 <b class="key">3、4、5</b>；<b class="key">6、8、10</b>；<b class="key">5、12、13</b>；<b class="key">7、24、25</b>；<b class="key">8、15、17</b>；<b class="key">9、40、41</b>；<b class="key">20、21、29</b>。</p>'+
+    '<p>2. 已知一個直角三角形兩邊的長度，可利用畢氏定理求出<b class="key">第三邊</b>的長度。</p>'+
+    '<div class="inline-ex">例：某一直角三角形的兩股長為 3、5，則斜邊長 $=\\sqrt{3^2+5^2}=\\sqrt{34}$。</div>',
+    fig:'u31-pyth',
+    examples:[
+      { q:'直角三角形兩股 9、12，求斜邊。',
+        steps:['$\\sqrt{9^2+12^2}=\\sqrt{81+144}=\\sqrt{225}$。','$=15$（3:4:5 的 3 倍）。'],
+        ans:'$15$' },
+      { q:'直角三角形斜邊 13、一股 5，求另一股。',
+        steps:['另一股 $=\\sqrt{13^2-5^2}=\\sqrt{169-25}=\\sqrt{144}$。','$=12$。'],
+        ans:'$12$' } ] },
+
+  { id:'u31c2', title:'畢氏定理的證明', body:
+    '<p>1. 大正方形＝三角形×4＋小正方形：$(a+b)^2=\\dfrac{a\\times b}{2}\\times 4+c^2$ → $a^2+2ab+b^2=2ab+c^2$ → <b class="key">$a^2+b^2=c^2$</b>。</p>'+
+    '<p>2. 趙爽的證明法（<b class="key">弦圖</b>）：大正方形＝三角形×4＋小正方形：$c^2=\\dfrac{a\\times b}{2}\\times 4+(a-b)^2=2ab+(a^2-2ab+b^2)$ → $c^2=a^2+b^2$。</p>'+
+    '<p>3. 美國第 20 任總統（詹姆士·加菲爾德）：梯形＝直角三角形×2＋等腰直角三角形：$\\dfrac{(a+b)(a+b)}{2}=\\dfrac{a\\times b}{2}\\times 2+\\dfrac{c\\times c}{2}$ → $(a+b)^2=2ab+c^2$ → $a^2+b^2=c^2$。</p>',
+    examples:[
+      { q:'用「大正方形＝4 個直角三角形＋小正方形」的圖，說明為什麼 $a^2+b^2=c^2$。',
+        steps:['邊長 $(a+b)$ 的大正方形面積 $=(a+b)^2=a^2+2ab+b^2$。','它由 4 個直角三角形（共 $4\\times\\dfrac{ab}{2}=2ab$）和中間邊長 $c$ 的正方形（$c^2$）組成。','$a^2+2ab+b^2=2ab+c^2$ → 消去 $2ab$ 得 $a^2+b^2=c^2$。'],
+        ans:'兩種算面積方式相等，消去 $2ab$ 即得' } ] },
+
+  { id:'u31c3', title:'直角三角形斜邊上的高', body:
+    '<p>直角三角形斜邊上的高 $=$ <b class="key">$\\dfrac{兩股乘積}{斜邊}$</b>，即 $h=\\dfrac{a\\times b}{c}$。</p>'+
+    '<div class="inline-ex">例：兩股 5、12、斜邊 13 的直角三角形，面積 $=\\dfrac{5\\times 12}{2}=\\dfrac{13\\times h}{2}$ → $h=\\dfrac{5\\times 12}{13}=\\dfrac{60}{13}$。</div>',
+    examples:[
+      { q:'直角三角形兩股 6、8，求斜邊上的高。',
+        steps:['斜邊 $=\\sqrt{6^2+8^2}=10$。','$h=\\dfrac{6\\times 8}{10}=\\dfrac{48}{10}=4.8$。'],
+        ans:'$4.8$' } ] },
+
+  { id:'u31c4', title:'兩點距離', body:
+    '<p>坐標平面上兩點 $A(x_1,y_1)$、$B(x_2,y_2)$ 的距離為 <b class="key">$\\overline{AB}=\\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$</b>。</p>'+
+    '<p>證明：作水平線與鉛直線得直角三角形，$\\overline{AC}=x_2-x_1$、$\\overline{BC}=y_2-y_1$，由 $\\overline{AB}^2=\\overline{BC}^2+\\overline{AC}^2$ 得 $\\overline{AB}=\\sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$。</p>',
+    examples:[
+      { q:'求 $A(1,2)$、$B(4,6)$ 的距離。',
+        steps:['$\\overline{AB}=\\sqrt{(4-1)^2+(6-2)^2}=\\sqrt{9+16}$。','$=\\sqrt{25}=5$。'],
+        ans:'$5$' },
+      { q:'求 $P(-2,3)$、$Q(3,-9)$ 的距離。',
+        steps:['$\\sqrt{(3-(-2))^2+(-9-3)^2}=\\sqrt{25+144}$。','$=\\sqrt{169}=13$。'],
+        ans:'$13$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u30',book:3,sec:'2-2',title:'根式的運算',page:46},
-  {id:'u31',book:3,sec:'2-3',title:'畢氏定理',page:47},
   {id:'u32',book:3,sec:'3-1',title:'提公因式因式分解',page:49},
   {id:'u33',book:3,sec:'3-2',title:'乘法公式因式分解',page:50},
   {id:'u34',book:3,sec:'3-3',title:'十字交乘法因式分解',page:51},

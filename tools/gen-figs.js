@@ -338,6 +338,19 @@ figs['u26-diffsq'] = function () {
   return svg(570, 250, b);
 };
 
+/* 2-3 畢氏定理直角三角形 */
+figs['u31-pyth'] = function () {
+  var bx = 120, by = 200, W = 240, H = 150;   // 直角在左下
+  var b = '';
+  b += '<path d="M ' + bx + ' ' + by + ' L ' + (bx + W) + ' ' + by + ' L ' + bx + ' ' + (by - H) + ' z" fill="rgba(58,110,165,.12)" stroke="' + BLUE + '" stroke-width="2.5"/>';
+  b += '<path d="M ' + bx + ' ' + (by - 18) + ' L ' + (bx + 18) + ' ' + (by - 18) + ' L ' + (bx + 18) + ' ' + by + '" fill="none" stroke="' + RED + '" stroke-width="2"/>';
+  b += txt(bx + W / 2, by + 24, 'a（股）', { size: 15, fill: BLUE, bold: 1 });
+  b += txt(bx - 34, by - H / 2, 'b（股）', { size: 15, fill: BLUE, bold: 1 });
+  b += txt(bx + W / 2 + 30, by - H / 2 - 14, 'c（斜邊）', { size: 15, fill: ORANGE, bold: 1 });
+  b += txt(bx + W / 2 + 60, by - H - 10, 'a² + b² = c²', { size: 18, bold: 1 });
+  return svg(520, 250, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
