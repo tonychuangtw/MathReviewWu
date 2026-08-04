@@ -1843,15 +1843,135 @@ var MATH_UNITS = [
       { q:'兩根之和為 3、之積為 $-10$ 的一元二次方程式（首項係數 1）是什麼？其根為何？',
         steps:['$x^2-(和)x+(積)=0$ → $x^2-3x-10=0$。','因式分解 $(x-5)(x+2)=0$ → $x=5$ 或 $-2$。'],
         ans:'$x^2-3x-10=0$；根 5、$-2$' } ] }
+]},
+
+{ id:'u37', book:4, sec:'1-1', title:'等差數列', page:55, concepts:[
+  { id:'u37c1', title:'複習：循環小數', body:
+    '<p>1、分數 ⇒ 化成<b class="key">循環小數</b>：</p>'+
+    '<div class="inline-ex">例：$\\dfrac{1}{3}=0.3333\\ldots=0.\\overline{3}$；$\\dfrac{7}{11}=0.636363\\ldots=0.\\overline{63}$；$\\dfrac{11}{90}=0.12222\\ldots=0.1\\overline{2}$。</div>'+
+    '<p>2、循環小數 ⇒ 化成<b class="key">分數</b>：</p>'+
+    '<div class="inline-ex">例：$0.\\overline{2}=\\dfrac{2}{9}$；$0.\\overline{54}=\\dfrac{54}{99}$；$0.\\overline{123}=\\dfrac{123}{999}$；$0.1\\overline{23}=\\dfrac{123-1}{990}$。</div>',
+    examples:[
+      { q:'把 $0.\\overline{45}$ 化成最簡分數。',
+        steps:['兩位循環：$\\dfrac{45}{99}$。','約分（同除 9）：$\\dfrac{5}{11}$。'],
+        ans:'$\\dfrac{5}{11}$' } ] },
+
+  { id:'u37c2', title:'數列與其分類', body:
+    '<p><b class="key">數列</b>：<b class="key">數字排成一列</b>。第 1、2、3、4 項以符號 $a_1$、$a_2$、$a_3$、$a_4$ 表示。</p>'+
+    '<div class="inline-ex">例：自然數 1,2,3,4；偶數 2,4,6,8；奇數 1,3,5,7；亂數 5,−1,−2,4。</div>'+
+    '<p>數列可分為 1.<b class="key">無規則數列</b> 2.<b class="key">有規則數列</b>。有規則性的數列包括：</p>'+
+    '<p>1、特殊規則數列；2、圖形數列；3、<b class="key">等差數列</b>：（後項）−（前項）＝<b class="key">定數</b>；4、<b class="key">等比數列</b>：（後項）÷（前項）＝<b class="key">定數</b>；5、調和數列：<b class="key">倒數後成 AP</b>；6、費氏數列：<b class="key">1、1、2、3、5、8⋯</b>；7、遞迴數列：<b class="key">後項與前幾項相關</b>。</p>',
+    examples:[
+      { q:'數列 3, 6, 12, 24⋯ 和 2, 5, 8, 11⋯ 各是哪種數列？',
+        steps:['前者後項÷前項＝2 固定 → 等比數列。','後者後項−前項＝3 固定 → 等差數列。'],
+        ans:'等比；等差' } ] },
+
+  { id:'u37c3', title:'等差數列與公差', body:
+    '<p><b class="key">等差數列</b>：數列中，任意相連兩項，後項減前項的<b class="key">差均固定</b>。<b class="key">公差</b>：（後項）減（前項）＝（公差）。</p>'+
+    '<p>1. 一個數列 $a_1,a_2,\\ldots,a_n$，若 $a_2-a_1=a_3-a_2=\\cdots=a_n-a_{n-1}=d$，則此數列是<b class="key">公差為 $d$</b> 的等差數列。</p>'+
+    '<p>2. 等差數列中，任意相鄰兩項的差都等於<b class="key">公差</b>，故：</p>'+
+    '<p>(1) <b class="key">公差＝後項－前項</b>，即 $d=a_n-a_{n-1}$。</p>'+
+    '<p>(2) <b class="key">後項＝前項＋公差</b>，即 $a_n=a_{n-1}+d$。</p>'+
+    '<p>(3) 前項＝後項－公差，即 $a_{n-1}=a_n-d$。</p>',
+    examples:[
+      { q:'等差數列 7, 4, 1, ⋯ 的公差是多少？第 4 項是多少？',
+        steps:['$d=4-7=-3$。','$a_4=1+(-3)=-2$。'],
+        ans:'$d=-3$；$a_4=-2$' } ] },
+
+  { id:'u37c4', title:'等差數列的一般項公式', body:
+    '<p>符號：首項 $a_1$、末項（第 $n$ 項）$a_n$、項數 $n$、公差 $d$。</p>'+
+    '<div class="inline-ex">例：等差數列（A.P.）1、3、5、7、9、11：$a_1=1$、$d=2$；$a_2=a_1+d=3$；$a_3=a_1+2d=5$；$a_4=a_1+3d=7$；$a_5=a_1+(5-1)d=9$。</div>'+
+    '<p>公式：<b class="key">$a_n=a_1+(n-1)\\times d$</b>，即<b class="key">末項＝首項＋（項數－1）×公差</b>——不用背，但不能忘記！</p>',
+    examples:[
+      { q:'等差數列首項 5、公差 4，求第 20 項。',
+        steps:['$a_{20}=5+(20-1)\\times 4$。','$=5+76=81$。'],
+        ans:'$81$' },
+      { q:'等差數列 2, 9, 16, ⋯ 中，93 是第幾項？',
+        steps:['$d=7$：$93=2+(n-1)\\times 7$。','$(n-1)=13$ → $n=14$。'],
+        ans:'第 14 項' } ] },
+
+  { id:'u37c5', title:'等差中項', body:
+    '<p><b class="key">等差中項</b>：<b class="key">等差數列位於正中間的項</b>。</p>'+
+    '<p>若 $a$、$b$、$c$ 三數成等差數列（A.P.），則公差 $d=<b class="key">b-a</b>=<b class="key">c-b</b>$ ⇒ <b class="key">$2b=a+c$</b> 或 <b class="key">$b=\\dfrac{a+c}{2}$</b>。</p>'+
+    '<p>推廣：$a_{10}$ 是 $a_9$ 和 $a_{11}$ 的等差中項，也是 $a_3$ 和 $a_{17}$、$a_2$ 和 $a_{18}$、$a_1$ 和 $a_{19}$ 的等差中項（前後對稱的兩項）。</p>',
+    examples:[
+      { q:'若 $4$、$x$、$16$ 成等差數列，求 $x$。',
+        steps:['等差中項：$x=\\dfrac{4+16}{2}$。','$=10$。'],
+        ans:'$x=10$' },
+      { q:'等差數列中 $a_5=12$、$a_9=28$，求 $a_7$。',
+        steps:['$a_7$ 是 $a_5$、$a_9$ 的等差中項。','$a_7=\\dfrac{12+28}{2}=20$。'],
+        ans:'$20$' } ] }
+]},
+
+{ id:'u38', book:4, sec:'1-2', title:'等差級數', page:57, concepts:[
+  { id:'u38c1', title:'級數與等差級數', body:
+    '<p>1. <b class="key">級數</b>：<b class="key">將數列中的各項相加起來</b>。</p>'+
+    '<p>2. <b class="key">等差級數</b>：<b class="key">將等差數列中的各項加起來</b>。符號：$S_n=a_1+a_2+\\cdots+a_n$。公式：$S_n=\\dfrac{(a_1+a_n)\\times n}{2}$。</p>'+
+    '<p>數學家高斯（Carl Friedrich Gauss, 1777～1855）10 歲時解出「$1+2+3+\\cdots+99+100=?$」：正著寫一遍、倒著寫一遍相加，$2S=\\underbrace{101+101+\\cdots+101}_{100 個}$，$S=\\dfrac{101\\times 100}{2}=5050$。</p>',
+    examples:[
+      { q:'仿高斯法求 $1+2+\\cdots+50$。',
+        steps:['首末配對：$1+50=51$，共 $\\dfrac{50}{2}=25$ 對。','$51\\times 25=1275$。'],
+        ans:'$1275$' } ] },
+
+  { id:'u38c2', title:'等差級數前 n 項的和', body:
+    '<p>一個等差級數從第 1 項加到第 $n$ 項的和，稱為此等差級數<b class="key">前 $n$ 項的和</b>，以 $S_n$ 表示，即 $S_n=<b class="key">a_1+a_2+\\cdots+a_n</b>$。</p>'+
+    '<div class="inline-ex">例：等差級數 $3+6+9+12+15+18$ 中，$S_1=3$；$S_2=3+6$；$S_3=3+6+9$；⋯；$S_6=3+6+9+12+15+18$。</div>',
+    examples:[
+      { q:'上例中 $S_4$ 是多少？',
+        steps:['$S_4=3+6+9+12$。','$=30$。'],
+        ans:'$30$' } ] },
+
+  { id:'u38c3', title:'等差級數前 n 項和的公式', body:
+    '<p>若等差級數的和 $S_n=a_1+a_2+\\cdots+a_n$，公差為 $d$，則：</p>'+
+    '<p>【公式(一)】等差級數的和 $=\\dfrac{項數\\times(首項＋末項)}{2}$，即 <b class="key">$S_n=\\dfrac{n(a_1+a_n)}{2}$</b>。</p>'+
+    '<p>【公式(二)】<b class="key">$S_n=\\dfrac{n[2a_1+(n-1)d]}{2}$</b>（把 $a_n=a_1+(n-1)d$ 代入公式一）。</p>'+
+    '<p>【公式(三)】<b class="key">$S_n=$（等差中項）$\\times n$</b>。</p>',
+    examples:[
+      { q:'求等差級數 $5+8+11+\\cdots$ 前 20 項的和。',
+        steps:['$a_1=5$、$d=3$：公式(二) $S_{20}=\\dfrac{20[2\\times 5+19\\times 3]}{2}$。','$=10\\times(10+57)=670$。'],
+        ans:'$670$' },
+      { q:'等差級數 $2+5+8+\\cdots+59$ 共幾項？和是多少？',
+        steps:['$59=2+(n-1)\\times 3$ → $n=20$。','$S_{20}=\\dfrac{20(2+59)}{2}=610$。'],
+        ans:'20 項；和 610' } ] }
+]},
+
+{ id:'u39', book:4, sec:'2-1', title:'生活中的平面圖形', page:58, concepts:[
+  { id:'u39c1', title:'點、線', body:
+    '<p><b class="key">點</b>：<b class="key">表示位置、不占空間、沒有大小</b>。</p>'+
+    '<p><b class="key">線</b>：<b class="key">點連續移動所經的路線、沒有粗細</b>。分為 1、<b class="key">曲線</b>；2、<b class="key">直線</b>。</p>'+
+    '<p>(1) 直線 AB：$\\overleftrightarrow{AB}$。註：<b class="key">兩點</b>決定一條直線。</p>'+
+    '<p>(2) 線段 AB：$\\overline{AB}$。</p>'+
+    '<p>(3) 射線 AB：$\\overrightarrow{AB}$（與 $\\overrightarrow{BA}$ 不同）。</p>',
+    examples:[
+      { q:'$\\overrightarrow{AB}$ 和 $\\overrightarrow{BA}$ 一樣嗎？$\\overline{AB}$ 和 $\\overline{BA}$ 呢？',
+        steps:['射線有起點和方向：$\\overrightarrow{AB}$ 從 A 出發、$\\overrightarrow{BA}$ 從 B 出發 → 不同。','線段只是 A、B 之間的部分，沒有方向 → 相同。'],
+        ans:'射線不同；線段相同' } ] },
+
+  { id:'u39c2', title:'角及其分類', body:
+    '<p><b class="key">角</b>：以「∠」表示角的符號，記作「$\\angle ABC$」（或 $\\angle CBA$），讀作「角 $ABC$」（或角 $CBA$），頂點寫中間。</p>'+
+    '<p>根據角的度數，可以分類如下：</p>'+
+    '<p>(1) 銳角：<b class="key">$<90^\\circ$</b>；(2) 直角：<b class="key">$=90^\\circ$</b>；(3) 鈍角：<b class="key">$>90^\\circ$</b>；(4) 平角：<b class="key">$=180^\\circ$</b>；(5) 周角：<b class="key">$=360^\\circ$</b>。</p>',
+    examples:[
+      { q:'$35^\\circ$、$90^\\circ$、$120^\\circ$、$180^\\circ$ 各屬哪類角？',
+        steps:['$35^\\circ<90^\\circ$ 銳角；$90^\\circ$ 直角。','$120^\\circ$ 鈍角；$180^\\circ$ 平角。'],
+        ans:'銳角／直角／鈍角／平角' } ] },
+
+  { id:'u39c3', title:'餘角與補角', body:
+    '<p><b class="key">餘角</b>：若 $\\angle 1+\\angle 2=90^\\circ$，則稱 $\\angle 1$ 是 $\\angle 2$ 的<b class="key">餘角</b>，且 $\\angle 2$ 是 $\\angle 1$ 的<b class="key">餘角</b>；$\\angle 1$、$\\angle 2$ 互為餘角，簡稱<b class="key">互餘</b>。</p>'+
+    '<p><b class="key">補角</b>：若 $\\angle 1+\\angle 2=180^\\circ$，則稱 $\\angle 1$ 是 $\\angle 2$ 的<b class="key">補角</b>，且 $\\angle 2$ 是 $\\angle 1$ 的<b class="key">補角</b>；$\\angle 1$、$\\angle 2$ 互為補角，簡稱<b class="key">互補</b>。</p>',
+    examples:[
+      { q:'$52^\\circ$ 的餘角和補角各是多少？',
+        steps:['餘角：$90^\\circ-52^\\circ=38^\\circ$。','補角：$180^\\circ-52^\\circ=128^\\circ$。'],
+        ans:'餘角 $38^\\circ$；補角 $128^\\circ$' },
+      { q:'某角的補角是它餘角的 3 倍，求這個角。',
+        steps:['設角 $x$：$180-x=3(90-x)$。','$180-x=270-3x$ → $2x=90$ → $x=45^\\circ$。'],
+        ans:'$45^\\circ$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u37',book:4,sec:'1-1',title:'等差數列',page:55},
-  {id:'u38',book:4,sec:'1-2',title:'等差級數',page:57},
-  {id:'u39',book:4,sec:'2-1',title:'生活中的平面圖形',page:58},
   {id:'u40',book:4,sec:'2-2',title:'垂直、平分與線對稱',page:63},
   {id:'u41',book:4,sec:'2-3',title:'尺規作圖',page:65},
   {id:'u42',book:4,sec:'3-1',title:'三角形的內、外角',page:66},
