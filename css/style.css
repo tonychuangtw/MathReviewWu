@@ -1,20 +1,51 @@
-/* MathReviewWu — 筆記本風格：深色介面 + 紙白內容卡（圖形/數式對比穩定，列印友善） */
+/* MathReviewWu — 筆記本風格：介面色系可選 + 紙白內容卡（圖形/數式對比穩定，列印友善） */
 :root{
-  --bg:#141822; --bg2:#1b2130; --card:#fdfcf7; --card-line:#e8e4d8;
+  --bg:#141822; --bg2:#1b2130; --bg3:#233049; --card:#fdfcf7; --card-line:#e8e4d8;
   --ink:#22242a; --ink-soft:#5a5e6a; --fg:#e8eaf2; --fg-dim:#9aa1b5;
   --accent:#3a6ea5; --accent2:#e07a2f; --key:#c0392b;
   --ok:#2e7d32; --warn:#e6a817; --strong:#7b1fa2;
-  --radius:14px;
+  --radius:14px; --shadow:0 3px 10px rgba(0,0,0,.3);
+}
+/* 色系（女兒挑的門面 🎨） */
+html[data-theme="white"]{
+  --bg:#f2f0ea; --bg2:#ffffff; --bg3:#e7ecf5; --fg:#2a2c33; --fg-dim:#7a7f8d;
+  --accent:#3a6ea5; --accent2:#d97a2f; --shadow:0 3px 10px rgba(60,60,80,.14);
+}
+html[data-theme="forest"]{
+  --bg:#122019; --bg2:#1a2b22; --bg3:#24463a;
+  --accent:#3f9b6e; --accent2:#c9a13b;
+}
+html[data-theme="sakura"]{
+  --bg:#fdf0f3; --bg2:#ffffff; --bg3:#fbdde6; --fg:#43333a; --fg-dim:#a08791;
+  --accent:#d16b8f; --accent2:#8f6bd1; --key:#c0392b; --card:#fffafc; --card-line:#f3dde4;
+  --shadow:0 3px 10px rgba(190,120,150,.18);
+}
+html[data-theme="sunny"]{
+  --bg:#faf3e7; --bg2:#fffdf7; --bg3:#f5e3c8; --fg:#3d3427; --fg-dim:#98876c;
+  --accent:#c77b3a; --accent2:#4a8fb5; --card:#fffef9; --card-line:#efe3cd;
+  --shadow:0 3px 10px rgba(170,130,70,.16);
+}
+html[data-theme="violet"]{
+  --bg:#191426; --bg2:#221b33; --bg3:#332752;
+  --accent:#8d6fd1; --accent2:#d98cb3;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;flex-direction:column}
 
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg2);position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.35)}
-.topbar h1{font-size:1.05rem;cursor:pointer;letter-spacing:.05em}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg2);position:sticky;top:0;z-index:20;box-shadow:var(--shadow);border-bottom:3px solid var(--accent)}
+.topbar h1{font-size:1.05rem;cursor:pointer;letter-spacing:.05em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
 .topbar-controls{display:flex;gap:8px;align-items:center}
-.chip{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--fg);border-radius:999px;padding:6px 14px;font-size:.9rem;cursor:pointer}
-.chip:active{transform:scale(.96)}
+.chip{border:1.5px solid var(--fg-dim);background:transparent;color:var(--fg);border-radius:999px;padding:6px 14px;font-size:.9rem;cursor:pointer;transition:transform .12s,border-color .12s}
+.chip:hover{border-color:var(--accent)}
+.chip:active{transform:scale(.94)}
+
+/* 色系選單 */
+.theme-pop{position:absolute;top:52px;right:12px;background:var(--bg2);border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.35);padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;z-index:40}
+.theme-opt{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:.88rem;color:var(--fg);border:2px solid transparent}
+.theme-opt:hover{background:var(--bg3)}
+.theme-opt.on{border-color:var(--accent)}
+.theme-dot{width:20px;height:20px;border-radius:50%;flex:none;border:2px solid rgba(128,128,128,.35)}
 
 #main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:16px}
 .hidden{display:none!important}
@@ -22,11 +53,14 @@ body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;ba
 
 /* 首頁 */
 .book-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.book-tab{flex:1 1 100px;text-align:center;padding:10px 4px;border-radius:var(--radius);background:var(--bg2);cursor:pointer;border:2px solid transparent;font-size:.95rem}
+.book-tab{flex:1 1 100px;text-align:center;padding:10px 4px;border-radius:var(--radius);background:var(--bg2);cursor:pointer;border:2px solid transparent;font-size:.95rem;box-shadow:var(--shadow);transition:transform .12s}
+.book-tab:hover{transform:translateY(-2px)}
 .book-tab small{display:block;color:var(--fg-dim);font-size:.72rem;margin-top:2px}
-.book-tab.active{border-color:var(--accent);background:#233049}
+.book-tab.active{border-color:var(--accent);background:var(--bg3)}
+.book-tab .bicon{font-size:1.1rem;display:block;margin-bottom:2px}
 .unit-list{display:flex;flex-direction:column;gap:10px}
-.unit-item{display:flex;align-items:center;gap:12px;background:var(--bg2);border-radius:var(--radius);padding:12px 14px;cursor:pointer;border-left:5px solid transparent}
+.unit-item{display:flex;align-items:center;gap:12px;background:var(--bg2);border-radius:var(--radius);padding:12px 14px;cursor:pointer;border-left:5px solid transparent;box-shadow:var(--shadow);transition:transform .12s}
+.unit-item:not(.todo):hover{transform:translateX(4px)}
 .unit-item.todo{opacity:.45;cursor:default}
 .unit-item .sec{font-weight:700;color:var(--accent2);min-width:2.6em}
 .unit-item .name{flex:1}
@@ -35,10 +69,13 @@ body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;ba
 .unit-item.st-weak{border-left-color:var(--warn)}
 .unit-item.st-master{border-left-color:var(--strong)}
 .st-label{font-size:.75rem;padding:3px 10px;border-radius:999px;white-space:nowrap}
-.st-label.taught{background:rgba(46,125,50,.25);color:#7fd185}
-.st-label.weak{background:rgba(230,168,23,.22);color:#f0c65e}
-.st-label.master{background:rgba(123,31,162,.25);color:#ce93d8}
-.st-label.none{background:rgba(255,255,255,.08);color:var(--fg-dim)}
+.st-label.taught{background:rgba(46,125,50,.22);color:#7fd185}
+.st-label.weak{background:rgba(230,168,23,.2);color:#f0c65e}
+.st-label.master{background:rgba(123,31,162,.22);color:#ce93d8}
+.st-label.none{background:rgba(128,128,128,.14);color:var(--fg-dim)}
+html[data-theme="white"] .st-label.taught,html[data-theme="sakura"] .st-label.taught,html[data-theme="sunny"] .st-label.taught{color:#2e7d32}
+html[data-theme="white"] .st-label.weak,html[data-theme="sakura"] .st-label.weak,html[data-theme="sunny"] .st-label.weak{color:#a3770a}
+html[data-theme="white"] .st-label.master,html[data-theme="sakura"] .st-label.master,html[data-theme="sunny"] .st-label.master{color:#7b1fa2}
 .note-badge{font-size:.72rem;color:var(--fg-dim)}
 
 /* 單元頁 */
@@ -53,7 +90,7 @@ body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;ba
 .status-btns .chip.on-master{background:var(--strong);border-color:var(--strong);color:#fff}
 
 /* 觀念卡：紙感 */
-.concept{background:var(--card);color:var(--ink);border-radius:var(--radius);padding:18px 20px;margin-bottom:18px;box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.concept{background:var(--card);color:var(--ink);border-radius:var(--radius);padding:18px 20px;margin-bottom:18px;box-shadow:var(--shadow)}
 .concept h3{font-size:1.05rem;color:var(--accent);border-bottom:2px solid var(--card-line);padding-bottom:8px;margin-bottom:12px}
 .concept h3 .cnum{display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;margin-right:8px;font-size:.85rem}
 .concept p{line-height:1.9;margin:6px 0}
@@ -86,11 +123,12 @@ body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;ba
 /* 進度總覽 */
 .pg-book{margin-bottom:18px}
 .pg-book h3{font-size:1rem;color:var(--accent2);margin-bottom:8px}
-.pg-row{display:flex;align-items:center;gap:10px;background:var(--bg2);border-radius:10px;padding:8px 12px;margin-bottom:6px;cursor:pointer}
+.pg-row{display:flex;align-items:center;gap:10px;background:var(--bg2);border-radius:10px;padding:8px 12px;margin-bottom:6px;cursor:pointer;box-shadow:var(--shadow)}
 .pg-row .sec{color:var(--accent2);font-weight:700;min-width:2.6em;font-size:.85rem}
 .pg-row .name{flex:1;font-size:.9rem}
 .pg-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
-.pg-stat{background:var(--bg2);border-radius:var(--radius);padding:12px 18px;text-align:center;flex:1;min-width:110px}
+.pg-stat{background:var(--bg2);border-radius:var(--radius);padding:12px 18px;text-align:center;flex:1;min-width:110px;box-shadow:var(--shadow)}
+.pg-stat b{color:var(--accent)}
 .pg-stat b{display:block;font-size:1.5rem}
 .pg-stat small{color:var(--fg-dim)}
 

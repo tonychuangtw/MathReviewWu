@@ -9,6 +9,15 @@
     { key:'weak',   label:'需加強', cls:'on-weak' },
     { key:'master', label:'已精熟', cls:'on-master' }
   ];
+  var BOOK_ICON = { 1:'📘', 2:'📗', 3:'📙', 4:'📕', 5:'📔', 6:'📓' };
+  var THEMES = [
+    { key:'',       name:'深夜藍', dot:'#1b2130' },
+    { key:'white',  name:'純淨白', dot:'#f2f0ea' },
+    { key:'forest', name:'森林綠', dot:'#1a2b22' },
+    { key:'sakura', name:'櫻花粉', dot:'#fbdde6' },
+    { key:'sunny',  name:'暖陽杏', dot:'#f5e3c8' },
+    { key:'violet', name:'紫夜',   dot:'#332752' }
+  ];
 
   function $(id) { return document.getElementById(id); }
 
@@ -68,7 +77,7 @@
       (function (b) {
         var t = document.createElement('div');
         t.className = 'book-tab' + (state.book === b ? ' active' : '');
-        t.innerHTML = BOOK_NAMES[b] + '<small>' + BOOK_GRADE[b] + '</small>';
+        t.innerHTML = '<span class="bicon">' + BOOK_ICON[b] + '</span>' + BOOK_NAMES[b] + '<small>' + BOOK_GRADE[b] + '</small>';
         t.addEventListener('click', function () { state.book = b; save(); renderHome(); });
         tabs.appendChild(t);
       })(b);
@@ -223,7 +232,37 @@
     show('view-progress');
   }
 
+  /* ---------- theme ---------- */
+  function applyTheme() {
+    if (state.theme) document.documentElement.setAttribute('data-theme', state.theme);
+    else document.documentElement.removeAttribute('data-theme');
+  }
+  var themePop = null;
+  function toggleThemePop() {
+    if (themePop) { themePop.remove(); themePop = null; return; }
+    themePop = document.createElement('div');
+    themePop.className = 'theme-pop';
+    THEMES.forEach(function (t) {
+      var opt = document.createElement('div');
+      opt.className = 'theme-opt' + ((state.theme || '') === t.key ? ' on' : '');
+      opt.innerHTML = '<span class="theme-dot" style="background:' + t.dot + '"></span>' + t.name;
+      opt.addEventListener('click', function () {
+        state.theme = t.key;
+        save();
+        applyTheme();
+        toggleThemePop();
+      });
+      themePop.appendChild(opt);
+    });
+    document.body.appendChild(themePop);
+  }
+
   /* ---------- boot ---------- */
+  applyTheme();
+  $('themeBtn').addEventListener('click', function (e) { e.stopPropagation(); toggleThemePop(); });
+  document.addEventListener('click', function (e) {
+    if (themePop && !themePop.contains(e.target)) { themePop.remove(); themePop = null; }
+  });
   $('homeLink').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('backBtn').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('backBtn2').addEventListener('click', function () { renderHome(); show('view-home'); });
