@@ -2629,14 +2629,101 @@ var MATH_UNITS = [
     examples:[
       { q:'圓外切四邊形三邊依序為 7、9、12，求第四邊。',
         steps:['對邊和相等：$7+12=9+x$。','$x=10$。'],
-        ans:'$10$' } ] }
+        ans:'$10$' } ] },
+
+  { id:'u52c4', title:'弦的性質與弦心距', body:
+    '<p>5、弦的性質：</p>'+
+    '<p>(1) 過圓心且與弦垂直的直線，必<b class="key">平分</b>此弦。</p>'+
+    '<p>(2) 過圓心且平分弦的直線，必<b class="key">垂直</b>此弦。</p>'+
+    '<p>(3) 一弦的垂直平分線必通過其所在圓的<b class="key">圓心</b>。</p>'+
+    '<p>6、<b class="key">弦心距</b>的性質：圓心到弦的距離稱為此弦的<b class="key">弦心距</b>。在同一圓中：</p>'+
+    '<p>(1) 若兩弦不等長，則愈長的弦，其弦心距愈<b class="key">短</b>；愈短的弦，其弦心距愈<b class="key">長</b>。</p>'+
+    '<p>(2) 若兩弦等長，則其弦心距<b class="key">相等</b>；若兩弦的弦心距相等，則此兩弦<b class="key">等長</b>。</p>',
+    examples:[
+      { q:'半徑 10 的圓中，一弦的弦心距為 6，求弦長。',
+        steps:['半徑、弦心距、半弦構成直角三角形。','半弦 $=\\sqrt{10^2-6^2}=8$ → 弦長 16。'],
+        ans:'$16$' } ] },
+
+  { id:'u52c5', title:'兩圓的位置關係與公切線數量', body:
+    '<p>連接兩圓圓心的直線稱為<b class="key">連心線</b>，$\\overline{O_1O_2}$ 稱為<b class="key">連心線段長</b>。設 $r_1>r_2$：</p>'+
+    '<p>・<b class="key">外離</b>：無交點；公切線 外 2、內 2、共 <b class="key">4</b>；$\\overline{O_1O_2}>r_1+r_2$。</p>'+
+    '<p>・<b class="key">外切</b>：交於 1 點；外 2、內 1、共 <b class="key">3</b>；$\\overline{O_1O_2}=r_1+r_2$。</p>'+
+    '<p>・<b class="key">相交於兩點</b>：交於 2 點；外 2、內 0、共 <b class="key">2</b>；$r_1-r_2<\\overline{O_1O_2}<r_1+r_2$。</p>'+
+    '<p>・<b class="key">內切</b>：交於 1 點；外 1、內 0、共 <b class="key">1</b>；$\\overline{O_1O_2}=r_1-r_2$。</p>'+
+    '<p>・<b class="key">內離</b>：無交點；共 <b class="key">0</b>；$0<\\overline{O_1O_2}<r_1-r_2$。</p>'+
+    '<p>補充（兩圓外切，$A$、$B$、$C$ 為外、內公切線切點，$M$ 為內公切線上交點）：(1) $\\overline{MA}=\\overline{MB}=\\overline{MC}$；(2) 切線與弦的角度各為半弧；(3) $\\angle ABC=90^\\circ$，即 $\\triangle ABC$ 必為直角三角形。</p>',
+    examples:[
+      { q:'兩圓半徑 7、3，圓心距 10、4、12 時各是什麼位置關係？',
+        steps:['$10=7+3$ → 外切。','$4=7-3$ → 內切。','$12>10$ → 外離。'],
+        ans:'外切／內切／外離' },
+      { q:'半徑 8、5 的兩圓相交於兩點，圓心距 $d$ 的範圍？',
+        steps:['$r_1-r_2<d<r_1+r_2$。','$3<d<13$。'],
+        ans:'$3<d<13$' } ] },
+
+  { id:'u52c6', title:'公切線段長', body:
+    '<p>8、<b class="key">公切線</b>：若某直線同時是兩圓的切線，我們稱它為兩圓的<b class="key">公切線</b>。</p>'+
+    '<p>(1) <b class="key">外公切線段長</b>：$\\overline{AB}=\\sqrt{\\overline{O_1O_2}^2-(r_1-r_2)^2}$。</p>'+
+    '<p>(2) <b class="key">內公切線段長</b>：$\\overline{AB}=\\sqrt{\\overline{O_1O_2}^2-(r_1+r_2)^2}$。</p>',
+    examples:[
+      { q:'兩圓半徑 6、2，圓心距 10，求外公切線段長與內公切線段長。',
+        steps:['外：$\\sqrt{10^2-(6-2)^2}=\\sqrt{84}=2\\sqrt{21}$。','內：$\\sqrt{10^2-(6+2)^2}=\\sqrt{36}=6$。'],
+        ans:'外 $2\\sqrt{21}$；內 $6$' } ] }
+]},
+
+{ id:'u53', book:5, sec:'2-2', title:'圓心角、圓周角與弦切角', page:91, concepts:[
+  { id:'u53c1', title:'圓心角與弧的度數', body:
+    '<p>(0) <b class="key">優弧與劣弧</b>：圓上的 $A$、$B$ 兩點將圓周分成兩個弧，小於半圓的弧稱為<b class="key">劣弧</b>，以 $\\overset{\\frown}{AB}$ 表示；大於半圓的弧稱為<b class="key">優弧</b>，通常會在弧上加一點 $C$，以 $\\overset{\\frown}{ACB}$ 表示。</p>'+
+    '<p>(1) <b class="key">圓心角</b>：<b class="key">頂點在圓心上的角</b>。(2) 圓心角的度數＝<b class="key">其所夾 $\\overset{\\frown}{AB}$ 的度數</b>。(3) 弧的度數：圓上一弧的度數就是它所對<b class="key">圓心角</b>的度數。(4) 弧的長度：圓周長 $\\times\\dfrac{x^\\circ}{360^\\circ}$。</p>'+
+    '<p>(6)【等圓心角對等弧】在同圓或等圓中，度數相等的兩弧<b class="key">等長</b>。(7)【等圓心角對等弦】兩圓心角相等 ⇔ 所對的弦等長。(8)【等弦對等弧】兩弧度數相等 ⇔ 所對的弦等長。</p>',
+    examples:[
+      { q:'半徑 9 的圓中，$120^\\circ$ 的弧長是多少？',
+        steps:['圓周長 $=18\\pi$。','弧長 $=18\\pi\\times\\dfrac{120}{360}=6\\pi$。'],
+        ans:'$6\\pi$' } ] },
+
+  { id:'u53c2', title:'圓周角的度數', body:
+    '<p>(1) <b class="key">圓周角</b>：<b class="key">頂點在圓周上的角</b>。</p>'+
+    '<p>(2) 圓周角的度數＝<b class="key">其所夾弧度數的一半</b>，也等於<b class="key">所對圓心角的一半</b>。</p>'+
+    '<p>(3) 直徑或半圓所對的圓周角必為<b class="key">直角</b>。</p>'+
+    '<p>(4)【<b class="key">平行線截等弧</b>】若兩條直線平行，則此兩條平行線在圓上所截出的兩弧度數<b class="key">相等</b>（$\\overset{\\frown}{AC}=\\overset{\\frown}{BD}$）。</p>',
+    examples:[
+      { q:'同一弧所對的圓心角為 $84^\\circ$，圓周角是多少？',
+        steps:['圓周角＝圓心角的一半。','$42^\\circ$。'],
+        ans:'$42^\\circ$' },
+      { q:'$\\overline{AB}$ 是直徑，$C$ 在圓上且 $\\angle CAB=35^\\circ$，求 $\\angle ABC$。',
+        steps:['直徑所對圓周角 $\\angle ACB=90^\\circ$。','$\\angle ABC=180-90-35=55^\\circ$。'],
+        ans:'$55^\\circ$' } ] },
+
+  { id:'u53c3', title:'圓內接四邊形與弦切角', body:
+    '<p>3、圓內接四邊形：(1) 四邊形 $ABCD$ 稱為圓 $O$ 的<b class="key">內接四邊形</b>，圓 $O$ 稱為四邊形 $ABCD$ 的<b class="key">外接圓</b>。(2) 圓內接四邊形的<b class="key">對角互補</b>：$\\angle A+\\angle C=180^\\circ$、$\\angle B+\\angle D=180^\\circ$。(3)【判別】對角互補的四邊形有<b class="key">外接圓</b>。</p>'+
+    '<p>4、弦切角：(1) <b class="key">弦切角</b>：<b class="key">弦與切線所夾的角</b>。(2) 弦切角的度數等於<b class="key">其所夾弧度數的一半</b>：$\\angle BAC=\\dfrac{1}{2}\\overset{\\frown}{AB}$。</p>',
+    examples:[
+      { q:'圓內接四邊形 $ABCD$ 中 $\\angle A=95^\\circ$、$\\angle B=80^\\circ$，求 $\\angle C$、$\\angle D$。',
+        steps:['對角互補：$\\angle C=180-95=85^\\circ$。','$\\angle D=180-80=100^\\circ$。'],
+        ans:'$\\angle C=85^\\circ$、$\\angle D=100^\\circ$' },
+      { q:'切線與弦所夾的弦切角為 $65^\\circ$，其所夾的弧是幾度？',
+        steps:['弦切角＝所夾弧的一半。','弧 $=130^\\circ$。'],
+        ans:'$130^\\circ$' } ] },
+
+  { id:'u53c4', title:'圓內角、圓外角與圓冪性質', body:
+    '<p>5、<b class="key">圓內角</b>：<b class="key">頂點在圓內的角</b>，度數等於<b class="key">（大弧＋小弧）的一半</b>：$\\angle APC=\\dfrac{1}{2}(\\overset{\\frown}{AC}+\\overset{\\frown}{BD})$。</p>'+
+    '<p>6、<b class="key">圓外角</b>：<b class="key">頂點在圓外的角</b>，度數等於<b class="key">（大弧－小弧）的一半</b>：$\\angle P=\\dfrac{1}{2}(\\overset{\\frown}{AB}-\\overset{\\frown}{CD})$。</p>'+
+    '<p>7、<b class="key">圓冪性質</b>：</p>'+
+    '<p>(1) <b class="key">內冪</b>：兩弦 $\\overline{AB}$、$\\overline{CD}$ 相交於圓內 $P$ 點，則 $\\overline{PA}\\times\\overline{PB}=\\overline{PC}\\times\\overline{PD}$。</p>'+
+    '<p>(2) <b class="key">外冪</b>：兩弦延長線於圓外相交於 $P$，則 $\\overline{PA}\\times\\overline{PB}=\\overline{PC}\\times\\overline{PD}$。</p>'+
+    '<p>(3) <b class="key">切割線性質</b>：$\\overline{PA}$ 切圓於 $A$，割線交圓於 $C$、$D$，則 $\\overline{PA}^2=\\overline{PC}\\times\\overline{PD}$。</p>',
+    examples:[
+      { q:'兩弦交於圓內 $P$，$\\overline{PA}=4$、$\\overline{PB}=6$、$\\overline{PC}=3$，求 $\\overline{PD}$。',
+        steps:['內冪：$4\\times 6=3\\times\\overline{PD}$。','$\\overline{PD}=8$。'],
+        ans:'$8$' },
+      { q:'$\\overline{PA}$ 切圓於 $A$，割線交圓於 $C$、$D$，$\\overline{PC}=4$、$\\overline{CD}=5$，求 $\\overline{PA}$。',
+        steps:['$\\overline{PD}=4+5=9$。','$\\overline{PA}^2=4\\times 9=36$ → $\\overline{PA}=6$。'],
+        ans:'$6$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u53',book:5,sec:'2-2',title:'圓心角、圓周角與弦切角',page:91},
   {id:'u54',book:5,sec:'3-1',title:'推理證明',page:93},
   {id:'u55',book:5,sec:'3-2',title:'外心、內心、重心',page:94},
   {id:'u56',book:6,sec:'1-1',title:'二次函數的圖形',page:98},
