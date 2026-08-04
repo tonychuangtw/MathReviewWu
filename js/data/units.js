@@ -1965,7 +1965,113 @@ var MATH_UNITS = [
         ans:'餘角 $38^\\circ$；補角 $128^\\circ$' },
       { q:'某角的補角是它餘角的 3 倍，求這個角。',
         steps:['設角 $x$：$180-x=3(90-x)$。','$180-x=270-3x$ → $2x=90$ → $x=45^\\circ$。'],
-        ans:'$45^\\circ$' } ] }
+        ans:'$45^\\circ$' } ] },
+
+  { id:'u39c4', title:'對頂角', body:
+    '<p><b class="key">對頂角</b>：<b class="key">對頂角相等</b>。兩直線相交時，$\\angle 1$ 和 $\\angle 3$ 互為對頂角且 $\\angle 2$ 和 $\\angle 4$ 互為對頂角：$\\angle 1=\\angle 3$、$\\angle 2=\\angle 4$。</p>',
+    examples:[
+      { q:'兩直線相交，其中一角為 $70^\\circ$，求其餘三個角。',
+        steps:['對頂角相等 → 對面也是 $70^\\circ$。','相鄰角互補：$180^\\circ-70^\\circ=110^\\circ$，其對頂角也是 $110^\\circ$。'],
+        ans:'$70^\\circ$、$110^\\circ$、$110^\\circ$' } ] },
+
+  { id:'u39c5', title:'多邊形：凸、凹與對角線', body:
+    '<p>(1) <b class="key">凸多邊形</b>：<b class="key">將任一邊延長，其他各邊都在此延長線同一側</b>；或：<b class="key">所有對角線都在多邊形內部</b>。</p>'+
+    '<p>(2) <b class="key">凹多邊形</b>：將任一邊延長，<b class="key">不是</b>所有其他各邊都在此延長線同一側；或：<b class="key">不是所有對角線都完全在多邊形內部</b>。</p>'+
+    '<p><b class="key">對角線</b>：<b class="key">任兩不相鄰頂點的連線</b>（如四邊形的 $\\overline{AC}$、$\\overline{BD}$）。</p>',
+    examples:[
+      { q:'五邊形有幾條對角線？',
+        steps:['每個頂點可連到不相鄰的 $5-3=2$ 個頂點。','$\\dfrac{5\\times 2}{2}=5$ 條（除以 2 因為每條算了兩次）。'],
+        ans:'5 條' } ] },
+
+  { id:'u39c6', title:'三角形的內角與外角', body:
+    '<p>①<b class="key">內角</b>：三角形內部的角，$\\angle A$、$\\angle B$、$\\angle C$。</p>'+
+    '<p>②<b class="key">外角</b>：由內角的其中一邊<b class="key">延伸出去</b>的角（每個內角有 2 個相等的外角）。</p>'+
+    '<p>③<b class="key">內角和</b>：三角形內角和 <b class="key">$180^\\circ$</b>。</p>'+
+    '<p>④<b class="key">外角和</b>：三角形外角和 <b class="key">$360^\\circ$</b>。</p>'+
+    '<p>⑤<b class="key">外角定理</b>：三角形任一外角等於<b class="key">兩個遠內角（內對角）相加</b>。</p>'+
+    '<p>⑥<b class="key">銳角三角形</b>：三內角均 $<90^\\circ$；⑦<b class="key">鈍角三角形</b>：有一內角 $>90^\\circ$；⑧<b class="key">直角三角形</b>：有一內角 $=90^\\circ$。<b class="key">勾股定理</b>：直角三角形中，任意兩股平方和等於<b class="key">斜邊平方</b>，$a^2+b^2=c^2$。</p>',
+    examples:[
+      { q:'三角形兩內角為 $65^\\circ$、$48^\\circ$，求第三個內角與 $65^\\circ$ 角的外角。',
+        steps:['內角和 180°：第三角 $=180-65-48=67^\\circ$。','外角 $=180-65=115^\\circ$（也等於遠內角和 $48+67=115$ ✓）。'],
+        ans:'$67^\\circ$；外角 $115^\\circ$' },
+      { q:'三角形一外角為 $130^\\circ$，其中一個遠內角為 $55^\\circ$，求另一個遠內角。',
+        steps:['外角定理：$130=55+x$。','$x=75^\\circ$。'],
+        ans:'$75^\\circ$' } ] },
+
+  { id:'u39c7', title:'等腰三角形與正三角形', body:
+    '<p>&lt;2&gt; <b class="key">等腰三角形</b>：①<b class="key">兩腰等長</b>；②<b class="key">兩底角相等</b>；③<b class="key">重要性質</b>：等腰三角形<b class="key">頂角平分線</b>必<b class="key">垂直</b>、<b class="key">平分</b>底邊。</p>'+
+    '<p>&lt;3&gt; <b class="key">正三角形</b>：①三邊等長；②三角等大（各 $60^\\circ$）；③<b class="key">面積公式</b>：$\\triangle$ 面積 $=\\dfrac{\\sqrt{3}}{4}\\times a^2$，高 $=\\dfrac{\\sqrt{3}}{2}\\times a$。</p>',
+    examples:[
+      { q:'等腰三角形頂角 $40^\\circ$，求底角。',
+        steps:['兩底角相等，設為 $x$：$40+2x=180$。','$x=70^\\circ$。'],
+        ans:'$70^\\circ$' },
+      { q:'邊長 6 的正三角形，高和面積各是多少？',
+        steps:['高 $=\\dfrac{\\sqrt{3}}{2}\\times 6=3\\sqrt{3}$。','面積 $=\\dfrac{\\sqrt{3}}{4}\\times 36=9\\sqrt{3}$。'],
+        ans:'高 $3\\sqrt{3}$；面積 $9\\sqrt{3}$' } ] },
+
+  { id:'u39c8', title:'平行四邊形的性質', body:
+    '<p>&lt;4&gt; <b class="key">平行四邊形</b>（對角線交於 $O$）：</p>'+
+    '<p>① 兩雙對邊分別<b class="key">平行</b>（$\\overline{AB}\\parallel\\overline{CD}$ 且 $\\overline{AD}\\parallel\\overline{BC}$）。</p>'+
+    '<p>② 兩雙對邊分別<b class="key">相等</b>（$\\overline{AB}=\\overline{CD}$ 且 $\\overline{AD}=\\overline{BC}$）。</p>'+
+    '<p>③ 一雙對邊<b class="key">平行且相等</b>。</p>'+
+    '<p>④ 兩組對角分別<b class="key">相等</b>（$\\angle A=\\angle C$ 且 $\\angle B=\\angle D$）。</p>'+
+    '<p>⑤ 一雙對邊平行、一組對角相等。</p>'+
+    '<p>⑥ <b class="key">對角線：互相平分</b>（$\\overline{OA}=\\overline{OC}$ 且 $\\overline{OB}=\\overline{OD}$）。</p>',
+    fig:'u39-pgram',
+    examples:[
+      { q:'平行四邊形 $ABCD$ 中 $\\angle A=70^\\circ$，求其餘三個角。',
+        steps:['對角相等：$\\angle C=70^\\circ$。','鄰角互補（同側內角）：$\\angle B=\\angle D=110^\\circ$。'],
+        ans:'$\\angle C=70^\\circ$、$\\angle B=\\angle D=110^\\circ$' },
+      { q:'平行四邊形對角線交於 $O$，$\\overline{AC}=12$、$\\overline{BD}=8$，求 $\\overline{OA}$、$\\overline{OB}$。',
+        steps:['對角線互相平分。','$\\overline{OA}=6$、$\\overline{OB}=4$。'],
+        ans:'$\\overline{OA}=6$；$\\overline{OB}=4$' } ] },
+
+  { id:'u39c9', title:'特殊四邊形與正 N 邊形', body:
+    '<p>&lt;5&gt; <b class="key">長方形</b>：<b class="key">4 個角都 $=90^\\circ$</b>。①對邊相等；②對角線：<b class="key">互相平分且相等</b>；③長方形為<b class="key">平行四邊形</b>的一種。</p>'+
+    '<p>&lt;6&gt; <b class="key">菱形</b>：<b class="key">4 個邊都等長</b>。對角線：<b class="key">互相垂直、平分</b>。</p>'+
+    '<p>&lt;7&gt; <b class="key">箏形（鳶形）</b>：<b class="key">2 雙鄰邊分別等長</b>。對角線：互相<b class="key">垂直</b>，只<b class="key">平分</b>其中一條對角線。</p>'+
+    '<p>&lt;8&gt; <b class="key">正方形</b>：<b class="key">4 邊等長、4 個角 $90^\\circ$</b>。①對角線：<b class="key">互相垂直、平分且相等</b>；②正方形為<b class="key">長方形</b>、③<b class="key">菱形</b>、④<b class="key">平行四邊形</b>的一種。</p>'+
+    '<p>&lt;9&gt; <b class="key">梯形</b>：只有一雙對邊<b class="key">平行</b>，另一雙對邊<b class="key">不平行</b>。對角線：<b class="key">不垂直、不平分、不等長</b>。</p>'+
+    '<p>&lt;10&gt; <b class="key">等腰梯形</b>：兩腰等長的梯形。①兩腰<b class="key">相等</b>；②兩底角<b class="key">相等</b>；③對角線：<b class="key">等長</b>。</p>'+
+    '<p>&lt;11&gt; <b class="key">正 N 邊形</b>：每一個內角都<b class="key">相等</b>，且每一邊都<b class="key">相等</b>。</p>',
+    examples:[
+      { q:'哪些四邊形的對角線互相垂直？哪些對角線等長？',
+        steps:['垂直：菱形、正方形、箏形。','等長：長方形、正方形、等腰梯形。'],
+        ans:'垂直：菱形／正方形／箏形；等長：長方形／正方形／等腰梯形' },
+      { q:'「正方形是菱形」對嗎？「菱形是正方形」呢？',
+        steps:['正方形四邊等長 → 滿足菱形定義 ✓。','菱形的角不一定 90° → 不一定是正方形。'],
+        ans:'前者對；後者不一定' } ] },
+
+  { id:'u39c10', title:'多邊形的內角與對角線性質', body:
+    '<p>$N$ 邊形（$N\\ge 3$）的通式：</p>'+
+    '<p>・每一頂點可以畫出 <b class="key">$N-3$</b> 條對角線；對角線總數 <b class="key">$\\dfrac{N\\times(N-3)}{2}$</b>。</p>'+
+    '<p>・每一頂點對角線可將圖形分成 <b class="key">$N-2$</b> 個三角形。</p>'+
+    '<p>・內角和 <b class="key">$(N-2)\\times 180^\\circ$</b>（三角形 $180^\\circ$、四邊形 $360^\\circ$、五邊形 $540^\\circ$、六邊形 $720^\\circ$）。</p>'+
+    '<p>・外角和一律 <b class="key">$360^\\circ$</b>。</p>'+
+    '<p>・正多邊形每一內角 <b class="key">$\\dfrac{(N-2)\\times 180^\\circ}{N}$</b>（正三角形 $60^\\circ$、正方形 $90^\\circ$、正五邊形 $108^\\circ$、正六邊形 $120^\\circ$）；每一外角 <b class="key">$\\dfrac{360^\\circ}{N}$</b>。</p>',
+    examples:[
+      { q:'正八邊形每個內角、每個外角各幾度？對角線共幾條？',
+        steps:['外角 $=360\\div 8=45^\\circ$；內角 $=180-45=135^\\circ$。','對角線 $=\\dfrac{8\\times 5}{2}=20$ 條。'],
+        ans:'內角 $135^\\circ$、外角 $45^\\circ$、對角線 20 條' },
+      { q:'某正多邊形每個外角 $30^\\circ$，它是正幾邊形？內角和是多少？',
+        steps:['$N=360\\div 30=12$。','內角和 $=(12-2)\\times 180=1800^\\circ$。'],
+        ans:'正十二邊形；$1800^\\circ$' } ] },
+
+  { id:'u39c11', title:'圓的基本名詞與弧長、扇形', body:
+    '<p>(1) <b class="key">圓心</b>：$O$；<b class="key">半徑</b>：$\\overline{OA}$。</p>'+
+    '<p>(2) <b class="key">直徑</b>：$\\overline{CD}$（過圓心的弦）；<b class="key">弦</b>：$\\overline{AB}$。</p>'+
+    '<p>(3) <b class="key">優弧</b>：$\\overset{\\frown}{ACB}$（大於半圓）；<b class="key">劣弧</b>：$\\overset{\\frown}{ADB}$（小於半圓）。</p>'+
+    '<p>(4) <b class="key">弓形</b>：弦與弧圍成；<b class="key">扇形</b>：兩半徑與弧圍成（$AOB$）。</p>'+
+    '<p>(5) <b class="key">圓心角</b>：<b class="key">頂點在圓心上的角</b>。</p>'+
+    '<p>(6) <b class="key">弧長＝圓周長 $\\times\\dfrac{x}{360}$</b>（$x$ 為圓心角度數）。</p>'+
+    '<p>(7) <b class="key">扇形面積＝圓面積 $\\times\\dfrac{x}{360}$</b>。</p>',
+    examples:[
+      { q:'半徑 6、圓心角 $60^\\circ$ 的扇形，求弧長與面積（圓周率用 $\\pi$）。',
+        steps:['弧長 $=2\\pi\\times 6\\times\\dfrac{60}{360}=2\\pi$。','面積 $=\\pi\\times 6^2\\times\\dfrac{60}{360}=6\\pi$。'],
+        ans:'弧長 $2\\pi$；面積 $6\\pi$' },
+      { q:'弦和直徑有什麼關係？',
+        steps:['直徑是通過圓心的弦。','直徑是圓中最長的弦。'],
+        ans:'直徑是最長的弦' } ] }
 ]}
 
 ];

@@ -351,6 +351,25 @@ figs['u31-pyth'] = function () {
   return svg(520, 250, b);
 };
 
+/* 2-1 平行四邊形與對角線 */
+figs['u39-pgram'] = function () {
+  var b = '';
+  var Ax = 150, Ay = 50, Bx = 90, By = 190, sh = 260;
+  var Dx = Ax + sh, Dy = Ay, Cx = Bx + sh, Cy = By;
+  b += '<path d="M ' + Ax + ' ' + Ay + ' L ' + Dx + ' ' + Dy + ' L ' + Cx + ' ' + Cy + ' L ' + Bx + ' ' + By + ' z" fill="rgba(58,110,165,.10)" stroke="' + BLUE + '" stroke-width="2.5"/>';
+  b += line(Ax, Ay, Cx, Cy, ORANGE, 1.8, ' stroke-dasharray="6 5"');
+  b += line(Dx, Dy, Bx, By, ORANGE, 1.8, ' stroke-dasharray="6 5"');
+  var Ox = (Ax + Cx) / 2, Oy = (Ay + Cy) / 2;
+  b += '<circle cx="' + Ox + '" cy="' + Oy + '" r="4.5" fill="' + RED + '"/>';
+  b += txt(Ox + 14, Oy - 6, 'O', { fill: RED, size: 14, bold: 1, anchor: 'start' });
+  b += txt(Ax - 12, Ay - 8, 'A', { size: 15, bold: 1 });
+  b += txt(Dx + 12, Dy - 8, 'D', { size: 15, bold: 1 });
+  b += txt(Cx + 12, Cy + 16, 'C', { size: 15, bold: 1 });
+  b += txt(Bx - 12, By + 16, 'B', { size: 15, bold: 1 });
+  b += txt((Ax + Dx) / 2 + 60, 236, '對邊平行且相等、對角相等、對角線互相平分（OA=OC、OB=OD）', { size: 13, fill: SOFT });
+  return svg(560, 250, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
