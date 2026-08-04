@@ -2718,14 +2718,106 @@ var MATH_UNITS = [
       { q:'$\\overline{PA}$ 切圓於 $A$，割線交圓於 $C$、$D$，$\\overline{PC}=4$、$\\overline{CD}=5$，求 $\\overline{PA}$。',
         steps:['$\\overline{PD}=4+5=9$。','$\\overline{PA}^2=4\\times 9=36$ → $\\overline{PA}=6$。'],
         ans:'$6$' } ] }
+]},
+
+{ id:'u54', book:5, sec:'3-1', title:'推理證明', page:93, concepts:[
+  { id:'u54c1', title:'推理與證明的格式', body:
+    '<p>1、推理與證明：(1) 將「題目所給的條件」寫在<b class="key">已知</b>；(2) 將「要說明的結論」寫在<b class="key">求證</b>；(3) 將「推導或說明的過程」寫在<b class="key">證明</b>。</p>'+
+    '<p>2、思路分析與證明：推理證明的思考與分析，可先從「<b class="key">結論</b>」推論到「<b class="key">題目所給的條件</b>」；但在寫作推理的過程中，則是依據分析的結果，由「<b class="key">題目所給的條件</b>」逐步推理至「<b class="key">結論</b>」。</p>',
+    examples:[
+      { q:'要證「等腰三角形兩底角相等」，已知、求證各寫什麼？',
+        steps:['已知：$\\triangle ABC$ 中 $\\overline{AB}=\\overline{AC}$。','求證：$\\angle B=\\angle C$。'],
+        ans:'已知 $\\overline{AB}=\\overline{AC}$；求證 $\\angle B=\\angle C$' } ] },
+
+  { id:'u54c2', title:'代數證明', body:
+    '<p>(1) 偶數都可以表示成 <b class="key">$2n$</b> 的形式，其中 $n$ 為整數。</p>'+
+    '<p>(2) 奇數都可以表示成 <b class="key">$2n+1$</b> 的形式，其中 $n$ 為整數。</p>',
+    examples:[
+      { q:'證明：兩個奇數的和必為偶數。',
+        steps:['設兩奇數為 $2m+1$、$2n+1$（$m,n$ 為整數）。','和 $=2m+2n+2=2(m+n+1)$，是 2 的倍數。'],
+        ans:'和可寫成 $2k$ 形式 → 偶數' } ] },
+
+  { id:'u54c3', title:'幾何證明與輔助線', body:
+    '<p>4、幾何證明常用性質：</p>'+
+    '<p>(1) 梯形兩腰中點連線性質：(a) 梯形兩腰中點連線與兩底<b class="key">平行</b>；(b) 梯形兩腰中點的連線段長等於<b class="key">兩底和的一半</b>。</p>'+
+    '<p>(2) 三角形內分比性質：$\\angle BAC$ 的角平分線與 $\\overline{BC}$ 交於 $D$，則 $\\overline{AB}:\\overline{AC}=\\overline{BD}:\\overline{DC}$。</p>'+
+    '<p>5、<b class="key">輔助線</b>：(1) 幾何推理進行中，有時需要在原圖形上添加一些<b class="key">線條</b>或<b class="key">圖形</b>，協助進行推理證明或計算，這種添加的線條或圖形就稱為<b class="key">輔助線</b>；(2) 不同的思路會產生不同的輔助線畫法與證法。</p>'+
+    '<p>6、四邊形四邊中點連線性質：四邊形各邊中點連線所形成的四邊形是<b class="key">平行四邊形</b>，其周長為原四邊形<b class="key">兩對角線</b>的和。</p>',
+    examples:[
+      { q:'梯形上底 8、下底 14，兩腰中點連線多長？',
+        steps:['兩底和的一半。','$(8+14)\\div 2=11$。'],
+        ans:'$11$' },
+      { q:'四邊形兩對角線長 10、16，其四邊中點連成的四邊形周長是多少？',
+        steps:['中點四邊形周長＝兩對角線的和。','$10+16=26$。'],
+        ans:'$26$' } ] }
+]},
+
+{ id:'u55', book:5, sec:'3-2', title:'外心、內心、重心', page:94, concepts:[
+  { id:'u55c1', title:'三角形的外心', body:
+    '<p>① 三角形<b class="key">外心</b>的符號：<b class="key">$O$</b>（Outer）。</p>'+
+    '<p>② 三角形<b class="key">外接圓</b>的<b class="key">圓心</b>（圓 $O$ 稱為 $\\triangle ABC$ 的<b class="key">外接圓</b>，$\\triangle ABC$ 稱為圓 $O$ 的<b class="key">內接三角形</b>）。</p>'+
+    '<p>③ 外心到三角形<b class="key">三頂點等距離</b>（＝<b class="key">半徑 $R$</b>）。</p>'+
+    '<p>④ 外心是三角形三邊<b class="key">中垂線</b>的<b class="key">交點</b>。</p>'+
+    '<p>⑤ 外心的位置：&lt;1&gt; 銳角三角形：<b class="key">在 △ 內部</b>；&lt;2&gt; 鈍角三角形：<b class="key">在 △ 外部</b>；&lt;3&gt; 直角三角形：<b class="key">在斜邊中點</b>。</p>'+
+    '<p>⑥ 公式：<b class="key">$\\angle BOC=2\\angle A$</b>（銳角三角形）$=360^\\circ-2\\angle A$（鈍角三角形）。</p>'+
+    '<p>多邊形的外心：如果一個多邊形各邊的<b class="key">中垂線</b>交於同一點，此點稱為多邊形的<b class="key">外心</b>，外心到<b class="key">各頂點</b>的距離相等，且此多邊形有<b class="key">外接圓</b>。</p>',
+    examples:[
+      { q:'直角三角形兩股 6、8，外接圓半徑是多少？',
+        steps:['斜邊 $=10$，直角三角形外心在斜邊中點。','$R=10\\div 2=5$。'],
+        ans:'$5$' },
+      { q:'銳角 $\\triangle ABC$ 的外心 $O$，$\\angle A=50^\\circ$，求 $\\angle BOC$。',
+        steps:['$\\angle BOC=2\\angle A$。','$=100^\\circ$。'],
+        ans:'$100^\\circ$' } ] },
+
+  { id:'u55c2', title:'三角形的內心', body:
+    '<p>① 三角形<b class="key">內心</b>的符號：<b class="key">$I$</b>（Inner）。</p>'+
+    '<p>② 三角形<b class="key">內切圓</b>的<b class="key">圓心</b>（圓 $I$ 稱為 $\\triangle ABC$ 的<b class="key">內切圓</b>，$\\triangle ABC$ 稱為圓 $I$ 的<b class="key">外切三角形</b>）。</p>'+
+    '<p>③ 內心到三角形<b class="key">三邊等距離</b>（＝<b class="key">半徑 $r$</b>）。</p>'+
+    '<p>④ 三角形<b class="key">三角平分線</b>的<b class="key">交點</b>。</p>'+
+    '<p>⑤ 位置：內心在三角形<b class="key">內部</b>。</p>'+
+    '<p>⑥ 公式：(1) $\\triangle ABC$ 面積 $=S\\times r$（$S=\\dfrac{a+b+c}{2}$ 周長的一半、$r$＝內切圓半徑）；(2) <b class="key">直角三角形：$a+b=c+2r$</b>（兩股和＝斜邊長＋2 倍內切圓半徑）；(3) $\\angle BIC=90^\\circ+\\dfrac{1}{2}\\angle A$。</p>'+
+    '<p>【三角形內心與面積】若 $I$ 為內心，則 $\\triangle AIB:\\triangle BIC:\\triangle CIA=\\overline{AB}:\\overline{BC}:\\overline{CA}$。</p>'+
+    '<p>多邊形的內心：各內角的<b class="key">角平分線</b>交於同一點時，此點為多邊形的<b class="key">內心</b>，到<b class="key">各邊</b>距離相等，有<b class="key">內切圓</b>；內切圓半徑 $r$、周長 $S$ 時面積 $=\\dfrac{1}{2}\\times S\\times r$。</p>',
+    examples:[
+      { q:'直角三角形兩股 6、8、斜邊 10，求內切圓半徑。',
+        steps:['$a+b=c+2r$ → $6+8=10+2r$。','$r=2$。'],
+        ans:'$r=2$' },
+      { q:'$\\triangle ABC$ 中 $\\angle A=70^\\circ$，$I$ 為內心，求 $\\angle BIC$。',
+        steps:['$\\angle BIC=90^\\circ+\\dfrac{1}{2}\\times 70^\\circ$。','$=125^\\circ$。'],
+        ans:'$125^\\circ$' } ] },
+
+  { id:'u55c3', title:'三角形的重心', body:
+    '<p>(1) 三角形<b class="key">重心</b>的符號：<b class="key">$G$</b>。</p>'+
+    '<p>(2) 三角形<b class="key">重量中心</b>（質量中心、幾何中心）。</p>'+
+    '<p>(3) 三角形<b class="key">三中線</b>的<b class="key">交點</b>（<b class="key">中線</b>：<b class="key">頂點</b>和<b class="key">對邊中點</b>連線）。</p>'+
+    '<p>(4) 三中線將原三角形分成 <b class="key">6 塊等面積</b>小三角形。</p>'+
+    '<p>(5) 中線<b class="key">長度比 $2:1$</b>：$\\overline{AG}:\\overline{GD}=\\overline{BG}:\\overline{GE}=\\overline{CG}:\\overline{GF}=2:1$。</p>'+
+    '<p>(6) 位置：重心在三角形<b class="key">內部</b>。</p>',
+    examples:[
+      { q:'中線 $\\overline{AD}=12$，重心 $G$ 把它分成幾比幾？$\\overline{AG}$ 多長？',
+        steps:['$\\overline{AG}:\\overline{GD}=2:1$。','$\\overline{AG}=12\\times\\dfrac{2}{3}=8$。'],
+        ans:'$2:1$；$\\overline{AG}=8$' },
+      { q:'$\\triangle ABC$ 面積 36，重心與三頂點連線分成的 6 小塊，每塊面積多少？',
+        steps:['三中線分成 6 塊等面積。','$36\\div 6=6$。'],
+        ans:'$6$' } ] },
+
+  { id:'u55c4', title:'正多邊形三心合一、垂心與尤拉線', body:
+    '<p>(1) 正三角形的重心、外心與內心是<b class="key">同一點</b>；(2) 正多邊形的外心、內心與重心是<b class="key">同一點</b>。</p>'+
+    '<p><b class="key">垂心</b>：三角形的三個<b class="key">高</b>或其延長線交於一點，此交點稱為三角形的<b class="key">垂心</b>，通常以 <b class="key">$H$</b> 表示。銳角三角形的垂心位於三角形<b class="key">內部</b>；直角三角形的垂心即為<b class="key">直角的頂點</b>；鈍角三角形的垂心位於三角形<b class="key">外部</b>。</p>'+
+    '<p><b class="key">尤拉線</b>：瑞士數學家暨物理學家尤拉（Leonhard Euler，1707–1783）證明了在任意三角形中，垂心（$H$）、外心（$O$）、重心（$G$）<b class="key">三點共線</b>，通過這三點的直線稱為<b class="key">尤拉線</b>，且重心到外心的距離是重心到垂心距離的<b class="key">一半</b>。</p>',
+    examples:[
+      { q:'直角三角形的垂心在哪裡？外心在哪裡？',
+        steps:['垂心＝直角頂點。','外心＝斜邊中點。'],
+        ans:'直角頂點；斜邊中點' },
+      { q:'尤拉線上 $\\overline{GH}=6$，求 $\\overline{GO}$。',
+        steps:['重心到外心是重心到垂心的一半。','$\\overline{GO}=3$。'],
+        ans:'$3$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u54',book:5,sec:'3-1',title:'推理證明',page:93},
-  {id:'u55',book:5,sec:'3-2',title:'外心、內心、重心',page:94},
   {id:'u56',book:6,sec:'1-1',title:'二次函數的圖形',page:98},
   {id:'u57',book:6,sec:'1-2',title:'配方法與二次函數的極值',page:101},
   {id:'u58',book:6,sec:'1-3',title:'二次函數的應用',page:103},
