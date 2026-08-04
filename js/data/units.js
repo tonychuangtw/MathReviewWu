@@ -2452,15 +2452,95 @@ var MATH_UNITS = [
         ans:'中線 10；面積 50' },
       { q:'等腰梯形一底角為 $70^\\circ$，求其餘三個角。',
         steps:['同底的另一底角相等：$70^\\circ$。','同側上下底角互補（兩底平行）：$180-70=110^\\circ$，另一個也是 $110^\\circ$。'],
-        ans:'$70^\\circ$、$110^\\circ$、$110^\\circ$' } ] }
+        ans:'$70^\\circ$、$110^\\circ$、$110^\\circ$' } ] },
+
+  { id:'u48c6', title:'特殊四邊形的包含關係與性質總表', body:
+    '<p>五、【<b class="key">包含關係</b>】：1、菱形是<b class="key">箏形</b>；2、正方形是<b class="key">菱形</b>，也是<b class="key">長方形</b>；3、長方形、菱形、正方形都是<b class="key">平行四邊形</b>（正方形＝菱形與長方形的交集）。</p>'+
+    '<p>六、【<b class="key">性質總表</b>】：</p>'+
+    '<p>・對邊平行／對邊等長／對角相等／對角線互相平分：平行四邊形、菱形、長方形、正方形都 ✓。</p>'+
+    '<p>・四邊等長：菱形、正方形 ✓。四角相等（$90^\\circ$）：長方形、正方形 ✓。</p>'+
+    '<p>・對角線互相垂直：箏形、菱形、正方形 ✓。</p>'+
+    '<p>・對角線等長：長方形、正方形、等腰梯形 ✓。</p>',
+    examples:[
+      { q:'哪一種四邊形的對角線「又互相垂直、又互相平分、又等長」？',
+        steps:['垂直：箏形／菱形／正方形；平分：平行四邊形家族；等長：長方形／正方形／等腰梯形。','三者交集只有正方形。'],
+        ans:'正方形' } ] }
+]},
+
+{ id:'u49', book:5, sec:'1-1', title:'比例線段', page:82, concepts:[
+  { id:'u49c1', title:'三角形底邊與面積的關係', body:
+    '<p>(1) <b class="key">等底同高，面積相同</b>：$\\triangle ABC=\\dfrac{\\overline{BC}\\times\\overline{AP}}{2}$，若 $\\overline{AP}=\\overline{DQ}$（兩頂點在平行線上），則 $\\triangle ABC=\\triangle DBC$。</p>'+
+    '<p>(2) <b class="key">高相同，面積比等於底邊長比</b>：$\\triangle ABD:\\triangle ACD=\\dfrac{\\overline{BD}\\times\\overline{AE}}{2}:\\dfrac{\\overline{CD}\\times\\overline{AE}}{2}=\\overline{BD}:\\overline{CD}$。</p>',
+    examples:[
+      { q:'$D$ 在 $\\overline{BC}$ 上且 $\\overline{BD}:\\overline{DC}=2:3$，$\\triangle ABC$ 面積 40，求 $\\triangle ABD$。',
+        steps:['同高 → 面積比＝底邊比 $=2:3$。','$\\triangle ABD=40\\times\\dfrac{2}{5}=16$。'],
+        ans:'$16$' } ] },
+
+  { id:'u49c2', title:'平行線截比例線段性質（與逆敘述）', body:
+    '<p>若 $\\triangle ABC$ 中，$D$、$E$ 分別為 $\\overline{AB}$、$\\overline{AC}$ 上一點，且 <b class="key">$\\overline{DE}\\parallel\\overline{BC}$</b>，則：</p>'+
+    '<p>&lt;1&gt; $\\overline{AD}:\\overline{DB}=\\overline{AE}:\\overline{EC}$。</p>'+
+    '<p>&lt;2&gt; $\\overline{AD}:\\overline{AB}=\\overline{AE}:\\overline{AC}$。</p>'+
+    '<p>&lt;3&gt; $\\overline{DB}:\\overline{AB}=\\overline{EC}:\\overline{AC}$。</p>'+
+    '<p>&lt;4&gt; $\\overline{DE}:\\overline{BC}=\\overline{AD}:\\overline{AB}=\\overline{AE}:\\overline{AC}$。</p>'+
+    '<p><b class="key">逆敘述</b>：$D$、$E$ 分別在 $\\overline{AB}$、$\\overline{AC}$ 上，(1) 若 $\\overline{AD}:\\overline{DB}=\\overline{AE}:\\overline{EC}$，或 (2) $\\overline{AD}:\\overline{AB}=\\overline{AE}:\\overline{AC}$，或 (3) $\\overline{DB}:\\overline{AB}=\\overline{EC}:\\overline{AC}$，則 <b class="key">$\\overline{DE}\\parallel\\overline{BC}$</b>。</p>',
+    examples:[
+      { q:'$\\overline{DE}\\parallel\\overline{BC}$，$\\overline{AD}=4$、$\\overline{DB}=6$、$\\overline{AE}=6$，求 $\\overline{EC}$。',
+        steps:['$\\overline{AD}:\\overline{DB}=\\overline{AE}:\\overline{EC}$ → $4:6=6:\\overline{EC}$。','$4\\overline{EC}=36$ → $\\overline{EC}=9$。'],
+        ans:'$9$' },
+      { q:'承上，$\\overline{BC}=15$，求 $\\overline{DE}$。',
+        steps:['$\\overline{DE}:\\overline{BC}=\\overline{AD}:\\overline{AB}=4:10$。','$\\overline{DE}=15\\times\\dfrac{2}{5}=6$。'],
+        ans:'$6$' } ] },
+
+  { id:'u49c3', title:'三角形兩邊中點連線性質', body:
+    '<p>$\\triangle ABC$ 中，$D$、$E$ 分別為 $\\overline{AB}$、$\\overline{AC}$ 的<b class="key">中點</b>，則：</p>'+
+    '<p>(1) <b class="key">$\\overline{DE}\\parallel\\overline{BC}$</b>。</p>'+
+    '<p>(2) <b class="key">$\\overline{DE}=\\dfrac{1}{2}\\overline{BC}$</b>。</p>',
+    examples:[
+      { q:'三角形兩邊中點連線長 7，第三邊多長？',
+        steps:['中點連線是第三邊的一半。','$7\\times 2=14$。'],
+        ans:'$14$' } ] },
+
+  { id:'u49c4', title:'比例線段的應用：三平行線、中點坐標、內外分比', body:
+    '<p>4、平行線截比例線段性質的應用：$L_1\\parallel L_2\\parallel L_3$，分別與 $M_1$ 相交於 $A$、$B$、$C$ 三點，與 $M_2$ 相交於 $D$、$E$、$F$ 三點，則 <b class="key">$\\overline{AB}:\\overline{BC}=\\overline{DE}:\\overline{EF}$</b>。</p>'+
+    '<p>5、利用尺規作圖做比例線段：可在 $\\overline{AB}$ 上作出 $C$，使 $\\overline{AC}:\\overline{CB}=1:2$（作輔助射線等分後平行截取）。</p>'+
+    '<p>6、坐標平面上線段的中點坐標：$A(a_1,b_1)$、$B(a_2,b_2)$，$\\overline{AB}$ 的中點坐標為 <b class="key">$\\left(\\dfrac{a_1+a_2}{2},\\dfrac{b_1+b_2}{2}\\right)$</b>。</p>'+
+    '<p>7、三角形<b class="key">內分比</b>性質：$\\angle BAC$ 的角平分線與 $\\overline{BC}$ 相交於 $D$，則 <b class="key">$\\overline{AB}:\\overline{AC}=\\overline{BD}:\\overline{DC}$</b>。</p>'+
+    '<p>8、三角形<b class="key">外分比</b>性質：$\\angle BAC$ 的外角平分線與 $\\overleftrightarrow{BC}$ 相交於 $D$，則 $\\overline{AB}:\\overline{AC}=\\overline{BD}:\\overline{DC}$。</p>',
+    examples:[
+      { q:'$A(-2,5)$、$B(6,-1)$，求 $\\overline{AB}$ 中點。',
+        steps:['$x=\\dfrac{-2+6}{2}=2$；$y=\\dfrac{5-1}{2}=2$。'],
+        ans:'$(2,2)$' },
+      { q:'$\\triangle ABC$ 中 $\\overline{AB}=8$、$\\overline{AC}=6$，$\\angle A$ 的角平分線交 $\\overline{BC}$ 於 $D$，$\\overline{BC}=7$，求 $\\overline{BD}$。',
+        steps:['內分比：$\\overline{BD}:\\overline{DC}=8:6=4:3$。','$\\overline{BD}=7\\times\\dfrac{4}{7}=4$。'],
+        ans:'$4$' } ] }
+]},
+
+{ id:'u50', book:5, sec:'1-2', title:'縮放與相似多邊形', page:84, concepts:[
+  { id:'u50c1', title:'縮放的性質', body:
+    '<p>(1) 一線段經過縮放後仍是<b class="key">線段</b>，且該線段與原線段<b class="key">平行</b>，或在同一直線上。</p>'+
+    '<p>(2) 線段縮放 $k$ 倍後，縮放後的線段長為原線段長的 <b class="key">$k$ 倍</b>。</p>'+
+    '<p>(3) 任意一角經過 $r$ 倍縮放後，其角度<b class="key">不變</b>。</p>',
+    examples:[
+      { q:'線段長 6 以 $O$ 為中心放大 2.5 倍後多長？角 $40^\\circ$ 放大 2.5 倍後幾度？',
+        steps:['線段：$6\\times 2.5=15$。','角度縮放不變：仍 $40^\\circ$。'],
+        ans:'$15$；$40^\\circ$' } ] },
+
+  { id:'u50c2', title:'點、線段、角、三角形的縮放', body:
+    '<p><b class="key">點的縮放</b>：$A&#39;$ 點是以 $O$ 點為縮放中心，將 $A$ 點沿 $\\overrightarrow{OA}$ 縮放 $k$ 倍的點（$\\overline{OA&#39;}=k\\overline{OA}$）。</p>'+
+    '<p><b class="key">線段的縮放</b>：將 $A$、$B$ 兩點分別縮放 $k$ 倍得到對應點 $A&#39;$、$B&#39;$，連接 $\\overline{A&#39;B&#39;}$。</p>'+
+    '<p><b class="key">角的縮放</b>：將 $A$、$B$、$C$ 三點縮放後連接 $\\overrightarrow{B&#39;A&#39;}$、$\\overrightarrow{B&#39;C&#39;}$。</p>'+
+    '<p><b class="key">三角形的縮放</b>：縮放中心可在三角形外部或內部，將各頂點分別縮放 $k$ 倍距離後連成 $\\triangle A&#39;B&#39;C&#39;$。</p>'+
+    '<p>結論：若 $\\triangle ABC$ 縮放 $r$ 倍得到 $\\triangle A&#39;B&#39;C&#39;$，則縮放後對應角的角度<b class="key">不變</b>，對應的邊長變成原來的 <b class="key">$r$ 倍</b>。</p>',
+    examples:[
+      { q:'以 $O$ 為中心把 $\\triangle ABC$ 放大 3 倍，若 $\\overline{OA}=2$，$\\overline{OA&#39;}$ 是多少？若 $\\overline{BC}=5$，$\\overline{B&#39;C&#39;}$ 呢？',
+        steps:['$\\overline{OA&#39;}=3\\times 2=6$。','對應邊長 $r$ 倍：$\\overline{B&#39;C&#39;}=15$。'],
+        ans:'$6$；$15$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u49',book:5,sec:'1-1',title:'比例線段',page:82},
-  {id:'u50',book:5,sec:'1-2',title:'縮放與相似多邊形',page:84},
   {id:'u51',book:5,sec:'1-3',title:'相似三角形的應用',page:87},
   {id:'u52',book:5,sec:'2-1',title:'點、直線、圓的關係',page:88},
   {id:'u53',book:5,sec:'2-2',title:'圓心角、圓周角與弦切角',page:91},
