@@ -970,14 +970,63 @@ var MATH_UNITS = [
       { q:'判斷 $\\begin{cases}x-2y=5\\\\ 3x+y=1\\end{cases}$ 的解的情形。',
         steps:['$\\dfrac{1}{3}\\neq\\dfrac{-2}{1}$。','係數比不等 → 交於一點。'],
         ans:'恰有一組解（交於一點）' } ] }
+]},
+
+{ id:'u17', book:2, sec:'1-2', title:'解二元一次聯立方程式', page:27, concepts:[
+  { id:'u17c1', title:'解二元一次聯立方程式', body:
+    '<p>(1) 我們可以用<b class="key">代入消去法</b>或<b class="key">加減消去法</b>解二元一次聯立方程式。</p>'+
+    '<p>(2) 不論是用哪一種方法解二元一次聯立方程式，都要先設法<b class="key">消掉</b>其中一個未知數，化簡成<b class="key">一元一次方程式</b>後，再來求解。</p>',
+    examples:[
+      { q:'用代入消去法解 $\\begin{cases}y=2x-1\\\\ 3x+y=9\\end{cases}$。',
+        steps:['第一式已解出 $y$，代入第二式：$3x+(2x-1)=9$。','$5x=10$ → $x=2$。','代回：$y=2\\times 2-1=3$。'],
+        ans:'$x=2$、$y=3$' },
+      { q:'用加減消去法解 $\\begin{cases}2x+3y=7\\\\ 2x-y=3\\end{cases}$。',
+        steps:['兩式相減消去 $x$：$(2x+3y)-(2x-y)=7-3$。','$4y=4$ → $y=1$。','代回第二式：$2x-1=3$ → $x=2$。'],
+        ans:'$x=2$、$y=1$' } ] },
+
+  { id:'u17c2', title:'二元一次聯立方程式解的情形', body:
+    '<p>二元一次聯立方程式解的情形可能是<b class="key">恰有一組解</b>、<b class="key">無解</b>或<b class="key">無限多組解</b>。</p>'+
+    '<div class="inline-ex">例：$\\begin{cases}3x+y=4\\\\ x-2y=1\\end{cases}$ 恰有<b class="key">一組解</b>；$\\begin{cases}2x+3y=5\\\\ 4x+6y=10\\end{cases}$ 有<b class="key">無限多組</b>解；$\\begin{cases}x+2y=4\\\\ x+2y=5\\end{cases}$ <b class="key">無解</b>。</div>',
+    examples:[
+      { q:'解 $\\begin{cases}x+2y=4\\\\ x+2y=5\\end{cases}$ 時會發生什麼事？',
+        steps:['兩式相減：$0=-1$，矛盾。','同一個 $x+2y$ 不可能同時等於 4 和 5 → 無解（圖形是兩平行線）。'],
+        ans:'無解' } ] },
+
+  { id:'u17c3', title:'補充：斜截式與兩點求直線', body:
+    '<p>Q：為什麼不是假設 $ax+by+c=0$？而是 $y=ax+b$？</p>'+
+    '<p>$ax+by+c=0 \\Rightarrow \\dfrac{a}{b}x+y=-\\dfrac{c}{b} \\Rightarrow y=-\\dfrac{a}{b}x-\\dfrac{c}{b}$，設 $m=-\\dfrac{a}{b}$、$k=-\\dfrac{c}{b}$，得 $y=mx+k$【<b class="key">斜截式</b>】。</p>'+
+    '<p>※ 兩點求直線的方法：</p>'+
+    '<p>(1) 代數式：假設 <b class="key">$y=ax+b$</b>，把兩點代入解 $a$、$b$。</p>'+
+    '<p>(2) 兩點式：$\\dfrac{x-x_1}{y-y_1}=\\dfrac{x_2-x_1}{y_2-y_1}$。</p>'+
+    '<p>(3) 截距式：$\\dfrac{x}{a}+\\dfrac{y}{b}=1$（$a$、$b$ 為 $x$、$y$ 截距）。</p>',
+    examples:[
+      { q:'求通過 $(0,3)$ 與 $(2,7)$ 的直線方程式。',
+        steps:['設 $y=ax+b$。','代 $(0,3)$：$b=3$。','代 $(2,7)$：$2a+3=7$ → $a=2$。'],
+        ans:'$y=2x+3$' } ] }
+]},
+
+{ id:'u18', book:2, sec:'1-3', title:'應用問題', page:28, concepts:[
+  { id:'u18c1', title:'用聯立方程式解應用問題的步驟', body:
+    '<p>(1) <b class="key">設未知數</b>：依題意假設<b class="key">兩個</b>適當的未知數。</p>'+
+    '<p>(2) <b class="key">列方程式</b>：根據題目找出相等的關係，列出<b class="key">二元一次聯立方程式</b>。</p>'+
+    '<p>(3) <b class="key">解聯立方程式</b>。</p>'+
+    '<p>(4) <b class="key">寫答案</b>：依題意寫出正確答案，若不合題意的解則要捨棄，即此題沒有解。</p>',
+    examples:[
+      { q:'雞兔同籠，共 10 個頭、28 隻腳，雞兔各幾隻？',
+        steps:['設雞 $x$ 隻、兔 $y$ 隻。','頭：$x+y=10$；腳：$2x+4y=28$。','第一式 ×2：$2x+2y=20$，與腳式相減：$2y=8$ → $y=4$。','$x=10-4=6$。驗算：$2\\times 6+4\\times 4=28$ ✓。'],
+        ans:'雞 6 隻、兔 4 隻' },
+      { q:'兩數的和是 25，大數是小數的 4 倍，求兩數。',
+        steps:['設大數 $x$、小數 $y$：$x+y=25$、$x=4y$。','代入：$4y+y=25$ → $y=5$。','$x=20$。'],
+        ans:'20 和 5' },
+      { q:'門票全票 100 元、半票 60 元，共賣 30 張、收入 2600 元，全票賣幾張？',
+        steps:['設全票 $x$ 張、半票 $y$ 張：$x+y=30$、$100x+60y=2600$。','第一式 ×60：$60x+60y=1800$，相減：$40x=800$ → $x=20$。','$y=10$，驗算：$2000+600=2600$ ✓。'],
+        ans:'全票 20 張' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u17',book:2,sec:'1-3',title:'解二元一次聯立方程式',page:27},
-  {id:'u18',book:2,sec:'1-4',title:'應用問題',page:28},
   {id:'u19',book:2,sec:'3-1',title:'比例式',page:29},
   {id:'u20',book:2,sec:'3-2',title:'連比例',page:31},
   {id:'u21',book:2,sec:'3-3',title:'正比、反比',page:32},
