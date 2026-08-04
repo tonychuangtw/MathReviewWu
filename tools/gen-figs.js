@@ -370,6 +370,37 @@ figs['u39-pgram'] = function () {
   return svg(560, 250, b);
 };
 
+/* 6-1-1 拋物線平移：y=2x² → y=2(x−3)² → y=2(x−3)²+5 */
+figs['u56-shift'] = function () {
+  var cx = 130, cy = 250, px = 34, py = 22;   // py: 每單位 y 高度
+  function X(x) { return cx + x * px; }
+  function Y(y) { return cy - y * py; }
+  function parab(h, k, color, label, lx, ly) {
+    var d = '', first = 1;
+    for (var t = -1.9; t <= 1.9; t += 0.1) {
+      var x = h + t, y = 2 * t * t + k;
+      if (y > 10.6) continue;
+      d += (first ? 'M ' : 'L ') + X(x).toFixed(1) + ' ' + Y(y).toFixed(1) + ' ';
+      first = 0;
+    }
+    var s = '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.5"/>';
+    s += '<circle cx="' + X(h) + '" cy="' + Y(k) + '" r="4" fill="' + color + '"/>';
+    s += txt(lx, ly, label, { fill: color, size: 13, bold: 1, anchor: 'start' });
+    return s;
+  }
+  var b = line(X(-2.6), cy, X(6.4), cy, INK, 2, ' marker-end="url(#arr)"');
+  b += line(X(0), Y(-0.6), X(0), Y(11), INK, 2, ' marker-end="url(#arr)"');
+  b += txt(X(6.4) + 10, cy + 4, 'x', { size: 14, anchor: 'start' }) + txt(X(0), Y(11) - 10, 'y', { size: 14 });
+  b += parab(0, 0, BLUE, 'y=2x²', X(-2.5), Y(9.6));
+  b += parab(3, 0, GREEN, 'y=2(x−3)²', X(3.4), Y(-0.9) + 14);
+  b += parab(3, 5, RED, 'y=2(x−3)²+5', X(4.1), Y(10.4));
+  b += line(X(0), Y(0.3), X(3) - 6, Y(0.3), SOFT, 1.6, ' stroke-dasharray="4 3" marker-end="url(#arr)"');
+  b += txt(X(1.5), Y(0.9), '右移 3', { fill: SOFT, size: 12 });
+  b += line(X(3.25), Y(0.4), X(3.25), Y(4.6), SOFT, 1.6, ' stroke-dasharray="4 3" marker-end="url(#arr)"');
+  b += txt(X(3.9), Y(2.4), '上移 5', { fill: SOFT, size: 12, anchor: 'start' });
+  return svg(560, 300, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
