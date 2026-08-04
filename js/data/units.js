@@ -2351,15 +2351,114 @@ var MATH_UNITS = [
         ans:'$112^\\circ$；$68^\\circ$' },
       { q:'截線與 $L_1$ 成 $75^\\circ$，$L_1\\parallel L_2$，截線與 $L_2$ 成幾度？',
         steps:['同位角相等。','也是 $75^\\circ$。'],
-        ans:'$75^\\circ$' } ] }
+        ans:'$75^\\circ$' } ] },
+
+  { id:'u46c4', title:'平行線的判別與製作', body:
+    '<p>六、<b class="key">平行線的判別</b>：已知兩直線被一直線所截：</p>'+
+    '<p>1、若有一組<b class="key">同位角相等</b>，則此兩直線互相平行。</p>'+
+    '<p>2、若有一組<b class="key">內錯角相等</b>，則此兩直線互相平行。</p>'+
+    '<p>3、若有一組<b class="key">同側內角互補</b>，則此兩直線互相平行。</p>'+
+    '<p>七、平行線的製作：1、<b class="key">直角三角板</b>（共同垂線）；2、<b class="key">畫同位角</b>。</p>',
+    examples:[
+      { q:'截線截兩直線，形成的內錯角分別為 $63^\\circ$ 與 $63^\\circ$，兩直線平行嗎？',
+        steps:['一組內錯角相等。','由判別 → 互相平行。'],
+        ans:'平行' } ] }
+]},
+
+{ id:'u47', book:4, sec:'4-2', title:'平行四邊形', page:76, concepts:[
+  { id:'u47c1', title:'平行四邊形的定義', body:
+    '<p>平行四邊形的定義：<b class="key">兩雙對邊分別平行</b>，即 $\\overline{AD}\\parallel\\overline{BC}$ 且 $\\overline{AB}\\parallel\\overline{CD}$。</p>',
+    examples:[
+      { q:'四邊形 $ABCD$ 只知道 $\\overline{AB}\\parallel\\overline{CD}$，能斷定是平行四邊形嗎？',
+        steps:['定義要「兩雙」對邊分別平行。','只有一雙平行可能是梯形。'],
+        ans:'不能（可能是梯形）' } ] },
+
+  { id:'u47c2', title:'平行四邊形的性質（含證明脈絡）', body:
+    '<p>1、兩組對角<b class="key">相等</b>，鄰角<b class="key">互補</b>：$\\angle A=\\angle C$、$\\angle B=\\angle D$、$\\angle A+\\angle B=180^\\circ$、$\\angle B+\\angle C=180^\\circ$（由平行的同側內角互補推得）。</p>'+
+    '<p>2、兩組對邊<b class="key">分別相等</b>。</p>'+
+    '<p>3、任一條對角線將平行四邊形分成兩個<b class="key">全等三角形</b>（內錯角相等＋共用邊 → ASA 全等）。</p>'+
+    '<p>4、兩條對角線<b class="key">互相平分</b>（$\\triangle AOB\\cong\\triangle COD$，ASA → $\\overline{OA}=\\overline{OC}$、$\\overline{OB}=\\overline{OD}$）。</p>'+
+    '<p>5、兩條對角線將其面積<b class="key">四等分</b>（等底同高 → $\\triangle AOB$、$\\triangle BOC$、$\\triangle COD$、$\\triangle AOD$ 面積相等）。</p>',
+    examples:[
+      { q:'平行四邊形 $ABCD$ 面積 48，對角線交於 $O$，求 $\\triangle AOB$ 的面積。',
+        steps:['兩對角線把面積四等分。','$48\\div 4=12$。'],
+        ans:'$12$' },
+      { q:'平行四邊形相鄰兩角比為 $2:3$，求四個角。',
+        steps:['鄰角互補：$2r+3r=180$ → $r=36$。','兩角 $72^\\circ$、$108^\\circ$；對角相等 → $72^\\circ,108^\\circ,72^\\circ,108^\\circ$。'],
+        ans:'$72^\\circ$、$108^\\circ$ 各兩個' } ] },
+
+  { id:'u47c3', title:'平行四邊形的判別性質', body:
+    '<p>滿足下列情形之一者為<b class="key">平行四邊形</b>：</p>'+
+    '<p>1、<b class="key">兩雙對邊分別平行</b>（$\\overline{AD}\\parallel\\overline{BC}$ 且 $\\overline{AB}\\parallel\\overline{CD}$）。</p>'+
+    '<p>2、<b class="key">兩雙對邊分別相等</b>（$\\overline{AB}=\\overline{CD}$ 且 $\\overline{AD}=\\overline{BC}$）。</p>'+
+    '<p>3、<b class="key">兩組對角分別相等</b>（$\\angle A=\\angle C$ 且 $\\angle B=\\angle D$）。</p>'+
+    '<p>4、<b class="key">一雙對邊平行且相等</b>。</p>'+
+    '<p>5、<b class="key">一雙對邊平行、一組對角相等</b>。</p>'+
+    '<p>6、<b class="key">兩對角線互相平分</b>（$\\overline{OA}=\\overline{OC}$ 且 $\\overline{OB}=\\overline{OD}$）。</p>',
+    examples:[
+      { q:'四邊形 $ABCD$ 中 $\\overline{AB}\\parallel\\overline{CD}$ 且 $\\overline{AB}=\\overline{CD}$，是平行四邊形嗎？依據哪條判別？',
+        steps:['一雙對邊平行且相等。','判別 4 → 是平行四邊形。'],
+        ans:'是（判別 4）' },
+      { q:'兩條對角線互相平分的四邊形一定是平行四邊形嗎？',
+        steps:['判別 6：對角線互相平分 → 平行四邊形。'],
+        ans:'一定是' } ] }
+]},
+
+{ id:'u48', book:4, sec:'4-3', title:'特殊四邊形', page:78, concepts:[
+  { id:'u48c1', title:'長方形的對角線與斜邊中點性質', body:
+    '<p>1、【<b class="key">長方形（矩形）的對角線</b>】：</p>'+
+    '<p>(1) 兩條對角線<b class="key">互相平分且等長</b>（長方形為平行四邊形的一種 → 互相平分；再由 SAS 全等得 $\\overline{AC}=\\overline{BD}$）。</p>'+
+    '<p>(2) 兩條對角線<b class="key">等長且互相平分</b>的四邊形是<b class="key">長方形</b>（$\\overline{OA}=\\overline{OB}=\\overline{OC}=\\overline{OD}$ → 等腰三角形拼出四個角各 $90^\\circ$）。</p>'+
+    '<p>【<b class="key">直角三角形斜邊中點性質</b>】：直角三角形斜邊中點到三頂點的<b class="key">距離相等</b>（把直角三角形補成長方形看對角線）。</p>',
+    examples:[
+      { q:'直角三角形斜邊長 26，斜邊中點到直角頂點的距離是多少？',
+        steps:['斜邊中點到三頂點等距 → 距離＝斜邊的一半。','$26\\div 2=13$。'],
+        ans:'$13$' } ] },
+
+  { id:'u48c2', title:'菱形的對角線', body:
+    '<p>2、【<b class="key">菱形的對角線</b>】：(1) 兩條對角線<b class="key">互相垂直、平分</b>，且<b class="key">平分對角</b>。</p>'+
+    '<p>證明脈絡：$\\overline{AB}=\\overline{BC}=\\overline{CD}=\\overline{DA}$ → $\\triangle ABC\\cong\\triangle ADC$（SSS）⇒ $\\overline{AC}$ 平分 $\\angle A$、$\\angle C$；同理 $\\overline{BD}$ 平分 $\\angle B$、$\\angle D$；再由 $\\triangle AOB\\cong\\triangle AOD$（SAS）⇒ 兩鄰角相等且互補 $=90^\\circ$，即 $\\overline{AC}\\perp\\overline{BD}$。</p>',
+    examples:[
+      { q:'菱形兩對角線長 12、16，求邊長與面積。',
+        steps:['對角線垂直平分 → 半對角線 6、8 構成直角三角形。','邊長 $=\\sqrt{6^2+8^2}=10$。','面積 $=\\dfrac{12\\times 16}{2}=96$（對角線乘積的一半）。'],
+        ans:'邊長 10；面積 96' } ] },
+
+  { id:'u48c3', title:'菱形的判別與面積、箏形的對角線', body:
+    '<p>(2) 兩條對角線<b class="key">互相垂直平分</b>的四邊形是<b class="key">菱形</b>。</p>'+
+    '<p>(3) <b class="key">菱形的面積</b> $=\\dfrac{\\overline{AC}\\times\\overline{BD}}{2}$（拆成上下兩個三角形相加）。</p>'+
+    '<p>3、【<b class="key">箏形的對角線</b>】：(1) 其中一條對角線<b class="key">垂直平分</b>另一條對角線，且<b class="key">平分</b>兩個內角。(2) 一條對角線垂直平分另一條對角線的四邊形是<b class="key">箏形</b>。</p>',
+    examples:[
+      { q:'箏形兩對角線長 10、14，求面積。',
+        steps:['箏形面積也是對角線乘積的一半。','$\\dfrac{10\\times 14}{2}=70$。'],
+        ans:'$70$' } ] },
+
+  { id:'u48c4', title:'正方形的對角線與特殊四邊形面積公式', body:
+    '<p>4、【<b class="key">正方形的對角線</b>】：(1) 兩條對角線互相<b class="key">垂直、平分且相等</b>。(2) 兩條對角線<b class="key">等長且互相垂直平分</b>的四邊形是<b class="key">正方形</b>。</p>'+
+    '<p>（正方形為菱形的一種 → 對角線互相垂直、平分；正方形為長方形的一種 → 對角線互相平分、等長。）</p>'+
+    '<p>二、【<b class="key">特殊四邊形面積公式</b>】：箏形、菱形與正方形的面積皆 $=\\dfrac{\\overline{AC}\\times\\overline{BD}}{2}$。</p>',
+    examples:[
+      { q:'正方形對角線長 8，求面積。',
+        steps:['兩對角線等長且垂直：面積 $=\\dfrac{8\\times 8}{2}$。','$=32$。'],
+        ans:'$32$' } ] },
+
+  { id:'u48c5', title:'梯形中線與面積、等腰梯形的性質', body:
+    '<p>三、【<b class="key">梯形中線長和面積公式</b>】：</p>'+
+    '<p>1、<b class="key">中線</b>：梯形<b class="key">兩腰中點的連線段</b>。(1) 梯形中線會與<b class="key">上、下底平行</b>；(2) 梯形中線長 $=\\dfrac{上底+下底}{2}$。</p>'+
+    '<p>2、梯形面積 $=\\dfrac{(上底+下底)\\times 高}{2}=$ <b class="key">中線長 × 高</b>。</p>'+
+    '<p>四、【<b class="key">等腰梯形的性質</b>】：1、兩組底角分別<b class="key">相等</b>；2、兩條對角線<b class="key">等長</b>。</p>',
+    examples:[
+      { q:'梯形上底 6、下底 14、高 5，求中線長與面積。',
+        steps:['中線 $=\\dfrac{6+14}{2}=10$。','面積 $=10\\times 5=50$。'],
+        ans:'中線 10；面積 50' },
+      { q:'等腰梯形一底角為 $70^\\circ$，求其餘三個角。',
+        steps:['同底的另一底角相等：$70^\\circ$。','同側上下底角互補（兩底平行）：$180-70=110^\\circ$，另一個也是 $110^\\circ$。'],
+        ans:'$70^\\circ$、$110^\\circ$、$110^\\circ$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u47',book:4,sec:'4-2',title:'平行四邊形',page:76},
-  {id:'u48',book:4,sec:'4-3',title:'特殊四邊形',page:78},
   {id:'u49',book:5,sec:'1-1',title:'比例線段',page:82},
   {id:'u50',book:5,sec:'1-2',title:'縮放與相似多邊形',page:84},
   {id:'u51',book:5,sec:'1-3',title:'相似三角形的應用',page:87},
