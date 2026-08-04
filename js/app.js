@@ -130,9 +130,13 @@
       }
       if (c.examples && c.examples.length) {
         html += '<div class="ex-block"><div class="ex-head">✏️ 例題練習</div>';
+        var D_LABEL = { '易':'基礎', '中':'一般', '難':'精熟' };
         c.examples.forEach(function (ex, ei) {
+          var tag = ex.d && D_LABEL[ex.d]
+            ? '<span class="exnum ex-d-' + ex.d + '">' + D_LABEL[ex.d] + '</span>'
+            : '<span class="exnum">例' + (ei + 1) + '</span>';
           html += '<div class="example">' +
-            '<div class="q"><span class="exnum">例' + (ei + 1) + '</span>' + ex.q + '</div>' +
+            '<div class="q">' + tag + ex.q + '</div>' +
             '<button class="toggle-sol" data-c="' + c.id + '" data-e="' + ei + '">看解答</button>' +
             '<div class="sol hidden"><ol>' +
               ex.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('') +

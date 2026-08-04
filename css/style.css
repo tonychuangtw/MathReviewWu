@@ -105,6 +105,9 @@ html[data-theme="white"] .st-label.master,html[data-theme="sakura"] .st-label.ma
 .example{background:#f7f5ec;border-radius:10px;padding:12px 14px;margin-bottom:10px}
 .example .q{line-height:1.85}
 .example .q .exnum{font-weight:700;color:var(--accent2);margin-right:6px}
+.example .q .ex-d-易{color:#2e7d32;background:rgba(46,125,50,.12);border-radius:6px;padding:1px 8px;font-size:.82rem}
+.example .q .ex-d-中{color:#b5731f;background:rgba(224,122,47,.13);border-radius:6px;padding:1px 8px;font-size:.82rem}
+.example .q .ex-d-難{color:#8e24aa;background:rgba(123,31,162,.12);border-radius:6px;padding:1px 8px;font-size:.82rem}
 .example .toggle-sol{margin-top:8px;background:none;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:4px 14px;font-size:.82rem;cursor:pointer}
 .example .sol{margin-top:10px;border-top:1px dashed #d8d2bf;padding-top:10px}
 .example .sol ol{padding-left:1.4em;line-height:1.9}
