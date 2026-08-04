@@ -2161,15 +2161,95 @@ var MATH_UNITS = [
         ans:'$1440^\\circ$' },
       { q:'某多邊形內角和為 $1080^\\circ$，它是幾邊形？',
         steps:['$(n-2)\\times 180=1080$ → $n-2=6$。','$n=8$。'],
-        ans:'八邊形' } ] }
+        ans:'八邊形' } ] },
+
+  { id:'u42c4', title:'n 邊形外角和與正 n 邊形', body:
+    '<p>四、<b class="key">$n$ 邊形外角和</b>：任意 $n$ 邊形的一組外角和為 <b class="key">$360^\\circ$</b>。</p>'+
+    '<p>五、<b class="key">正 $n$ 邊形</b>的外角與內角：</p>'+
+    '<p>(1) 正 $n$ 邊形的<b class="key">每一個外角</b>為 $\\dfrac{360^\\circ}{n}$。</p>'+
+    '<p>(2) 正 $n$ 邊形的<b class="key">每一個內角</b>為 $\\dfrac{(n-2)\\times 180^\\circ}{n}$ 或 $180^\\circ-\\dfrac{360^\\circ}{n}$。</p>',
+    examples:[
+      { q:'正五邊形每個外角、內角各是多少？',
+        steps:['外角 $=360\\div 5=72^\\circ$。','內角 $=180-72=108^\\circ$。'],
+        ans:'外角 $72^\\circ$；內角 $108^\\circ$' } ] }
+]},
+
+{ id:'u43', book:4, sec:'3-2', title:'三角形的全等', page:67, concepts:[
+  { id:'u43c1', title:'全等的意義與符號', body:
+    '<p>1、意義：<b class="key">兩圖形經平移、旋轉、翻轉後會重合，完全相等、一模一樣</b>。</p>'+
+    '<p>2、符號：(1) 全等：<b class="key">≅</b>；(2) 邊：<b class="key">S</b>（Side）；(3) 角：<b class="key">A</b>（Angle）；(4) 直角：<b class="key">R</b>（Right angle）；(5) 斜邊：<b class="key">H</b>（Hypotenuse）。</p>'+
+    '<p>3、對應點：$A\\leftrightarrow D$、$B\\leftrightarrow E$、$C\\leftrightarrow F$。</p>'+
+    '<p>4、對應邊：$\\overline{AB}=\\overline{DE}$、$\\overline{BC}=\\overline{EF}$、$\\overline{AC}=\\overline{DF}$。</p>'+
+    '<p>5、對應角：$\\angle A=\\angle D$、$\\angle B=\\angle E$、$\\angle C=\\angle F$。</p>'+
+    '<p>6、全等 ⇒ (1) <b class="key">對應角相等</b> (2) <b class="key">對應邊相等</b>。</p>',
+    examples:[
+      { q:'若 $\\triangle ABC\\cong\\triangle PQR$，$\\overline{AB}=7$、$\\angle C=50^\\circ$，能知道 $\\triangle PQR$ 的什麼？',
+        steps:['對應邊：$\\overline{PQ}=\\overline{AB}=7$。','對應角：$\\angle R=\\angle C=50^\\circ$。'],
+        ans:'$\\overline{PQ}=7$、$\\angle R=50^\\circ$' } ] },
+
+  { id:'u43c2', title:'SSS 與 SAS 全等性質', body:
+    '<p>【三角形的全等性質】（5 種）：由<b class="key">尺規作圖</b>發現，給定下列三條件只能畫出<b class="key">唯一一種</b>三角形。</p>'+
+    '<p>1、<b class="key">SSS 全等性質</b>：在 $\\triangle ABC$ 和 $\\triangle DEF$ 中，若 (1) $\\overline{AB}=\\overline{DE}$ (2) $\\overline{BC}=\\overline{EF}$ (3) $\\overline{AC}=\\overline{DF}$，則 $\\triangle ABC\\cong\\triangle DEF$（三邊對應相等）。</p>'+
+    '<p>2、<b class="key">SAS 全等性質</b>：若 (1) $\\overline{AB}=\\overline{DE}$ (2) $\\angle A=\\angle D$（<b class="key">夾角</b>）(3) $\\overline{AC}=\\overline{DF}$，則 $\\triangle ABC\\cong\\triangle DEF$（兩邊與其夾角對應相等）。</p>',
+    examples:[
+      { q:'兩三角形三邊分別是 5、7、9 與 9、5、7，全等嗎？依據？',
+        steps:['三邊對應相等（順序可重排）。','依 SSS 全等。'],
+        ans:'全等（SSS）' },
+      { q:'SAS 的「A」為什麼一定要是兩邊的夾角？',
+        steps:['若角不夾在兩邊中間（SSA），同樣條件可能畫出兩種不同三角形。','夾角固定住兩邊的張口，圖形才唯一。'],
+        ans:'非夾角（SSA）不保證唯一，不能判定全等' } ] },
+
+  { id:'u43c3', title:'RHS 與 ASA 全等性質', body:
+    '<p>3、<b class="key">RHS 全等性質</b>（直角三角形）：若 (1) $\\angle C=\\angle F=90^\\circ$ (2) $\\overline{AB}=\\overline{DE}$（斜邊）(3) $\\overline{AC}=\\overline{DF}$（一股），則 $\\triangle ABC\\cong\\triangle DEF$。（利用畢氏定理可得 $\\overline{BC}=\\overline{EF}$，再利用 SSS 得全等。）</p>'+
+    '<p>4、<b class="key">ASA 全等性質</b>：若 (1) $\\angle A=\\angle D$ (2) $\\overline{AB}=\\overline{DE}$（<b class="key">夾邊</b>）(3) $\\angle B=\\angle E$，則 $\\triangle ABC\\cong\\triangle DEF$（兩角與其夾邊對應相等）。</p>',
+    examples:[
+      { q:'兩直角三角形斜邊都是 10、一股都是 6，全等嗎？另一股是多少？',
+        steps:['直角＋斜邊＋一股 → RHS 全等。','另一股 $=\\sqrt{10^2-6^2}=8$。'],
+        ans:'全等（RHS）；另一股 8' } ] },
+
+  { id:'u43c4', title:'AAS 全等與不全等的例子', body:
+    '<p>5、<b class="key">AAS 全等性質</b>：若 (1) $\\angle A=\\angle D$ (2) $\\angle B=\\angle E$ (3) $\\overline{BC}=\\overline{EF}$，則 $\\triangle ABC\\cong\\triangle DEF$。AAS 其實是以 $\\triangle$ 內角和 $180^\\circ$ 得 $\\angle C=\\angle F$，再利用 <b class="key">ASA</b> 全等。</p>'+
+    '<p>三、【不全等的例子】：</p>'+
+    '<p>1、<b class="key">SSA 不全等</b>：若 (1) $\\overline{AB}=\\overline{DE}$ (2) $\\overline{AC}=\\overline{DF}$ (3) $\\angle B=\\angle E$（角不是夾角），則 $\\triangle ABC$ <b class="key">不全等於</b> $\\triangle DEF$——此時 $\\angle C$ 與 $\\angle F$ <b class="key">相等或互補</b>，圖形不唯一。</p>'+
+    '<p>2、<b class="key">AAA 不全等</b>：三角對應相等只保證形狀相同，例如<b class="key">兩個邊長不相等的正三角形</b>。</p>',
+    examples:[
+      { q:'全等性質共有哪 5 種？哪兩組條件「不能」判定全等？',
+        steps:['5 種：SSS、SAS、ASA、AAS、RHS。','不能：SSA（角非夾角）、AAA（只同形狀不同大小）。'],
+        ans:'SSS/SAS/ASA/AAS/RHS；SSA 與 AAA 不行' } ] }
+]},
+
+{ id:'u44', book:4, sec:'3-3', title:'中垂線與角平分線', page:70, concepts:[
+  { id:'u44c1', title:'垂直平分線的性質與判別', body:
+    '<p>【<b class="key">垂直平分線的性質</b>】：一線段的垂直平分線上任一點到此線段<b class="key">兩端點等距離</b>。</p>'+
+    '<p>證明：$L$ 為 $\\overline{AB}$ 的垂直平分線、$C$ 在 $L$ 上、$D$ 為交點，在 $\\triangle CAD$ 和 $\\triangle CBD$ 中：$\\overline{AD}=\\overline{BD}$、$\\angle CDA=\\angle CDB=90^\\circ$、$\\overline{CD}=\\overline{CD}$（共用邊）∴ $\\triangle CAD\\cong\\triangle CBD$（SAS），故 $\\overline{CA}=\\overline{CB}$。</p>'+
+    '<p>【<b class="key">垂直平分線的判別</b>】：若一點到某線段的兩端點<b class="key">距離相等</b>，則該點在此線段的<b class="key">垂直平分線（中垂線）</b>上。</p>',
+    examples:[
+      { q:'$\\overline{PA}=\\overline{PB}$、$\\overline{QA}=\\overline{QB}$，$P$、$Q$ 兩點連線和 $\\overline{AB}$ 有什麼關係？',
+        steps:['$P$、$Q$ 都到 $A$、$B$ 等距 → 都在 $\\overline{AB}$ 的中垂線上。','兩點決定一條直線 → $\\overleftrightarrow{PQ}$ 就是 $\\overline{AB}$ 的中垂線。'],
+        ans:'$\\overleftrightarrow{PQ}$ 是 $\\overline{AB}$ 的垂直平分線' } ] },
+
+  { id:'u44c2', title:'角平分線的性質與判別', body:
+    '<p>【<b class="key">角平分線性質</b>】：角平分線上任一點到此角<b class="key">兩邊垂直距離相等</b>。</p>'+
+    '<p>證明：$\\overrightarrow{AP}$ 為 $\\angle EAF$ 的角平分線、$D$ 在其上，$DC\\perp AE$、$DB\\perp AF$，在 $\\triangle ACD$ 和 $\\triangle ABD$ 中：$\\angle 1=\\angle 2$、$\\angle ACD=\\angle ABD=90^\\circ$、$\\overline{AD}=\\overline{AD}$（共用邊）∴ $\\triangle ACD\\cong\\triangle ABD$（AAS），故 $\\overline{DC}=\\overline{DB}$。</p>'+
+    '<p>【<b class="key">角平分線的判別</b>】：若某角內部的一點到此角的兩邊<b class="key">距離相等</b>，則該點在此角的<b class="key">角平分線（分角線）</b>上。</p>',
+    examples:[
+      { q:'三角形三條角平分線的交點（內心）有什麼特性？',
+        steps:['在每條角平分線上 → 到每個角的兩邊等距。','所以內心到三邊等距，可作內切圓。'],
+        ans:'到三邊等距（內切圓圓心）' } ] },
+
+  { id:'u44c3', title:'等腰三角形的性質（證明）', body:
+    '<p>【<b class="key">等腰三角形的性質</b>】：1、等腰三角形的<b class="key">兩底角</b>會<b class="key">相等</b>。</p>'+
+    '<p>證明：$\\triangle ABC$ 為等腰三角形（$\\overline{AB}=\\overline{AC}$），在 $\\overline{BC}$ 上取中點 $D$ 並連接 $\\overline{AD}$，在 $\\triangle ABD$ 和 $\\triangle ACD$ 中：$\\overline{AB}=\\overline{AC}$（已知）、$\\overline{BD}=\\overline{CD}$（$D$ 為中點）、$\\overline{AD}=\\overline{AD}$（共用邊）∴ $\\triangle ABD\\cong\\triangle ACD$（SSS），故 $\\angle B=\\angle C$。</p>',
+    examples:[
+      { q:'等腰三角形一個底角是 $65^\\circ$，求頂角。',
+        steps:['兩底角相等：$65^\\circ+65^\\circ=130^\\circ$。','頂角 $=180-130=50^\\circ$。'],
+        ans:'$50^\\circ$' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u43',book:4,sec:'3-2',title:'三角形的全等',page:67},
-  {id:'u44',book:4,sec:'3-3',title:'中垂線與角平分線',page:70},
   {id:'u45',book:4,sec:'3-4',title:'三角形邊角關係',page:72},
   {id:'u46',book:4,sec:'4-1',title:'平行',page:74},
   {id:'u47',book:4,sec:'4-2',title:'平行四邊形',page:76},
