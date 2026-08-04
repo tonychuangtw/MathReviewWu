@@ -2072,15 +2072,102 @@ var MATH_UNITS = [
       { q:'弦和直徑有什麼關係？',
         steps:['直徑是通過圓心的弦。','直徑是圓中最長的弦。'],
         ans:'直徑是最長的弦' } ] }
+]},
+
+{ id:'u40', book:4, sec:'2-2', title:'垂直、平分與線對稱', page:63, concepts:[
+  { id:'u40c1', title:'垂直與點到直線的距離', body:
+    '<p>一、<b class="key">垂直</b>：1、直線 $L_1$ 與直線 $L_2$ 的交角成 <b class="key">$90^\\circ$</b>，我們說 $L_1$ 與 $L_2$ 互相<b class="key">垂直</b>，或說 $L_1$ 與 $L_2$ 互為<b class="key">垂線</b>。2、而交點 $O$ 就稱為<b class="key">垂足</b>。3、以符號「<b class="key">⊥</b>」來表示垂直。4、$L_1$ 垂直於 $L_2$，可記作「$L_1\\perp L_2$」。</p>'+
+    '<p>二、<b class="key">點到直線的距離</b>：線外一點到某直線的<b class="key">垂直距離</b>，即 $d(A,L)=\\overline{AB}$（$B$ 為垂足）。</p>',
+    examples:[
+      { q:'為什麼點到直線的距離要沿「垂直」方向量？',
+        steps:['從 $A$ 到直線上各點的線段中，垂直的那條最短。','其他斜線段都是直角三角形的斜邊，比股（垂直距離）長。'],
+        ans:'垂直線段最短，故取垂直距離' } ] },
+
+  { id:'u40c2', title:'平分與中點', body:
+    '<p>三、<b class="key">平分</b>：1、若 $M$ 把 $\\overline{AB}$ 分成相等的兩個部分，即 $\\overline{AM}=\\overline{MB}$，則稱 $M$ <b class="key">平分</b> $\\overline{AB}$。2、$M$ 為 $\\overline{AB}$ 之<b class="key">中點</b>。</p>',
+    examples:[
+      { q:'$\\overline{AB}=14$，$M$ 為中點，$N$ 為 $\\overline{MB}$ 中點，求 $\\overline{AN}$。',
+        steps:['$\\overline{AM}=\\overline{MB}=7$。','$\\overline{MN}=3.5$ → $\\overline{AN}=7+3.5=10.5$。'],
+        ans:'$10.5$' } ] },
+
+  { id:'u40c3', title:'垂直平分線（中垂線）與角平分線', body:
+    '<p>四、<b class="key">垂直平分線（中垂線）</b>：1、過已知線段<b class="key">中點</b>且與該線段<b class="key">垂直</b>的直線。2、【重要性質】中垂線上任一點，到此線段的兩端點<b class="key">等距離</b>。</p>'+
+    '<p>五、<b class="key">角平分線（分角線）</b>：1、將已知角<b class="key">平分</b>為兩個<b class="key">相等</b>的角的射線。2、【重要性質】角平分線上任一點，到此角的兩邊<b class="key">等距離</b>。</p>',
+    examples:[
+      { q:'$P$ 在 $\\overline{AB}$ 的中垂線上，$\\overline{PA}=8$，求 $\\overline{PB}$。',
+        steps:['中垂線上的點到兩端點等距。','$\\overline{PB}=\\overline{PA}=8$。'],
+        ans:'$8$' },
+      { q:'$Q$ 在 $\\angle ABC$ 的角平分線上，$Q$ 到邊 $BA$ 的距離為 5，求 $Q$ 到邊 $BC$ 的距離。',
+        steps:['角平分線上的點到兩邊等距。','距離也是 5。'],
+        ans:'$5$' } ] },
+
+  { id:'u40c4', title:'線對稱圖形及其性質', body:
+    '<p>六、<b class="key">線對稱圖形</b>：1、將一個圖形沿著一條直線對摺，如果直線兩側的部分能<b class="key">完全重疊</b>，這樣的圖形稱為<b class="key">線對稱圖形</b>。2、而這條對摺線稱為該圖形的<b class="key">對稱軸</b>。3、對應疊合的點稱為<b class="key">對稱點</b>。4、對應疊合的角稱為<b class="key">對稱角</b>。5、對應疊合的線段稱為<b class="key">對稱線段</b>。</p>'+
+    '<p>七、線對稱圖形的<b class="key">性質</b>：對稱軸為任意兩對稱點連接線段的<b class="key">垂直平分線</b>。→ <b class="key">線對稱圖形的對稱軸必垂直平分任意兩對稱點所連接的線段</b>。</p>',
+    examples:[
+      { q:'正方形、等腰三角形、平行四邊形各有幾條對稱軸？',
+        steps:['正方形：4 條（兩條對角線＋兩條中線）。','等腰三角形：1 條（頂角平分線）。','一般平行四邊形：0 條（點對稱但非線對稱）。'],
+        ans:'4 條／1 條／0 條' },
+      { q:'$A$、$B$ 是線對稱圖形的一組對稱點，對稱軸為 $L$。$\\overline{AB}=10$，$A$ 到 $L$ 的距離是多少？',
+        steps:['$L$ 垂直平分 $\\overline{AB}$。','距離 $=10\\div 2=5$。'],
+        ans:'$5$' } ] }
+]},
+
+{ id:'u41', book:4, sec:'2-3', title:'尺規作圖', page:65, concepts:[
+  { id:'u41c1', title:'尺規作圖的意義', body:
+    '<p>繪製幾何圖形時，若只用<b class="key">直尺</b>和<b class="key">圓規</b>兩種工具，並規定圓規只拿來<b class="key">畫弧</b>，直尺只用來<b class="key">畫直線</b>，而<b class="key">不使用直尺的刻度</b>，符合這樣規則的作圖就稱為<b class="key">尺規作圖</b>。</p>',
+    examples:[
+      { q:'尺規作圖中，可以用直尺量出 5 公分再畫線嗎？',
+        steps:['不行——規定不能使用直尺的刻度。','長度只能用圓規「複製」既有線段來轉移。'],
+        ans:'不可以，長度靠圓規轉移' } ] },
+
+  { id:'u41c2', title:'六種基本作圖', body:
+    '<p>利用尺規作圖作出基本作圖：</p>'+
+    '<p>(1) <b class="key">等線段</b>作圖——圓規量取原線段長，在新射線上畫弧截取。</p>'+
+    '<p>(2) <b class="key">等角</b>作圖——以弧截出原角的兩交點，複製到新射線上再交弧。</p>'+
+    '<p>(3) <b class="key">垂直平分線</b>作圖——以兩端點為圓心、大於半長為半徑畫弧，連兩弧交點。</p>'+
+    '<p>(4) <b class="key">角平分線</b>作圖——先在兩邊截等距兩點，再以此兩點畫等弧，連頂點與弧交點。</p>'+
+    '<p>(5) <b class="key">過線上一點作垂線</b>——以該點為圓心畫弧得兩交點，作此兩點的中垂線。</p>'+
+    '<p>(6) <b class="key">過線外一點作垂線</b>——以該點為圓心畫弧交直線於兩點，作此兩點的中垂線。</p>'+
+    '<div class="inline-ex">HW：已知 $\\angle AOB=90^\\circ$，利用尺規作圖，將 $\\angle AOB$ 三等分。（提示：$90^\\circ\\div 3=30^\\circ$，可利用正三角形作出 $60^\\circ$ 再平分。）</div>',
+    examples:[
+      { q:'不能直接用量角器，怎麼用尺規把 $90^\\circ$ 角三等分？',
+        steps:['在 $\\overrightarrow{OB}$ 上取 $P$，以 $O$、$P$ 為圓心、$\\overline{OP}$ 為半徑互畫弧交於 $S$ → $\\triangle OPS$ 是正三角形，$\\angle SOB=60^\\circ$。','把 $\\angle SOB$ 用角平分線作圖平分 → 得 $30^\\circ$。','$90^\\circ$ 被分成 $30^\\circ+30^\\circ+30^\\circ$。'],
+        ans:'先作 $60^\\circ$（正三角形），再平分成 $30^\\circ$' } ] }
+]},
+
+{ id:'u42', book:4, sec:'3-1', title:'三角形的內、外角', page:66, concepts:[
+  { id:'u42c1', title:'三角形內角和定理與外角和定理', body:
+    '<p>1、任意三角形的<b class="key">內角和 $=180^\\circ$</b>，即 $\\angle A+\\angle B+\\angle C=180^\\circ$（把三個角撕下來可拼成一個平角）。</p>'+
+    '<p>2、任意三角形的一組<b class="key">外角和 $=360^\\circ$</b>，即 $\\angle 1+\\angle 2+\\angle 3=360^\\circ$。</p>',
+    examples:[
+      { q:'三角形三內角比為 $2:3:4$，求三個內角。',
+        steps:['設 $2r$、$3r$、$4r$：$9r=180$ → $r=20$。','三角 $40^\\circ$、$60^\\circ$、$80^\\circ$。'],
+        ans:'$40^\\circ$、$60^\\circ$、$80^\\circ$' } ] },
+
+  { id:'u42c2', title:'三角形外角定理', body:
+    '<p>$\\triangle$ 的任一外角等於<b class="key">兩遠內角相加</b>，即 $\\angle 1=\\angle B+\\angle C$；$\\angle 2=\\angle A+\\angle C$；$\\angle 3=\\angle A+\\angle B$。</p>',
+    examples:[
+      { q:'$\\triangle ABC$ 中 $\\angle A=42^\\circ$、$\\angle B=71^\\circ$，求 $\\angle C$ 的外角。',
+        steps:['外角定理：$\\angle C$ 的外角 $=\\angle A+\\angle B$。','$=42+71=113^\\circ$。'],
+        ans:'$113^\\circ$' } ] },
+
+  { id:'u42c3', title:'n 邊形內角和', body:
+    '<p>$n$ 邊形的內角和為 <b class="key">$(n-2)\\times 180^\\circ$</b>。</p>'+
+    '<p>原理：過一頂點的對角線數 $=n-3$ 條，可將 $n$ 邊形切成 $n-2$ 個三角形：四邊形 1 條對角線 2 個三角形（$360^\\circ$）；五邊形 2 條 3 個（$540^\\circ$）；六邊形 3 條 4 個（$720^\\circ$）；七邊形 4 條 5 個（$900^\\circ$）。</p>',
+    examples:[
+      { q:'十邊形的內角和是多少？',
+        steps:['$(10-2)\\times 180^\\circ$。','$=1440^\\circ$。'],
+        ans:'$1440^\\circ$' },
+      { q:'某多邊形內角和為 $1080^\\circ$，它是幾邊形？',
+        steps:['$(n-2)\\times 180=1080$ → $n-2=6$。','$n=8$。'],
+        ans:'八邊形' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u40',book:4,sec:'2-2',title:'垂直、平分與線對稱',page:63},
-  {id:'u41',book:4,sec:'2-3',title:'尺規作圖',page:65},
-  {id:'u42',book:4,sec:'3-1',title:'三角形的內、外角',page:66},
   {id:'u43',book:4,sec:'3-2',title:'三角形的全等',page:67},
   {id:'u44',book:4,sec:'3-3',title:'中垂線與角平分線',page:70},
   {id:'u45',book:4,sec:'3-4',title:'三角形邊角關係',page:72},
