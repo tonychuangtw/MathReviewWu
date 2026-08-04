@@ -1,0 +1,113 @@
+/* MathReviewWu — 筆記本風格：深色介面 + 紙白內容卡（圖形/數式對比穩定，列印友善） */
+:root{
+  --bg:#141822; --bg2:#1b2130; --card:#fdfcf7; --card-line:#e8e4d8;
+  --ink:#22242a; --ink-soft:#5a5e6a; --fg:#e8eaf2; --fg-dim:#9aa1b5;
+  --accent:#3a6ea5; --accent2:#e07a2f; --key:#c0392b;
+  --ok:#2e7d32; --warn:#e6a817; --strong:#7b1fa2;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;flex-direction:column}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg2);position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.topbar h1{font-size:1.05rem;cursor:pointer;letter-spacing:.05em}
+.topbar-controls{display:flex;gap:8px;align-items:center}
+.chip{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--fg);border-radius:999px;padding:6px 14px;font-size:.9rem;cursor:pointer}
+.chip:active{transform:scale(.96)}
+
+#main{flex:1;width:100%;max-width:860px;margin:0 auto;padding:16px}
+.hidden{display:none!important}
+.foot{text-align:center;color:var(--fg-dim);padding:14px}
+
+/* 首頁 */
+.book-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.book-tab{flex:1 1 100px;text-align:center;padding:10px 4px;border-radius:var(--radius);background:var(--bg2);cursor:pointer;border:2px solid transparent;font-size:.95rem}
+.book-tab small{display:block;color:var(--fg-dim);font-size:.72rem;margin-top:2px}
+.book-tab.active{border-color:var(--accent);background:#233049}
+.unit-list{display:flex;flex-direction:column;gap:10px}
+.unit-item{display:flex;align-items:center;gap:12px;background:var(--bg2);border-radius:var(--radius);padding:12px 14px;cursor:pointer;border-left:5px solid transparent}
+.unit-item.todo{opacity:.45;cursor:default}
+.unit-item .sec{font-weight:700;color:var(--accent2);min-width:2.6em}
+.unit-item .name{flex:1}
+.unit-item .name small{display:block;color:var(--fg-dim);font-size:.75rem}
+.unit-item.st-taught{border-left-color:var(--ok)}
+.unit-item.st-weak{border-left-color:var(--warn)}
+.unit-item.st-master{border-left-color:var(--strong)}
+.st-label{font-size:.75rem;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.st-label.taught{background:rgba(46,125,50,.25);color:#7fd185}
+.st-label.weak{background:rgba(230,168,23,.22);color:#f0c65e}
+.st-label.master{background:rgba(123,31,162,.25);color:#ce93d8}
+.st-label.none{background:rgba(255,255,255,.08);color:var(--fg-dim)}
+.note-badge{font-size:.72rem;color:var(--fg-dim)}
+
+/* 單元頁 */
+.unit-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.unit-title-wrap{flex:1;min-width:180px}
+.unit-crumb{color:var(--fg-dim);font-size:.8rem}
+.unit-head h2{font-size:1.25rem}
+.status-btns{display:flex;gap:6px}
+.status-btns .chip{font-size:.8rem;padding:5px 10px}
+.status-btns .chip.on-taught{background:var(--ok);border-color:var(--ok);color:#fff}
+.status-btns .chip.on-weak{background:var(--warn);border-color:var(--warn);color:#1d1d1d}
+.status-btns .chip.on-master{background:var(--strong);border-color:var(--strong);color:#fff}
+
+/* 觀念卡：紙感 */
+.concept{background:var(--card);color:var(--ink);border-radius:var(--radius);padding:18px 20px;margin-bottom:18px;box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.concept h3{font-size:1.05rem;color:var(--accent);border-bottom:2px solid var(--card-line);padding-bottom:8px;margin-bottom:12px}
+.concept h3 .cnum{display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;margin-right:8px;font-size:.85rem}
+.concept p{line-height:1.9;margin:6px 0}
+.concept .key{color:var(--key);border-bottom:2px solid rgba(192,57,43,.45);font-weight:700;padding:0 1px}
+.inline-ex{background:#f4f0e4;border-left:4px solid var(--accent2);border-radius:0 8px 8px 0;padding:8px 12px;margin:10px 0;line-height:1.8;font-size:.95rem}
+.concept-fig{text-align:center;margin:12px 0}
+.concept-fig img,.concept-fig svg{max-width:100%;height:auto}
+
+/* 例題 */
+.ex-block{margin-top:14px;border-top:1px dashed var(--card-line);padding-top:12px}
+.ex-block .ex-head{font-weight:700;color:var(--accent2);margin-bottom:8px;font-size:.92rem}
+.example{background:#f7f5ec;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.example .q{line-height:1.85}
+.example .q .exnum{font-weight:700;color:var(--accent2);margin-right:6px}
+.example .toggle-sol{margin-top:8px;background:none;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:4px 14px;font-size:.82rem;cursor:pointer}
+.example .sol{margin-top:10px;border-top:1px dashed #d8d2bf;padding-top:10px}
+.example .sol ol{padding-left:1.4em;line-height:1.9}
+.example .sol .ans{margin-top:8px;font-weight:700;color:var(--ok)}
+
+/* 筆記區 */
+.note-area{margin-top:14px;border-top:1px dashed var(--card-line);padding-top:10px}
+.note-area label{font-size:.85rem;color:var(--ink-soft);display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.note-area textarea{width:100%;min-height:64px;border:1px solid var(--card-line);border-radius:8px;padding:10px;font:inherit;font-size:.95rem;line-height:1.7;background:repeating-linear-gradient(#fffef9,#fffef9 30px,#efe9da 31px);resize:vertical;color:var(--ink)}
+.note-area textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+.note-saved{font-size:.75rem;color:var(--ok);opacity:0;transition:opacity .3s}
+.note-saved.show{opacity:1}
+
+.unit-nav{display:flex;justify-content:space-between;margin:18px 0}
+
+/* 進度總覽 */
+.pg-book{margin-bottom:18px}
+.pg-book h3{font-size:1rem;color:var(--accent2);margin-bottom:8px}
+.pg-row{display:flex;align-items:center;gap:10px;background:var(--bg2);border-radius:10px;padding:8px 12px;margin-bottom:6px;cursor:pointer}
+.pg-row .sec{color:var(--accent2);font-weight:700;min-width:2.6em;font-size:.85rem}
+.pg-row .name{flex:1;font-size:.9rem}
+.pg-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.pg-stat{background:var(--bg2);border-radius:var(--radius);padding:12px 18px;text-align:center;flex:1;min-width:110px}
+.pg-stat b{display:block;font-size:1.5rem}
+.pg-stat small{color:var(--fg-dim)}
+
+/* 同步 UI */
+.sync-ui{display:flex;align-items:center;gap:6px}
+.sync-chip{width:34px;height:34px;padding:0;border-radius:50%;font-weight:700}
+.sync-status{font-size:.72rem;color:var(--fg-dim)}
+.sync-login-wrap{position:relative}
+.gsi-slot{position:absolute;inset:0;opacity:.011;overflow:hidden}
+
+@media (max-width:520px){
+  .status-btns{width:100%;justify-content:flex-start}
+  .book-tab{flex:1 1 30%}
+}
+@media print{
+  body{background:#fff;color:#000}
+  .topbar,.status-btns,.unit-nav,.foot,.chip,.toggle-sol{display:none!important}
+  .concept{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
+  .example .sol{display:block!important}
+}
