@@ -1,18 +1,17 @@
-# 轉錄進度
+# 轉錄進度 — ✅ 全部完成（2026-08-04）
 
-照片：photos/rot/p02–p60（轉正後跨頁圖，每張約 2 講義頁）。
-流程：讀跨頁 → units.js 補單元（觀念卡+例題）→ 從 MATH_UNITS_TODO 移除 → node test/test.js → 每冊 commit → 回報 Tony。
+63/63 單元、260 張觀念卡、390 題原創例題，六冊全數上線。
 
 | 冊 | 單元 | 狀態 |
 |----|------|------|
-| 一 | u01 1-1 負數與數線 | ✅ p02 |
-| 一 | u02–u12 | ⬜ 約 p03–p12 |
-| 二 | u13–u25 | ⬜ |
-| 三 | u26–u36 | ⬜ |
-| 四 | u37–u48 | ⬜ |
-| 五 | u49–u55 | ⬜ |
-| 六 | u56–u63 | ⬜ |
+| 一 | u01–u12 | ✅ |
+| 二 | u13–u25 | ✅ |
+| 三 | u26–u36 | ✅ |
+| 四 | u37–u48 | ✅ |
+| 五 | u49–u55 | ✅ |
+| 六 | u56–u63 | ✅ |
 
-- repo push 待 Tony 建 github.com/tonychuangtw/MathReviewWu（已催）
-- 後端 mathwu 已上線（claude-shared d1a1c33）
-- 圖形：tools/gen-figs.js 逐單元加；幾何冊（四五冊）圖量大
+- 原始照片：photos/p01–p60（p01 封面目次、p11 為 p10 重複翻拍）
+- 每張跨頁逐一人工轉錄；講義填空答案以紅字底線標示；例題全數原創附步驟詳解
+- SVG 圖形 19 張（tools/gen-figs.js 程式繪製）
+- 網站：https://tonychuangtw.github.io/MathReviewWu/

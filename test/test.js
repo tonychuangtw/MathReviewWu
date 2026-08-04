@@ -19,7 +19,7 @@ function assert(cond, msg) { if (!cond) throw new Error(msg); }
 
 console.log('資料完整性');
 
-t('已轉錄單元 ≥1', function () { assert(UNITS.length >= 1, '目前 ' + UNITS.length); });
+t('63 單元全數轉錄', function () { assert(UNITS.length === 63, '目前 ' + UNITS.length); });
 
 t('id 不重複（含 TODO）', function () {
   var seen = {};
