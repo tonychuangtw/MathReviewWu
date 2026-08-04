@@ -563,17 +563,304 @@ var MATH_UNITS = [
       { q:'用運算規律速算 $\\dfrac{2}{7}+\\dfrac{5}{9}+\\dfrac{5}{7}+\\dfrac{4}{9}$。',
         steps:['交換律重排同分母湊一起：$\\left(\\dfrac{2}{7}+\\dfrac{5}{7}\\right)+\\left(\\dfrac{5}{9}+\\dfrac{4}{9}\\right)$。','$=1+1=2$。'],
         ans:'$2$' } ] }
+]},
+
+{ id:'u09', book:1, sec:'2-4', title:'分數的乘除與四則運算', page:15, concepts:[
+  { id:'u09c1', title:'倒數', body:
+    '<p>(1) 意義：<b class="key">分子、分母顛倒的數</b>。</p>'+
+    '<p>(2) 性質：<b class="key">倒數相乘等於 1</b>。</p>'+
+    '<p>(3) 正負：<b class="key">倒數後正負不變</b>。</p>'+
+    '<p>(4) <b class="key">0 沒有倒數</b>。</p>'+
+    '<div class="inline-ex">例：$\\dfrac{2}{5}$ 的倒數為 $\\dfrac{5}{2}$；$-\\dfrac{7}{3}$ 的倒數為 $-\\dfrac{3}{7}$；$-4\\dfrac{2}{3}$ 的倒數為 $-\\dfrac{3}{14}$。</div>',
+    examples:[
+      { q:'求 $-\\dfrac{5}{9}$、$6$、$2\\dfrac{1}{4}$ 的倒數。',
+        steps:['$-\\dfrac{5}{9}$ 顛倒 → $-\\dfrac{9}{5}$（正負不變）。','$6=\\dfrac{6}{1}$ → 倒數 $\\dfrac{1}{6}$。','$2\\dfrac{1}{4}=\\dfrac{9}{4}$（帶分數先化假分數）→ 倒數 $\\dfrac{4}{9}$。'],
+        ans:'$-\\dfrac{9}{5}$；$\\dfrac{1}{6}$；$\\dfrac{4}{9}$' } ] },
+
+  { id:'u09c2', title:'分數的乘法運算', body:
+    '<p>(1) 先決定<b class="key">正、負</b>。</p>'+
+    '<p>(2) <b class="key">分子 × 分子，分母 × 分母</b>：$\\dfrac{分子}{分母}\\times\\dfrac{分子}{分母}=\\dfrac{分子\\times 分子}{分母\\times 分母}$。</p>'+
+    '<div class="inline-ex">例：$\\left(-\\dfrac{2}{3}\\right)\\times\\dfrac{7}{5}=-\\dfrac{2\\times 7}{3\\times 5}=-\\dfrac{14}{15}$。</div>'+
+    '<p>(3) 若算式中有帶分數，則要先將帶分數化成<b class="key">假分數</b>才能相乘。</p>'+
+    '<p>(4) <b class="key">同號</b>的兩分數相乘（除），其結果為<b class="key">正數</b>；<b class="key">異號</b>的兩分數相乘（除），其結果為<b class="key">負數</b>。</p>'+
+    '<p>(5) 當有<b class="key">偶數個</b>負數相乘時，其乘積為<b class="key">正數</b>；當有<b class="key">奇數個</b>負數相乘時，其乘積為<b class="key">負數</b>。</p>',
+    examples:[
+      { q:'計算 $\\left(-\\dfrac{3}{4}\\right)\\times\\left(-\\dfrac{8}{9}\\right)$。',
+        steps:['同號相乘得正。','先約分：$\\dfrac{3}{4}\\times\\dfrac{8}{9}=\\dfrac{1}{1}\\times\\dfrac{2}{3}=\\dfrac{2}{3}$。'],
+        ans:'$\\dfrac{2}{3}$' },
+      { q:'計算 $1\\dfrac{1}{2}\\times\\left(-\\dfrac{4}{5}\\right)$。',
+        steps:['帶分數化假分數：$1\\dfrac{1}{2}=\\dfrac{3}{2}$。','異號得負：$-\\dfrac{3}{2}\\times\\dfrac{4}{5}=-\\dfrac{12}{10}=-\\dfrac{6}{5}$。'],
+        ans:'$-\\dfrac{6}{5}$' } ] },
+
+  { id:'u09c3', title:'運算規律', body:
+    '<p>設 $a$、$b$、$c$ 是任意數：</p>'+
+    '<p>(1) 乘法<b class="key">交換律</b>：$a\\times b=b\\times a$。</p>'+
+    '<p>(2) 乘法<b class="key">結合律</b>：$(a\\times b)\\times c=a\\times(b\\times c)$。</p>'+
+    '<p>(3) <b class="key">分配律</b>：① $(a+b)\\times c=a\\times c+b\\times c$、$(a-b)\\times c=a\\times c-b\\times c$；② $c\\times(a+b)=c\\times a+c\\times b$、$c\\times(a-b)=c\\times a-c\\times b$。</p>',
+    examples:[
+      { q:'用分配律速算 $\\left(\\dfrac{5}{6}-\\dfrac{3}{4}\\right)\\times 12$。',
+        steps:['分配：$\\dfrac{5}{6}\\times 12-\\dfrac{3}{4}\\times 12$。','$=10-9=1$。'],
+        ans:'$1$' } ] },
+
+  { id:'u09c4', title:'分數的除法運算', body:
+    '<p>除以一個不為 0 的數等於乘以該數的<b class="key">倒數</b>。</p>'+
+    '<div class="inline-ex">例：$\\left(-\\dfrac{3}{5}\\right)\\div\\dfrac{7}{2}=\\left(-\\dfrac{3}{5}\\times\\dfrac{2}{7}\\right)=-\\dfrac{6}{35}$。</div>',
+    examples:[
+      { q:'計算 $\\dfrac{8}{15}\\div\\left(-\\dfrac{4}{5}\\right)$。',
+        steps:['除變乘倒數：$\\dfrac{8}{15}\\times\\left(-\\dfrac{5}{4}\\right)$。','異號得負，約分：$-\\dfrac{8\\times 5}{15\\times 4}=-\\dfrac{2}{3}$。'],
+        ans:'$-\\dfrac{2}{3}$' } ] },
+
+  { id:'u09c5', title:'分數的乘方', body:
+    '<p>若 $\\dfrac{b}{a}$ 為一個分數（$a\\neq 0$），$n$ 是正整數，則 $\\left(\\dfrac{b}{a}\\right)^n=\\dfrac{b^n}{a^n}$。</p>'+
+    '<div class="inline-ex">例：$\\left(\\dfrac{3}{5}\\right)^4=\\dfrac{3^4}{5^4}$；$\\left(\\dfrac{-4}{7}\\right)^3=\\dfrac{(-4)^3}{7^3}$。</div>',
+    examples:[
+      { q:'計算 $\\left(-\\dfrac{2}{3}\\right)^3$ 與 $\\left(-\\dfrac{1}{2}\\right)^4$。',
+        steps:['奇數次方得負：$-\\dfrac{2^3}{3^3}=-\\dfrac{8}{27}$。','偶數次方得正：$\\dfrac{1^4}{2^4}=\\dfrac{1}{16}$。'],
+        ans:'$-\\dfrac{8}{27}$；$\\dfrac{1}{16}$' } ] },
+
+  { id:'u09c6', title:'底數為分數的指數律', body:
+    '<p>(1) 當底數 $a$、$b$ 為分數，$m$、$n$ 為非負整數時，則：</p>'+
+    '<p>① $a^m\\times a^n=a^{m+n}$。</p>'+
+    '<div class="inline-ex">例：$\\left(-\\dfrac{1}{2}\\right)^6\\times\\left(-\\dfrac{1}{2}\\right)^3=\\left(-\\dfrac{1}{2}\\right)^{6+3}=\\left(-\\dfrac{1}{2}\\right)^9$。</div>'+
+    '<p>② $(a^m)^n=a^{m\\times n}$。</p>'+
+    '<div class="inline-ex">例：$\\left[\\left(-\\dfrac{1}{2}\\right)^6\\right]^3=\\left(-\\dfrac{1}{2}\\right)^{6\\times 3}=\\left(-\\dfrac{1}{2}\\right)^{18}$。</div>'+
+    '<p>③ $(a\\times b)^n=a^n\\times b^n$。</p>'+
+    '<div class="inline-ex">例：$\\left[\\left(-\\dfrac{1}{2}\\right)\\times\\left(-\\dfrac{1}{3}\\right)\\right]^3=\\left(-\\dfrac{1}{2}\\right)^3\\times\\left(-\\dfrac{1}{3}\\right)^3$。</div>'+
+    '<p>(2) 當底數 $a$ 為分數，$m$、$n$ 為正整數，且 $m>n$ 時，則 $a^m\\div a^n=a^{m-n}$。</p>'+
+    '<div class="inline-ex">例：$\\left(-\\dfrac{1}{2}\\right)^6\\div\\left(-\\dfrac{1}{2}\\right)^3=\\left(-\\dfrac{1}{2}\\right)^{6-3}=\\left(-\\dfrac{1}{2}\\right)^3$。</div>',
+    examples:[
+      { q:'化簡 $\\left(\\dfrac{2}{5}\\right)^4\\times\\left(\\dfrac{2}{5}\\right)^2\\div\\left(\\dfrac{2}{5}\\right)^5$。',
+        steps:['同底相乘：$\\left(\\dfrac{2}{5}\\right)^{4+2}=\\left(\\dfrac{2}{5}\\right)^6$。','同底相除：$\\left(\\dfrac{2}{5}\\right)^{6-5}=\\dfrac{2}{5}$。'],
+        ans:'$\\dfrac{2}{5}$' } ] },
+
+  { id:'u09c7', title:'乘方的比較大小', body:
+    '<p>對於任何一個正數 $a$ 及正整數 $n$：</p>'+
+    '<p>(1) 當 $a<1$ 時，$a^n<1$，且 $n$ 的值愈大，$a^n$ 的值愈<b class="key">小</b>。</p>'+
+    '<div class="inline-ex">例：$\\left(\\dfrac{2}{3}\\right)^3<\\left(\\dfrac{2}{3}\\right)^2$。</div>'+
+    '<p>(2) 當 $a>1$ 時，$a^n>1$，且 $n$ 的值愈大，$a^n$ 的值愈<b class="key">大</b>。</p>'+
+    '<div class="inline-ex">例：$1.2^3>1.2^2$。</div>',
+    examples:[
+      { q:'比較 $\\left(\\dfrac{4}{5}\\right)^{10}$、$\\left(\\dfrac{4}{5}\\right)^{7}$、$1$ 三數的大小。',
+        steps:['$\\dfrac{4}{5}<1$ → 次方愈大值愈小：$\\left(\\dfrac{4}{5}\\right)^{10}<\\left(\\dfrac{4}{5}\\right)^{7}$。','小於 1 的正數任何次方都 $<1$。'],
+        ans:'$\\left(\\dfrac{4}{5}\\right)^{10}<\\left(\\dfrac{4}{5}\\right)^{7}<1$' } ] },
+
+  { id:'u09c8', title:'分數的四則運算', body:
+    '<p>一般四則混合運算是由左向右依序計算，<b class="key">先</b>算<b class="key">乘、除</b>，<b class="key">後</b>算<b class="key">加、減</b>；若有括號時，應<b class="key">先做括號</b>內的計算。</p>',
+    examples:[
+      { q:'計算 $\\dfrac{1}{2}+\\dfrac{2}{3}\\div\\dfrac{4}{9}\\times\\left(-\\dfrac{1}{6}\\right)$。',
+        steps:['先乘除（由左而右）：$\\dfrac{2}{3}\\div\\dfrac{4}{9}=\\dfrac{2}{3}\\times\\dfrac{9}{4}=\\dfrac{3}{2}$。','$\\dfrac{3}{2}\\times\\left(-\\dfrac{1}{6}\\right)=-\\dfrac{1}{4}$。','再加減：$\\dfrac{1}{2}+\\left(-\\dfrac{1}{4}\\right)=\\dfrac{1}{4}$。'],
+        ans:'$\\dfrac{1}{4}$' },
+      { q:'計算 $\\left(\\dfrac{5}{6}-\\dfrac{1}{2}\\right)\\div\\left(-\\dfrac{2}{9}\\right)$。',
+        steps:['先括號：$\\dfrac{5}{6}-\\dfrac{3}{6}=\\dfrac{2}{6}=\\dfrac{1}{3}$。','除變乘倒數：$\\dfrac{1}{3}\\times\\left(-\\dfrac{9}{2}\\right)=-\\dfrac{3}{2}$。'],
+        ans:'$-\\dfrac{3}{2}$' } ] }
+]},
+
+{ id:'u10', book:1, sec:'3-1', title:'以符號列式與運算', page:17, concepts:[
+  { id:'u10c1', title:'代數式及其簡記', body:
+    '<p><b class="key">代數式</b>：<b class="key">式子中包含文字符號與數字及其四則運算者</b>。</p>'+
+    '<div class="inline-ex">例：$x+3$、$x-3$、$2\\times x$、$x\\div 2$、$x^2$、$x\\times y$。</div>',
+    examples:[
+      { q:'下列哪些是代數式？ $3+5$、$2x-1$、$a\\times b$、$100$',
+        steps:['代數式要含文字符號：$2x-1$、$a\\times b$ 是。','$3+5$、$100$ 只有數字，不是代數式。'],
+        ans:'$2x-1$、$a\\times b$' } ] },
+
+  { id:'u10c2', title:'乘法的簡記', body:
+    '<p>在一個代數式中，當文字符號與數字<b class="key">相乘</b>時，我們習慣上：</p>'+
+    '<p>① 將數字寫在文字符號的<b class="key">左邊</b>，</p>'+
+    '<p>② 且把乘號「×」改寫成「·」，或是<b class="key">省略不寫</b>。</p>'+
+    '<div class="inline-ex">例：$(-2)\\times x=(-2)\\cdot x=-2x$；$(-1)\\times x=-x$；$\\left(-\\dfrac{4}{5}\\right)\\times x=-\\dfrac{4}{5}x=\\dfrac{-4x}{5}=-\\dfrac{4x}{5}$。</div>'+
+    '<p>註：(1) 簡記時，<b class="key">數字</b>應<b class="key">寫在</b>英文字母的<b class="key">前面</b>。</p>'+
+    '<p>　(2) $1\\times x=x$，<b class="key">數字 1 可以省略</b>；$(-1)\\times x=-x$；$0\\times x=0$。</p>',
+    examples:[
+      { q:'把 $x\\times(-3)$、$1\\times y$、$b\\times a\\times 5$ 用簡記寫出。',
+        steps:['數字寫前面：$x\\times(-3)=-3x$。','1 省略：$1\\times y=y$。','$b\\times a\\times 5=5ab$（習慣上字母照字典序）。'],
+        ans:'$-3x$；$y$；$5ab$' } ] },
+
+  { id:'u10c3', title:'除法的簡記', body:
+    '<p>(1) 將除號寫成<b class="key">分數</b>。</p>'+
+    '<div class="inline-ex">例：$x\\div 5=\\dfrac{x}{5}$；$x\\div(-5)=\\dfrac{x}{-5}$。</div>'+
+    '<p>(2) 將除號改成乘號（<b class="key">需倒數</b>）。</p>'+
+    '<div class="inline-ex">例：$6\\div\\dfrac{2}{3}=6\\times\\dfrac{3}{2}=\\dfrac{6\\times 3}{2}$。</div>',
+    examples:[
+      { q:'把 $a\\div 7$ 與 $x\\div\\dfrac{3}{4}$ 用簡記寫出。',
+        steps:['$a\\div 7=\\dfrac{a}{7}$。','$x\\div\\dfrac{3}{4}=x\\times\\dfrac{4}{3}=\\dfrac{4x}{3}$。'],
+        ans:'$\\dfrac{a}{7}$；$\\dfrac{4x}{3}$' } ] },
+
+  { id:'u10c4', title:'將文字敘述改寫成代數式／一元一次式', body:
+    '<p>(1) 文字敘述 → 代數式：</p>'+
+    '<p>比 $x$ 大（多）5 的數：<b class="key">$x+5$</b>；比 $y$ 小（少）3 的數：<b class="key">$y-3$</b>；$x$ 的 $\\dfrac{2}{3}$ 倍：<b class="key">$\\dfrac{2}{3}x$</b>；把 $a$ 分成 3 等分：<b class="key">$\\dfrac{a}{3}$</b>；比 $c$ 的 2 倍多 10：<b class="key">$2c+10$</b>；$d$ 打 7 折：<b class="key">$d\\times 0.7$</b>；「比」→「$=$」。</p>'+
+    '<p>(2) <b class="key">一元一次式</b>：只含有一種文字符號（<b class="key">一元</b>），且文字符號的次數是 1（<b class="key">一次</b>）的代數式。</p>'+
+    '<div class="inline-ex">例：$x+5$、$y-3$、$\\dfrac{a}{3}$ 稱為一元一次式。</div>'+
+    '<p>(3) 一元一次式 $ax+b$ 中，$ax$ 稱為 $x$ 的<b class="key">一次項</b>，$a$ 稱為 $x$ 的<b class="key">一次項係數</b>，$b$ 稱為<b class="key">常數項</b>。</p>'+
+    '<div class="inline-ex">例：$4x-1$ 的一次項為 $4x$，4 為一次項係數，$-1$ 為常數項。</div>',
+    examples:[
+      { q:'小明有 $x$ 元，買一支 35 元的筆後，剩下的錢比原來的一半少 5 元。列出等式。',
+        steps:['買筆後剩 $x-35$ 元。','原來的一半少 5 元：$\\dfrac{x}{2}-5$。','「比」翻成等號：$x-35=\\dfrac{x}{2}-5$。'],
+        ans:'$x-35=\\dfrac{x}{2}-5$' },
+      { q:'寫出 $-\\dfrac{2x}{3}+7$ 的一次項係數與常數項。',
+        steps:['一次項 $-\\dfrac{2x}{3}$ → 係數 $-\\dfrac{2}{3}$。','常數項 $7$。'],
+        ans:'係數 $-\\dfrac{2}{3}$；常數項 $7$' } ] },
+
+  { id:'u10c5', title:'求代數式的值', body:
+    '<p>一個代數式的<b class="key">值</b>，是由文字符號所代表的數<b class="key">代入</b>該代數式後所得的值決定。</p>'+
+    '<div class="inline-ex">例：當 $x=3$ 時，$4x-1=4\\times 3-1=11$。</div>',
+    examples:[
+      { q:'當 $x=-2$ 時，求 $-3x+7$ 與 $x^2-x$ 的值。',
+        steps:['$-3\\times(-2)+7=6+7=13$。','$(-2)^2-(-2)=4+2=6$。'],
+        ans:'$13$；$6$' } ] },
+
+  { id:'u10c6', title:'代數式的乘法運算', body:
+    '<p>做代數式的乘法運算時，可以先把代數式中的各<b class="key">數字相乘</b>，再乘以文字符號。</p>'+
+    '<div class="inline-ex">例：$(-4x)\\times 5=[(-4)\\times 5]\\cdot x=-20x$。</div>'+
+    '<p>設 $a$、$b$、$c$ 是任意數，則有 $a(bx)=(ab)x=abx$、$a(bx+c)=abx+ac$、$a(bx-c)=abx-ac$。</p>'+
+    '<p>設 $a$、$b$ 是任意數，則有 $-(ax+b)=<b class="key">-ax-b</b>$、$-(ax-b)=<b class="key">-ax+b</b>$。</p>',
+    examples:[
+      { q:'化簡 $-2(3x-4)$。',
+        steps:['分配：$-2\\times 3x+(-2)\\times(-4)$。','$=-6x+8$。'],
+        ans:'$-6x+8$' },
+      { q:'化簡 $\\dfrac{2}{3}(6x-9)$。',
+        steps:['$\\dfrac{2}{3}\\times 6x=4x$；$\\dfrac{2}{3}\\times(-9)=-6$。','合併：$4x-6$。'],
+        ans:'$4x-6$' } ] },
+
+  { id:'u10c7', title:'代數式的加減運算', body:
+    '<p>一元一次式的加減法運算，可以<b class="key">先去括號</b>，再分別合併一次項與常數項（<b class="key">同類項合併</b>）。</p>'+
+    '<div class="inline-ex">例：$2x-7-4x+3=(2-4)x+(-7+3)=-2x-4$。</div>'+
+    '<p>設 $a$、$b$ 是任意數，則有 $ax+bx=(a+b)x$、$ax-bx=(a-b)x$——數字互相加減，【<b class="key">未知數</b>】放後面。</p>'+
+    '<p>設 $a$、$b$、$c$、$d$ 是任意數，則有 $(ax+b)+(cx+d)=(a+c)x+(b+d)$、$(ax+b)-(cx+d)=(a-c)x+(b-d)$。</p>',
+    examples:[
+      { q:'化簡 $(5x-2)-(3x+4)$。',
+        steps:['去括號（後括號變號）：$5x-2-3x-4$。','同類項合併：$(5-3)x+(-2-4)=2x-6$。'],
+        ans:'$2x-6$' },
+      { q:'化簡 $3(2x-1)+2(1-4x)$。',
+        steps:['分配：$6x-3+2-8x$。','合併：$(6-8)x+(-3+2)=-2x-1$。'],
+        ans:'$-2x-1$' } ] }
+]},
+
+{ id:'u11', book:1, sec:'3-2', title:'一元一次方程式', page:19, concepts:[
+  { id:'u11c1', title:'一元一次方程式與方程式的解', body:
+    '<p>(1) 一元一次方程式的意義：</p>'+
+    '<p>　一元：<b class="key">有一種未知數</b>。</p>'+
+    '<p>　一次：<b class="key">未知數最高次方 $=1$</b>。</p>'+
+    '<p>　方程式：<b class="key">出現「＝」符號</b>。</p>'+
+    '<div class="inline-ex">例：$3x+5=14$、$y-3=17$、$2c+10=6$ 都是一元一次方程式。</div>'+
+    '<p>(2) 方程式的解：若方程式中的未知數用某個數代入，能使這個方程式中左右兩邊的值相等，那麼這個數稱為此方程式的<b class="key">解</b>或<b class="key">根</b>；而求出方程式中未知數所代表的數的過程，稱為<b class="key">解方程式</b>。</p>'+
+    '<div class="inline-ex">例：將 $x=3$ 代入 $3x+5=14$ 中，得到方程式的等號兩邊相等，所以 $x=3$ 是 $3x+5=14$ 的解。</div>',
+    examples:[
+      { q:'判斷 $x=2$ 與 $x=-1$ 何者是方程式 $5x-3=7$ 的解。',
+        steps:['代 $x=2$：$5\\times 2-3=7$ ✓ 兩邊相等。','代 $x=-1$：$5\\times(-1)-3=-8\\neq 7$ ✗。'],
+        ans:'$x=2$ 是解' },
+      { q:'下列何者是一元一次方程式？① $2x+3$ ② $x^2=9$ ③ $\\dfrac{x}{4}=1$ ④ $x+y=5$',
+        steps:['① 沒有等號，不是方程式。','② 次數是 2，不是一次。','④ 有兩種未知數，不是一元。','③ 一種未知數、一次、有等號 ✓。'],
+        ans:'③' } ] },
+
+  { id:'u11c2', title:'等量公理', body:
+    '<p>任意一個方程式中，在等號的兩邊<b class="key">同加、減、乘、除以一個數</b>（除數不可為 0），則等號的兩邊仍會維持相等。即：若 $a=b$，則：</p>'+
+    '<p>(1) $a+c=b+c$；(2) $a-c=b-c$；(3) $a\\times c=b\\times c$；(4) $a\\div c=b\\div c$（$c\\neq 0$）。</p>'+
+    '<p>用天平想像：兩盤平衡時，兩邊<b class="key">同放上</b>、<b class="key">同拿走</b>、同<b class="key">變倍</b>、同<b class="key">等分</b>，天平仍然平衡。</p>'+
+    '<div class="inline-ex">例：$3x=10$ 兩邊同加 4 → $3x+4=10+4$；$2x+2=12$ 兩邊同減 2 → $2x=10$；$2x=4$ 兩邊同乘 3 → $6x=12$；$2x=4$ 兩邊同除 2 → $x=2$。</div>',
+    fig:'u11-balance',
+    examples:[
+      { q:'用等量公理解 $x-7=15$。',
+        steps:['兩邊同加 7：$x-7+7=15+7$。','$x=22$。'],
+        ans:'$x=22$' },
+      { q:'用等量公理解 $\\dfrac{2x}{5}=6$。',
+        steps:['兩邊同乘 5：$2x=30$。','兩邊同除 2：$x=15$。'],
+        ans:'$x=15$' } ] },
+
+  { id:'u11c3', title:'移項法則', body:
+    '<p>一個數 $a$ 從方程式等號的<b class="key">一邊移到另一邊</b>，應遵守下列規則：</p>'+
+    '<p>(1) $x-a=b \\Rightarrow x=b+a$（$-a$ 移過去變 $+a$）。</p>'+
+    '<p>(2) $x+a=b \\Rightarrow x=b-a$（$+a$ 移過去變 $-a$）。</p>'+
+    '<p>(3) $\\dfrac{x}{a}=b \\Rightarrow x=b\\times a$（$\\div a$ 移過去變 $\\times a$）。</p>'+
+    '<p>(4) $ax=b \\Rightarrow x=b\\div a$（$\\times a$ 移過去變 $\\div a$，$a\\neq 0$）。</p>',
+    examples:[
+      { q:'解 $4x+9=1$。',
+        steps:['$+9$ 移項變 $-9$：$4x=1-9=-8$。','$\\times 4$ 移項變 $\\div 4$：$x=-8\\div 4=-2$。'],
+        ans:'$x=-2$' },
+      { q:'解 $\\dfrac{x}{3}-2=5$。',
+        steps:['$-2$ 移項：$\\dfrac{x}{3}=7$。','$\\div 3$ 移項變 $\\times 3$：$x=21$。'],
+        ans:'$x=21$' },
+      { q:'解 $2(3x-4)=10$。',
+        steps:['先去括號：$6x-8=10$。','移項：$6x=18$。','$x=3$。'],
+        ans:'$x=3$' } ] }
+]},
+
+{ id:'u12', book:1, sec:'3-3', title:'應用問題', page:21, concepts:[
+  { id:'u12c1', title:'用一元一次方程式解應用問題的步驟', body:
+    '<p>(1) <b class="key">設未知數</b>：依題意假設適當的未知數。</p>'+
+    '<p>(2) <b class="key">列方程式</b>：根據題目找出相等的關係，列出一元一次方程式。</p>'+
+    '<p>(3) <b class="key">解方程式</b>。</p>'+
+    '<p>(4) <b class="key">寫答案</b>：依題意寫出正確答案，若<b class="key">不合題意的解則要捨棄</b>，即此題沒有解。</p>',
+    examples:[
+      { q:'一枝筆比一本筆記本貴 12 元，買 3 枝筆和 2 本筆記本共 156 元，求筆記本一本多少元？',
+        steps:['設筆記本一本 $x$ 元，則筆一枝 $(x+12)$ 元。','列式：$3(x+12)+2x=156$。','去括號：$3x+36+2x=156$ → $5x=120$ → $x=24$。','驗算：筆 36 元，$3\\times 36+2\\times 24=108+48=156$ ✓。'],
+        ans:'筆記本一本 24 元' },
+      { q:'姊姊今年 15 歲，弟弟 9 歲，幾年後姊姊年齡是弟弟的 1.5 倍？',
+        steps:['設 $x$ 年後，姊 $15+x$、弟 $9+x$。','列式：$15+x=1.5(9+x)$。','$15+x=13.5+1.5x$ → $1.5=0.5x$ → $x=3$。','驗算：3 年後姊 18、弟 12，$18=12\\times 1.5$ ✓。'],
+        ans:'3 年後' },
+      { q:'連續三個整數的和是 72，求這三個數。',
+        steps:['設中間數 $x$，三數為 $x-1$、$x$、$x+1$。','$(x-1)+x+(x+1)=3x=72$ → $x=24$。'],
+        ans:'23、24、25' } ] }
+]},
+
+{ id:'u13', book:2, sec:'1-1', title:'二元一次方程式', page:22, concepts:[
+  { id:'u13c1', title:'二元一次式（二元一次多項式）', body:
+    '<p><b class="key">二元</b>：含有<b class="key">兩種</b>文字符號，<b class="key">一次</b>：且這兩種文字符號的次數<b class="key">為 1 次</b>的<b class="key">代數式</b>，稱為<b class="key">二元一次式</b>。</p>'+
+    '<div class="inline-ex">例：$x-2y$、$2x+9y$、$5x+3y+8$ 都稱為二元一次式。</div>',
+    examples:[
+      { q:'下列何者是二元一次式？① $3x+5$ ② $x+y^2$ ③ $2a-7b+1$',
+        steps:['① 只有一種文字符號，是一元一次式。','② $y$ 的次數是 2，不合。','③ 兩種文字符號 $a$、$b$ 且都是一次 ✓。'],
+        ans:'③' } ] },
+
+  { id:'u13c2', title:'二元一次式的項與係數', body:
+    '<p>型如 $ax+by+c$ 的式子稱為二元一次式，其中稱 $ax$ 為 <b class="key">$x$ 項</b>、$by$ 為 <b class="key">$y$ 項</b>及 $c$ 為<b class="key">常數項</b>；$a$ 為 <b class="key">$x$ 項係數</b>、$b$ 為 <b class="key">$y$ 項係數</b>。</p>'+
+    '<div class="inline-ex">例：$3x-2y$：$x$ 項 $3x$、$y$ 項 $-2y$、常數項 0；$x$ 項係數 3、$y$ 項係數 $-2$。<br>$x+4y-5$：$x$ 項 $x$、$y$ 項 $4y$、常數項 $-5$；$x$ 項係數 1、$y$ 項係數 4。</div>',
+    examples:[
+      { q:'寫出 $-x+\\dfrac{2y}{3}+7$ 的各項係數與常數項。',
+        steps:['$x$ 項 $-x$ → 係數 $-1$。','$y$ 項 $\\dfrac{2y}{3}$ → 係數 $\\dfrac{2}{3}$。','常數項 $7$。'],
+        ans:'$x$ 係數 $-1$；$y$ 係數 $\\dfrac{2}{3}$；常數項 7' } ] },
+
+  { id:'u13c3', title:'二元一次式的值', body:
+    '<p>二元一次式的值是由二元一次式中的兩個文字符號所分別代表的數（$x$、$y$ <b class="key">代入求值</b>）共同決定的。</p>'+
+    '<div class="inline-ex">例：當 $x=3$、$y=-2$ 時，$5x-6y$ 的值為 $5\\times 3-6\\times(-2)=15+12=<b class="key">27</b>$。</div>',
+    examples:[
+      { q:'當 $x=-1$、$y=4$ 時，求 $2x-3y+10$ 的值。',
+        steps:['代入：$2\\times(-1)-3\\times 4+10$。','$=-2-12+10=-4$。'],
+        ans:'$-4$' } ] },
+
+  { id:'u13c4', title:'二元一次式的運算', body:
+    '<p><b class="key">同類項</b>：<b class="key">文字符號相同的項</b>。兩個二元一次式的加、減運算就是合併其<b class="key">同類項</b>。</p>'+
+    '<div class="inline-ex">例：$(3x-2y)+(x+4y-5)=(3x+x)+(-2y+4y)-5=4x+2y-5$。</div>',
+    examples:[
+      { q:'化簡 $(5x+y-3)-(2x-4y+1)$。',
+        steps:['去括號（後括號變號）：$5x+y-3-2x+4y-1$。','合併同類項：$(5-2)x+(1+4)y+(-3-1)=3x+5y-4$。'],
+        ans:'$3x+5y-4$' } ] },
+
+  { id:'u13c5', title:'二元一次方程式', body:
+    '<p><b class="key">二元</b>：<b class="key">有兩種未知數</b>；<b class="key">一次</b>：<b class="key">未知數最高次數 $=1$</b>；<b class="key">方程式</b>：<b class="key">出現「＝」符號</b>。</p>'+
+    '<div class="inline-ex">例：$3x+4y=185$、$x+6y+1=0$、$y=-3x+7$ 都稱為二元一次方程式。</div>',
+    examples:[
+      { q:'「一枝筆 $x$ 元、一顆糖 $y$ 元，買 2 枝筆和 5 顆糖共 100 元」，列出二元一次方程式。',
+        steps:['筆共 $2x$ 元、糖共 $5y$ 元。','合計：$2x+5y=100$。'],
+        ans:'$2x+5y=100$' } ] },
+
+  { id:'u13c6', title:'二元一次方程式的解', body:
+    '<p>(1) 如果一組 $x$、$y$ 的值代入二元一次方程式，能使方程式的<b class="key">等號</b>成立，那麼這一組 $x$、$y$ 的值就是這個二元一次方程式的<b class="key">一組解</b>。</p>'+
+    '<p>(2) 二元一次方程式有<b class="key">無限多組解</b>。</p>'+
+    '<div class="inline-ex">例：將 $x=5$、$y=-1$ 代入 $x+6y=-1$ 中，可得 $5+6\\times(-1)=-1$，所以 $x=5$、$y=-1$ 是 $x+6y=-1$ 的一組解。</div>',
+    examples:[
+      { q:'判斷 $(x,y)=(2,3)$ 與 $(4,1)$ 哪組是 $2x+y=7$ 的解？',
+        steps:['代 $(2,3)$：$2\\times 2+3=7$ ✓。','代 $(4,1)$：$2\\times 4+1=9\\neq 7$ ✗。'],
+        ans:'$(2,3)$ 是解' },
+      { q:'寫出 $x+2y=6$ 的三組整數解。',
+        steps:['取 $y=0$ → $x=6$；$y=1$ → $x=4$；$y=2$ → $x=2$。','二元一次方程式的解有無限多組，這只是其中三組。'],
+        ans:'$(6,0)$、$(4,1)$、$(2,2)$（不唯一）' } ] }
 ]}
 
 ];
 
 /* 目次骨架：尚未轉錄的單元（轉錄完成後逐一搬進上方陣列） */
 var MATH_UNITS_TODO = [
-  {id:'u09',book:1,sec:'2-4',title:'分數的乘除與四則運算',page:15},
-  {id:'u10',book:1,sec:'3-1',title:'以符號列式與運算',page:17},
-  {id:'u11',book:1,sec:'3-2',title:'一元一次方程式',page:19},
-  {id:'u12',book:1,sec:'3-3',title:'應用問題',page:21},
-  {id:'u13',book:2,sec:'1-1',title:'二元一次方程式',page:22},
   {id:'u14',book:2,sec:'1-2',title:'二元一次聯立方程式',page:23},
   {id:'u15',book:2,sec:'2-1',title:'直角坐標平面',page:24},
   {id:'u16',book:2,sec:'2-2',title:'二元一次方程式的圖形',page:25},

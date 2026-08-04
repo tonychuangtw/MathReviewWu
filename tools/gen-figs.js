@@ -151,6 +151,23 @@ figs['u02-dist'] = function () {
   return svg(560, 134, b);
 };
 
+/* 3-2 等量公理：天平 3x = 10 */
+figs['u11-balance'] = function () {
+  var b = '';
+  function pan(cx, label, fill) {
+    return '<path d="M ' + (cx - 55) + ' 60 Q ' + cx + ' 96 ' + (cx + 55) + ' 60" fill="none" stroke="' + INK + '" stroke-width="2.5"/>' +
+      line(cx - 55, 60, cx, 30, SOFT, 1.5) + line(cx + 55, 60, cx, 30, SOFT, 1.5) +
+      '<rect x="' + (cx - 40) + '" y="62" width="80" height="30" rx="8" fill="' + fill + '"/>' +
+      txt(cx, 83, label, { fill: '#fff', size: 16, bold: 1 });
+  }
+  b += line(130, 30, 430, 30, INK, 4);                                  // 橫梁
+  b += '<path d="M 280 30 L 260 108 L 300 108 z" fill="' + SOFT + '"/>'; // 支點
+  b += '<rect x="230" y="108" width="100" height="10" rx="4" fill="' + INK + '"/>';
+  b += pan(130, '3x', BLUE) + pan(430, '10', ORANGE);
+  b += txt(280, 140, '平衡 → 3x = 10；兩邊同加、同減、同乘、同除，仍平衡', { size: 14 });
+  return svg(560, 152, b);
+};
+
 Object.keys(figs).forEach(function (name) {
   fs.writeFileSync(path.join(OUT, name + '.svg'), figs[name]());
   console.log('✓', name + '.svg');
