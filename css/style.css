@@ -121,6 +121,35 @@ html[data-theme="white"] .st-label.master,html[data-theme="sakura"] .st-label.ma
 .note-saved{font-size:.75rem;color:var(--ok);opacity:0;transition:opacity .3s}
 .note-saved.show{opacity:1}
 
+/* 螢光筆 */
+.use-hint{background:var(--bg2);color:var(--fg-dim);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:.85rem;line-height:1.6}
+.use-hint b{color:var(--accent2)}
+mark.hl{background:transparent;color:inherit;border-radius:3px;padding:0 1px;cursor:pointer;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+mark.hl-y{background:rgba(255,213,0,.5)}
+mark.hl-g{background:rgba(97,208,121,.45)}
+mark.hl-p{background:rgba(255,120,170,.4)}
+.hl-bubble{position:absolute;z-index:70;background:var(--bg2);border-radius:999px;box-shadow:0 5px 20px rgba(0,0,0,.35);padding:7px 12px;display:flex;gap:10px;align-items:center;user-select:none;-webkit-user-select:none}
+.hl-tip{font-size:.9rem}
+.hl-dot{width:26px;height:26px;border-radius:50%;border:2px solid rgba(128,128,128,.35);cursor:pointer;padding:0}
+.hl-dot:hover{transform:scale(1.12)}
+.hl-dot.y{background:#ffd500}
+.hl-dot.g{background:#61d079}
+.hl-dot.p{background:#ff78aa}
+.hl-del{background:none;border:1.5px solid var(--fg-dim);color:var(--fg);border-radius:999px;padding:5px 14px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.hl-del:hover{border-color:#c0392b;color:#c0392b}
+
+/* 手寫筆記 */
+.ink-area{margin-top:10px;border-top:1px dashed var(--card-line);padding-top:8px}
+.ink-toggle{background:none;border:none;color:var(--ink-soft);font-size:.85rem;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;padding:4px 0}
+.ink-toggle .ink-dot{color:var(--accent2);font-size:.55rem}
+.ink-toggle .ink-arrow{font-size:.75rem;transition:transform .15s}
+.ink-toggle.open .ink-arrow{transform:rotate(180deg)}
+.ink-tools{display:flex;gap:7px;align-items:center;margin:8px 0;flex-wrap:wrap}
+.ink-tool{width:32px;height:32px;border-radius:50%;border:2px solid rgba(128,128,128,.3);cursor:pointer;background:#f0ede2;font-size:.95rem;display:flex;align-items:center;justify-content:center;padding:0}
+.ink-tool.ink-pen.on{border-color:var(--accent);box-shadow:0 0 0 2px rgba(58,110,165,.3)}
+.ink-tool:active{transform:scale(.92)}
+.ink-canvas{width:100%;display:block;border:1px solid var(--card-line);border-radius:8px;touch-action:none;background:repeating-linear-gradient(#fffef9,#fffef9 30px,#efe9da 31px);cursor:crosshair}
+
 .unit-nav{display:flex;justify-content:space-between;margin:18px 0}
 
 /* 進度總覽 */
@@ -165,7 +194,8 @@ html[data-theme="white"] .st-label.master,html[data-theme="sakura"] .st-label.ma
 }
 @media print{
   body{background:#fff;color:#000}
-  .topbar,.status-btns,.unit-nav,.foot,.chip,.toggle-sol{display:none!important}
+  .topbar,.status-btns,.unit-nav,.foot,.chip,.toggle-sol,.ink-tools,.hl-bubble,.use-hint{display:none!important}
+  mark.hl{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .concept{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
   .example .sol{display:block!important}
 }
