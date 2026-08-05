@@ -90,7 +90,7 @@ html[data-theme="white"] .st-label.master,html[data-theme="sakura"] .st-label.ma
 .status-btns .chip.on-master{background:var(--strong);border-color:var(--strong);color:#fff}
 
 /* 觀念卡：紙感 */
-.concept{background:var(--card);color:var(--ink);border-radius:var(--radius);padding:18px 20px;margin-bottom:18px;box-shadow:var(--shadow)}
+.concept{background:var(--card);color:var(--ink);border-radius:var(--radius);padding:18px 20px;margin-bottom:18px;box-shadow:var(--shadow);position:relative}
 .concept h3{font-size:1.05rem;color:var(--accent);border-bottom:2px solid var(--card-line);padding-bottom:8px;margin-bottom:12px}
 .concept h3 .cnum{display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;margin-right:8px;font-size:.85rem}
 .concept p{line-height:1.9;margin:6px 0}
@@ -150,6 +150,16 @@ mark.hl-p{background:rgba(255,120,170,.4)}
 .ink-tool:active{transform:scale(.92)}
 .ink-canvas{width:100%;display:block;border:1px solid var(--card-line);border-radius:8px;touch-action:none;background:repeating-linear-gradient(#fffef9,#fffef9 30px,#efe9da 31px);cursor:crosshair}
 
+/* 整頁手寫：覆蓋在觀念卡上的透明畫布 */
+.ol-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;border-radius:var(--radius)}
+body.write-mode .ol-canvas{pointer-events:auto;touch-action:none;cursor:crosshair;outline:2px dashed rgba(58,110,165,.35);outline-offset:-2px}
+body.write-mode .concept{user-select:none;-webkit-user-select:none}
+.ol-btn{position:fixed;right:16px;bottom:18px;z-index:45;width:54px;height:54px;border-radius:50%;font-size:1.35rem;background:var(--accent);color:#fff;border:none;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;transition:transform .12s}
+.ol-btn:active{transform:scale(.92)}
+body.write-mode .ol-btn{background:var(--ok)}
+.ol-tools{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:55;background:var(--bg2);border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.4);padding:8px 12px;display:flex;gap:8px;align-items:center;max-width:94vw}
+.ol-tools .ol-done{font-size:.85rem;padding:5px 14px}
+
 .unit-nav{display:flex;justify-content:space-between;margin:18px 0}
 
 /* 進度總覽 */
@@ -194,7 +204,7 @@ mark.hl-p{background:rgba(255,120,170,.4)}
 }
 @media print{
   body{background:#fff;color:#000}
-  .topbar,.status-btns,.unit-nav,.foot,.chip,.toggle-sol,.ink-tools,.hl-bubble,.use-hint{display:none!important}
+  .topbar,.status-btns,.unit-nav,.foot,.chip,.toggle-sol,.ink-tools,.hl-bubble,.use-hint,.ol-btn,.ol-tools{display:none!important}
   mark.hl{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .concept{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
   .example .sol{display:block!important}

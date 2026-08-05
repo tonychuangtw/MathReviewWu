@@ -29,10 +29,11 @@
       s.status = s.status || {};   // unitId -> taught|weak|master
       s.notes = s.notes || {};     // conceptId -> text
       s.hl = s.hl || {};           // conceptId -> [{t:文字, n:第幾次出現, c:顏色}]
-      s.ink = s.ink || {};         // conceptId -> {h:高度/寬度比, s:[{c:筆, p:[x,y,...] 以寬度正規化}]}
+      s.ink = s.ink || {};         // conceptId -> {h:高度/寬度比, s:[{c:筆, p:[x,y,...] 以寬度正規化}]}（白紙畫布）
+      s.ol = s.ol || {};           // conceptId -> {s:[...]}（整頁覆蓋層筆跡，座標以卡片寬正規化）
       s.book = s.book || 1;
       return s;
-    } catch (e) { return { status:{}, notes:{}, hl:{}, ink:{}, book:1 }; }
+    } catch (e) { return { status:{}, notes:{}, hl:{}, ink:{}, ol:{}, book:1 }; }
   }
   function save() {
     try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
@@ -55,8 +56,8 @@
   function inkCount(u) {
     var n = 0;
     (u.concepts || []).forEach(function (c) {
-      var r = state.ink[c.id];
-      if (r && r.s && r.s.length) n++;
+      var a = state.ink[c.id], b = state.ol[c.id];
+      if ((a && a.s && a.s.length) || (b && b.s && b.s.length)) n++;
     });
     return n;
   }
@@ -76,6 +77,7 @@
   var views = ['view-home', 'view-unit', 'view-progress'];
   function show(v) {
     views.forEach(function (id) { $(id).classList.toggle('hidden', id !== v); });
+    if (v !== 'view-unit' && OL.mode) olToggle(false);
     window.scrollTo(0, 0);
   }
 
@@ -136,7 +138,7 @@
     if (!Object.keys(state.hl).length && !Object.keys(state.ink).length) {
       var hint = document.createElement('div');
       hint.className = 'use-hint';
-      hint.innerHTML = '💡 選取重點文字可畫<b>螢光筆</b>；每張觀念卡底部可展開「✍️ <b>手寫筆記</b>」';
+      hint.innerHTML = '💡 選取重點文字可畫<b>螢光筆</b>；按右下 ✍️ 可<b>直接寫在重點上</b>；卡片底部另有白紙手寫區';
       list.appendChild(hint);
     }
     (u.concepts || []).forEach(function (c, ci) {
@@ -215,7 +217,12 @@
     $('prevUnit').style.visibility = idx > 0 ? 'visible' : 'hidden';
     $('nextUnit').style.visibility = idx < ALL.length - 1 ? 'visible' : 'hidden';
     renderMath(list);
-    (u.concepts || []).forEach(function (c) { applyHl(c.id); });
+    OL.live = {};
+    (u.concepts || []).forEach(function (c) {
+      applyHl(c.id);
+      var body = cBody(c.id);
+      if (body) setupOverlay(body.parentNode, c.id);   // .concept 卡片
+    });
     show('view-unit');
   }
 
@@ -246,8 +253,13 @@
     });
     var noteTotal = 0;
     Object.keys(state.notes).forEach(function (k) { if ((state.notes[k] || '').trim()) noteTotal++; });
-    var inkTotal = 0;
-    Object.keys(state.ink).forEach(function (k) { var r = state.ink[k]; if (r && r.s && r.s.length) inkTotal++; });
+    var inkTotal = 0, inkSeen = {};
+    [state.ink, state.ol].forEach(function (m) {
+      Object.keys(m).forEach(function (k) {
+        var r = m[k];
+        if (r && r.s && r.s.length && !inkSeen[k]) { inkSeen[k] = 1; inkTotal++; }
+      });
+    });
     var html = '<div class="pg-stats">' +
       '<div class="pg-stat"><b>' + counts.master + '</b><small>已精熟</small></div>' +
       '<div class="pg-stat"><b>' + counts.taught + '</b><small>已教過</small></div>' +
@@ -429,6 +441,45 @@
     for (var i = 0; i < INK_PENS.length; i++) if (INK_PENS[i].k === k) return INK_PENS[i];
     return INK_PENS[0];
   }
+  function rnd3(v) { return Math.round(v * 1000) / 1000; }
+  function inkLW(pen, cssW) { return pen.w * Math.max(0.6, Math.min(1.5, cssW / 560)); }
+  function inkPath(ctx, p, cssW) {
+    ctx.beginPath();
+    var n = p.length;
+    ctx.moveTo(p[0] * cssW, p[1] * cssW);
+    if (n < 4) {
+      ctx.lineTo(p[0] * cssW + 0.1, p[1] * cssW);
+    } else {
+      for (var i = 2; i + 3 < n; i += 2) {
+        var mx = (p[i] + p[i + 2]) / 2 * cssW, my = (p[i + 1] + p[i + 3]) / 2 * cssW;
+        ctx.quadraticCurveTo(p[i] * cssW, p[i + 1] * cssW, mx, my);
+      }
+      ctx.lineTo(p[n - 2] * cssW, p[n - 1] * cssW);
+    }
+    ctx.stroke();
+  }
+  function inkRedrawAll(ctx, strokes, cssW, cssH) {
+    ctx.clearRect(0, 0, cssW, cssH);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    strokes.forEach(function (st) {
+      var pen = penOf(st.c);
+      ctx.strokeStyle = pen.c;
+      ctx.lineWidth = inkLW(pen, cssW);
+      inkPath(ctx, st.p, cssW);
+    });
+  }
+  function inkSegment(ctx, cur, cssW) {   // 畫進行中筆畫的最後一小段
+    var pen = penOf(cur.c), n = cur.p.length;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = pen.c;
+    ctx.lineWidth = inkLW(pen, cssW);
+    ctx.beginPath();
+    ctx.moveTo(cur.p[n - 4] * cssW, cur.p[n - 3] * cssW);
+    ctx.lineTo(cur.p[n - 2] * cssW, cur.p[n - 1] * cssW);
+    ctx.stroke();
+  }
   function initInk(cid, wrap, toggleBtn) {
     var rec = state.ink[cid] || { h: 0.6, s: [] };
     var tool = 'k', undoStack = [];
@@ -485,7 +536,6 @@
     wrap.appendChild(canvas);
 
     var cssW = 0, cssH = 0;
-    function lw(pen) { return pen.w * Math.max(0.6, Math.min(1.5, cssW / 560)); }
     function resize() {
       cssW = wrap.clientWidth || 300;
       cssH = Math.round(cssW * (rec.h || 0.6));
@@ -496,32 +546,7 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       redraw();
     }
-    function strokePath(p) {
-      ctx.beginPath();
-      var n = p.length;
-      ctx.moveTo(p[0] * cssW, p[1] * cssW);
-      if (n < 4) {
-        ctx.lineTo(p[0] * cssW + 0.1, p[1] * cssW);
-      } else {
-        for (var i = 2; i + 3 < n; i += 2) {
-          var mx = (p[i] + p[i + 2]) / 2 * cssW, my = (p[i + 1] + p[i + 3]) / 2 * cssW;
-          ctx.quadraticCurveTo(p[i] * cssW, p[i + 1] * cssW, mx, my);
-        }
-        ctx.lineTo(p[n - 2] * cssW, p[n - 1] * cssW);
-      }
-      ctx.stroke();
-    }
-    function redraw() {
-      ctx.clearRect(0, 0, cssW, cssH);
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      rec.s.forEach(function (st) {
-        var pen = penOf(st.c);
-        ctx.strokeStyle = pen.c;
-        ctx.lineWidth = lw(pen);
-        strokePath(st.p);
-      });
-    }
+    function redraw() { inkRedrawAll(ctx, rec.s, cssW, cssH); }
     function commit() {
       if (rec.s.length) state.ink[cid] = rec;
       else delete state.ink[cid];
@@ -533,7 +558,6 @@
       undoStack.push(rec.s.slice());
       if (undoStack.length > 30) undoStack.shift();
     }
-    function rnd(v) { return Math.round(v * 1000) / 1000; }
     function xy(e) {
       var r = canvas.getBoundingClientRect();
       return { x: e.clientX - r.left, y: e.clientY - r.top };
@@ -561,7 +585,7 @@
       var pt = xy(e);
       if (tool === 'e') { erasing = true; eraseAt(pt); return; }
       drawing = true;
-      cur = { c: tool, p: [rnd(pt.x / cssW), rnd(pt.y / cssW)] };
+      cur = { c: tool, p: [rnd3(pt.x / cssW), rnd3(pt.y / cssW)] };
       lastX = pt.x;
       lastY = pt.y;
     });
@@ -571,18 +595,10 @@
       if (!drawing || !cur) return;
       var dx = pt.x - lastX, dy = pt.y - lastY;
       if (dx * dx + dy * dy < 4) return;
-      cur.p.push(rnd(pt.x / cssW), rnd(pt.y / cssW));
+      cur.p.push(rnd3(pt.x / cssW), rnd3(pt.y / cssW));
       lastX = pt.x;
       lastY = pt.y;
-      var pen = penOf(cur.c), n = cur.p.length;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.strokeStyle = pen.c;
-      ctx.lineWidth = lw(pen);
-      ctx.beginPath();
-      ctx.moveTo(cur.p[n - 4] * cssW, cur.p[n - 3] * cssW);
-      ctx.lineTo(cur.p[n - 2] * cssW, cur.p[n - 1] * cssW);
-      ctx.stroke();
+      inkSegment(ctx, cur, cssW);
     });
     function endStroke() {
       if (erasing) { erasing = false; return; }
@@ -601,6 +617,172 @@
 
     inkLive.push(resize);
     resize();
+  }
+
+  /* ---------- 整頁手寫（覆蓋在重點上） ----------
+   * 每張觀念卡疊一層透明 canvas，開「寫字模式」後直接在重點旁邊寫；
+   * 平常 pointer-events:none 不擋點擊與選字，筆跡永遠顯示。
+   * 存法：state.ol[conceptId] = {s:[{c,p[]}]}，座標以卡片寬正規化。 */
+  var OL = { mode: false, tool: 'k', tools: null, live: {}, undo: [] };
+  function olCommit(cid, rec) {
+    if (rec.s.length) state.ol[cid] = rec;
+    else delete state.ol[cid];
+    save();
+  }
+  function olUndo() {
+    var u = OL.undo.pop();
+    if (!u) return;
+    var live = OL.live[u.cid];
+    if (live) {
+      live.rec.s = u.snap;
+      olCommit(u.cid, live.rec);
+      live.redraw();
+    } else {
+      var rec = state.ol[u.cid] || { s: [] };
+      rec.s = u.snap;
+      olCommit(u.cid, rec);
+    }
+  }
+  function olPushUndo(cid, rec) {
+    OL.undo.push({ cid: cid, snap: rec.s.slice() });
+    if (OL.undo.length > 50) OL.undo.shift();
+  }
+  function setupOverlay(card, cid) {
+    var canvas = document.createElement('canvas');
+    canvas.className = 'ol-canvas';
+    card.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+    var rec = state.ol[cid] || { s: [] };
+    var cssW = 0, cssH = 0;
+    function resize() {
+      var r = card.getBoundingClientRect();
+      cssW = r.width || card.offsetWidth || 300;
+      cssH = r.height || card.offsetHeight || 200;
+      var dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(cssW * dpr);
+      canvas.height = Math.round(cssH * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      redraw();
+    }
+    function redraw() { inkRedrawAll(ctx, rec.s, cssW, cssH); }
+    function xy(e) {
+      var r = canvas.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+    function eraseAt(pt) {
+      var th = 14, hit = false;
+      for (var i = rec.s.length - 1; i >= 0; i--) {
+        var p = rec.s[i].p;
+        for (var j = 0; j + 1 < p.length; j += 2) {
+          var dx = p[j] * cssW - pt.x, dy = p[j + 1] * cssW - pt.y;
+          if (dx * dx + dy * dy < th * th) {
+            if (!hit) { olPushUndo(cid, rec); hit = true; }
+            rec.s.splice(i, 1);
+            break;
+          }
+        }
+      }
+      if (hit) { redraw(); olCommit(cid, rec); }
+    }
+    var drawing = false, erasing = false, cur = null, lastX = 0, lastY = 0;
+    canvas.addEventListener('pointerdown', function (e) {
+      if (!OL.mode) return;
+      e.preventDefault();
+      try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+      var pt = xy(e);
+      if (OL.tool === 'e') { erasing = true; eraseAt(pt); return; }
+      drawing = true;
+      cur = { c: OL.tool, p: [rnd3(pt.x / cssW), rnd3(pt.y / cssW)] };
+      lastX = pt.x;
+      lastY = pt.y;
+    });
+    canvas.addEventListener('pointermove', function (e) {
+      var pt = xy(e);
+      if (erasing) { eraseAt(pt); return; }
+      if (!drawing || !cur) return;
+      var dx = pt.x - lastX, dy = pt.y - lastY;
+      if (dx * dx + dy * dy < 4) return;
+      cur.p.push(rnd3(pt.x / cssW), rnd3(pt.y / cssW));
+      lastX = pt.x;
+      lastY = pt.y;
+      inkSegment(ctx, cur, cssW);
+    });
+    function endStroke() {
+      if (erasing) { erasing = false; return; }
+      if (!drawing) return;
+      drawing = false;
+      if (cur && cur.p.length >= 2) {
+        olPushUndo(cid, rec);
+        rec.s.push(cur);
+        redraw();
+        olCommit(cid, rec);
+      }
+      cur = null;
+    }
+    canvas.addEventListener('pointerup', endStroke);
+    canvas.addEventListener('pointercancel', endStroke);
+
+    // 卡片高度會變（開解答、載圖），跟著重設畫布
+    if (window.ResizeObserver) {
+      var rot = null;
+      var ro = new ResizeObserver(function () { clearTimeout(rot); rot = setTimeout(resize, 120); });
+      ro.observe(card);
+    }
+    inkLive.push(resize);
+    OL.live[cid] = { rec: rec, redraw: redraw, resize: resize };
+    resize();
+  }
+  function olToolbar() {
+    if (OL.tools) return;
+    var t = document.createElement('div');
+    t.className = 'ol-tools hidden';
+    function setOn(btn) {
+      t.querySelectorAll('.ink-pen').forEach(function (x) { x.classList.remove('on'); });
+      btn.classList.add('on');
+    }
+    INK_PENS.forEach(function (p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ink-tool ink-pen' + (p.k === OL.tool ? ' on' : '');
+      b.style.background = p.c;
+      b.title = p.name;
+      b.addEventListener('click', function () { OL.tool = p.k; setOn(b); });
+      t.appendChild(b);
+    });
+    var eraser = document.createElement('button');
+    eraser.type = 'button';
+    eraser.className = 'ink-tool ink-pen';
+    eraser.textContent = '🧽';
+    eraser.title = '橡皮擦（擦到的整筆刪除）';
+    eraser.addEventListener('click', function () { OL.tool = 'e'; setOn(eraser); });
+    t.appendChild(eraser);
+    var undoBtn = document.createElement('button');
+    undoBtn.type = 'button';
+    undoBtn.className = 'ink-tool';
+    undoBtn.textContent = '↩️';
+    undoBtn.title = '復原';
+    undoBtn.addEventListener('click', olUndo);
+    t.appendChild(undoBtn);
+    var done = document.createElement('button');
+    done.type = 'button';
+    done.className = 'chip ol-done';
+    done.textContent = '完成';
+    done.addEventListener('click', function () { olToggle(false); });
+    t.appendChild(done);
+    document.body.appendChild(t);
+    OL.tools = t;
+  }
+  function olToggle(on) {
+    OL.mode = (on === undefined) ? !OL.mode : !!on;
+    document.body.classList.toggle('write-mode', OL.mode);
+    olToolbar();
+    OL.tools.classList.toggle('hidden', !OL.mode);
+    var b = $('olBtn');
+    if (b) {
+      b.textContent = OL.mode ? '✅' : '✍️';
+      b.title = OL.mode ? '完成手寫' : '直接寫在重點上';
+    }
+    if (OL.mode) hideHlBubble();
   }
 
   /* ---------- theme ---------- */
@@ -664,6 +846,7 @@
   $('backBtn').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('backBtn2').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('progressBtn').addEventListener('click', renderProgress);
+  $('olBtn').addEventListener('click', function () { olToggle(); });
   $('prevUnit').addEventListener('click', function () {
     var i = ALL.indexOf(currentUnit);
     if (i > 0) openUnit(ALL[i - 1].id);
