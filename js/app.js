@@ -74,7 +74,7 @@
   }
 
   /* ---------- views ---------- */
-  var views = ['view-home', 'view-unit', 'view-progress'];
+  var views = ['view-home', 'view-unit', 'view-progress', 'view-help'];
   function show(v) {
     views.forEach(function (id) { $(id).classList.toggle('hidden', id !== v); });
     if (v !== 'view-unit' && OL.mode) olToggle(false);
@@ -846,6 +846,32 @@
   $('backBtn').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('backBtn2').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('progressBtn').addEventListener('click', renderProgress);
+  /* ℹ️ 使用說明與版本紀錄（資料在 js/versions.js） */
+  var helpRendered = false;
+  $('helpBtn').addEventListener('click', function () {
+    if (!helpRendered) {
+      helpRendered = true;
+      var el = $('verList');
+      (window.APP_VERSIONS || []).forEach(function (ver) {
+        var box = document.createElement('div');
+        box.className = 'ver-item';
+        var h = document.createElement('div');
+        h.className = 'ver-head';
+        h.innerHTML = '<b>' + ver.v + '</b><span class="ver-date">' + ver.date + '</span>';
+        box.appendChild(h);
+        var ul = document.createElement('ul');
+        ver.items.forEach(function (t) {
+          var li = document.createElement('li');
+          li.textContent = t;
+          ul.appendChild(li);
+        });
+        box.appendChild(ul);
+        el.appendChild(box);
+      });
+    }
+    show('view-help');
+  });
+  $('helpBack').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('olBtn').addEventListener('click', function () { olToggle(); });
   $('prevUnit').addEventListener('click', function () {
     var i = ALL.indexOf(currentUnit);

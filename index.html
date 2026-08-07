@@ -12,6 +12,7 @@
 <header class="topbar">
   <h1 id="homeLink">國中數學總複習</h1>
   <div class="topbar-controls">
+    <button id="helpBtn" class="chip" title="使用說明與版本紀錄">ℹ️</button>
     <button id="themeBtn" class="chip" title="選擇色系">🎨</button>
     <button id="progressBtn" class="chip" title="學習進度總覽">📊</button>
   </div>
@@ -52,6 +53,27 @@
   <div id="progressGrid"></div>
 </section>
 
+<!-- 使用說明與版本紀錄 -->
+<section id="view-help" class="view hidden">
+  <div class="unit-head">
+    <button id="helpBack" class="chip">← 返回</button>
+    <h2>使用說明</h2>
+  </div>
+  <div class="concept help-guide">
+    <h3>📖 第一次使用</h3>
+    <p><b>1 · 選冊別</b>：首頁上方切換第一冊到第六冊，點單元進入重點整理。</p>
+    <p><b>2 · 登入同步</b>：用 Google 帳號登入，筆記、畫記、進度跨裝置同步。</p>
+    <p><b>3 · 讀觀念卡、做例題</b>：每個觀念附「基礎／一般／精熟」三級例題，解答先想再展開。</p>
+    <p><b>4 · 老師標進度</b>：單元右上可標「已教過／需加強／已精熟」，📊 進度總覽一眼看完六冊。</p>
+    <p><b>5 · 做自己的筆記</b>：選取文字畫螢光重點；觀念卡可開手寫畫布；右下 ✍️ 直接寫在整頁重點旁。</p>
+    <p><b>6 · 家長與老師</b>：👥 授權面板可讓家長「檢視」進度、老師「共編」標記，被授權人登入後切換檢視對象。</p>
+  </div>
+  <div class="concept">
+    <h3>🗒️ 版本紀錄</h3>
+    <div id="verList"></div>
+  </div>
+</section>
+
 </main>
 
 <footer class="foot"><small>內容整理自吳老師家教講義 · 僅供個人學習使用</small></footer>
@@ -59,6 +81,7 @@
 <script src="js/vendor/katex/katex.min.js"></script>
 <script src="js/vendor/katex/auto-render.min.js"></script>
 <script src="js/data/units.js"></script>
+<script src="js/versions.js"></script>
 <script src="js/app.js"></script>
 <script src="js/sync.js"></script>
 </body>

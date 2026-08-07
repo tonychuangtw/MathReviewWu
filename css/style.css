@@ -209,3 +209,12 @@ body.write-mode .ol-btn{background:var(--ok)}
   .concept{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
   .example .sol{display:block!important}
 }
+
+/* ---- 使用說明與版本紀錄（內容在紙白 .concept 卡上，用卡片色系變數） ---- */
+.help-guide p{line-height:1.9;margin:8px 0}
+.ver-item{border-top:1px solid var(--card-line);padding:10px 0}
+.ver-item:first-child{border-top:none}
+.ver-head{display:flex;align-items:baseline;gap:10px}
+.ver-head .ver-date{color:var(--ink-soft);font-size:.85rem}
+.ver-item ul{margin:6px 0 0;padding-left:20px}
+.ver-item li{margin:4px 0;line-height:1.7}
