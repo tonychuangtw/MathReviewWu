@@ -74,7 +74,7 @@
   }
 
   /* ---------- views ---------- */
-  var views = ['view-home', 'view-unit', 'view-progress', 'view-help'];
+  var views = ['view-home', 'view-unit', 'view-progress', 'view-help', 'view-formulas', 'view-search'];
   function show(v) {
     views.forEach(function (id) { $(id).classList.toggle('hidden', id !== v); });
     if (v !== 'view-unit' && OL.mode) olToggle(false);
@@ -160,12 +160,17 @@
             '<div class="q">' + tag + ex.q + '</div>' +
             '<button class="toggle-sol" data-c="' + c.id + '" data-e="' + ei + '">看解答</button>' +
             '<div class="sol hidden"><ol>' +
-              ex.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('') +
-            '</ol><div class="ans">答：' + ex.ans + '</div></div></div>';
+              ex.steps.map(function (s) { return '<li class="s-hide">' + s + '</li>'; }).join('') +
+            '</ol><button type="button" class="step-next">下一步 ▶</button>' +
+            '<div class="ans s-hide">答：' + ex.ans + '</div></div></div>';
         });
         html += '</div>';
       }
       html += '</div>';   // /.c-body（螢光筆作用範圍）
+      // 互動圖形放 c-body 外：內容會隨操作即時變動，不能影響螢光筆的文字定位
+      if (window.MATH_IFIGS && MATH_IFIGS[c.id]) {
+        html += '<div class="ifig-box" data-ifig="' + c.id + '"></div>';
+      }
       html += '<div class="note-area"><label>📝 我的筆記 <span class="note-saved" id="saved-' + c.id + '">✓ 已存</span></label>' +
         '<textarea id="note-' + c.id + '" placeholder="寫下老師補充、易錯點、自己的想法…"></textarea></div>';
       var hasInk = state.ink[c.id] && state.ink[c.id].s && state.ink[c.id].s.length;
@@ -191,12 +196,37 @@
         }, 500);
       });
     });
-    // 解答開關
+    // 解答開關＋逐步展開（2026-08-11）：打開只亮第 1 步，「下一步」逐步揭示，最後才給答案
+    function solReset(sol) {
+      var lis = sol.querySelectorAll('ol li');
+      lis.forEach(function (li) { li.classList.add('s-hide'); li.classList.remove('s-show'); });
+      var ans = sol.querySelector('.ans');
+      ans.classList.add('s-hide'); ans.classList.remove('s-show');
+      var nx = sol.querySelector('.step-next');
+      nx.classList.remove('hidden');
+      if (lis[0]) { lis[0].classList.remove('s-hide'); lis[0].classList.add('s-show'); }
+      nx.textContent = lis.length > 1 ? '下一步 ▶' : '看答案 ▶';
+    }
     list.querySelectorAll('.toggle-sol').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var sol = btn.nextElementSibling;
         var open = sol.classList.toggle('hidden');
         btn.textContent = open ? '看解答' : '收起解答';
+        if (!open) solReset(sol);   // 每次打開都從第 1 步重來
+      });
+    });
+    list.querySelectorAll('.step-next').forEach(function (nx) {
+      nx.addEventListener('click', function () {
+        var sol = nx.closest('.sol');
+        var hid = sol.querySelectorAll('ol li.s-hide');
+        if (hid.length) {
+          hid[0].classList.remove('s-hide'); hid[0].classList.add('s-show');
+          nx.textContent = hid.length > 1 ? '下一步 ▶' : '看答案 ▶';
+        } else {
+          var ans = sol.querySelector('.ans');
+          ans.classList.remove('s-hide'); ans.classList.add('s-show');
+          nx.classList.add('hidden');
+        }
       });
     });
     // 手寫筆記開關（首次展開才建畫布）
@@ -224,6 +254,14 @@
       if (body) setupOverlay(body.parentNode, c.id);   // .concept 卡片
     });
     show('view-unit');
+    // 互動圖形（js/interactive.js 有登錄的觀念才有）
+    if (window.MATH_IFIGS) {
+      list.querySelectorAll('.ifig-box').forEach(function (b) {
+        if (b.getAttribute('data-init')) return;
+        b.setAttribute('data-init', '1');
+        try { MATH_IFIGS[b.getAttribute('data-ifig')](b); } catch (e) {}
+      });
+    }
   }
 
   function renderStatusBtns() {
@@ -785,6 +823,92 @@
     if (OL.mode) hideHlBubble();
   }
 
+  /* ---------- 公式速查（資料在 js/data/formulas.js） ---------- */
+  var fmBook = 0;   // 0 = 未渲染
+  function renderFormulas() {
+    var data = window.MATH_FORMULAS || [];
+    if (!fmBook) fmBook = state.book || 1;
+    var tabs = $('fmTabs');
+    tabs.innerHTML = '';
+    data.forEach(function (bk) {
+      var t = document.createElement('div');
+      t.className = 'book-tab' + (fmBook === bk.book ? ' active' : '');
+      t.innerHTML = '<span class="bicon">' + BOOK_ICON[bk.book] + '</span>' + BOOK_NAMES[bk.book] + '<small>' + BOOK_GRADE[bk.book] + '</small>';
+      t.addEventListener('click', function () { fmBook = bk.book; renderFormulas(); });
+      tabs.appendChild(t);
+    });
+    var wrap = $('fmList');
+    wrap.innerHTML = '';
+    var cur = data.filter(function (bk) { return bk.book === fmBook; })[0];
+    if (!cur) return;
+    cur.sections.forEach(function (sec) {
+      var card = document.createElement('div');
+      card.className = 'concept fm-card';
+      card.innerHTML = '<h3>' + sec.t + '</h3><ul class="fm-rows">' +
+        sec.rows.map(function (r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
+      wrap.appendChild(card);
+    });
+    renderMath(wrap);
+    show('view-formulas');
+  }
+
+  /* ---------- 搜尋（單元標題／觀念標題／重點內文／例題題目） ---------- */
+  var searchIdx = null;
+  function stripHtml(s) {
+    return String(s || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ');
+  }
+  function buildSearchIdx() {
+    searchIdx = [];
+    ALL.forEach(function (u) {
+      (u.concepts || []).forEach(function (c) {
+        var text = c.title + ' ' + stripHtml(c.body) + ' ' +
+          (c.examples || []).map(function (ex) { return stripHtml(ex.q); }).join(' ');
+        searchIdx.push({ uid: u.id, cid: c.id, book: u.book, sec: u.sec, ut: u.title, ct: c.title, text: text });
+      });
+    });
+  }
+  function doSearch(q) {
+    var box = $('searchResults');
+    box.innerHTML = '';
+    q = q.trim();
+    if (q.length < 1) { box.innerHTML = '<div class="use-hint">輸入關鍵字，如「畢氏定理」「因式分解」「內錯角」…</div>'; return; }
+    if (!searchIdx) buildSearchIdx();
+    var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+    var hits = searchIdx.filter(function (r) {
+      var hay = (r.ut + ' ' + r.text).toLowerCase();
+      return terms.every(function (t) { return hay.indexOf(t) >= 0; });
+    });
+    if (!hits.length) { box.innerHTML = '<div class="use-hint">找不到「' + q.replace(/</g, '&lt;') + '」，換個關鍵字試試。</div>'; return; }
+    var MAX = 40;
+    hits.slice(0, MAX).forEach(function (r) {
+      var row = document.createElement('div');
+      row.className = 'search-row';
+      var pos = r.text.toLowerCase().indexOf(terms[0]);
+      var snip = pos >= 0 ? r.text.slice(Math.max(0, pos - 12), pos + 34) : r.text.slice(0, 46);
+      row.innerHTML = '<span class="sr-crumb">' + BOOK_NAMES[r.book] + ' ' + r.sec + ' ' + r.ut + '</span>' +
+        '<span class="sr-title">' + r.ct + '</span><small class="sr-snip">…' + snip.replace(/</g, '&lt;') + '…</small>';
+      row.addEventListener('click', function () { jumpToConcept(r.uid, r.cid); });
+      box.appendChild(row);
+    });
+    if (hits.length > MAX) {
+      var more = document.createElement('div');
+      more.className = 'use-hint';
+      more.textContent = '還有 ' + (hits.length - MAX) + ' 筆，輸入更精確的關鍵字縮小範圍。';
+      box.appendChild(more);
+    }
+  }
+  function jumpToConcept(uid, cid) {
+    openUnit(uid);
+    setTimeout(function () {
+      var body = cBody(cid);
+      if (!body) return;
+      var card = body.parentNode;
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      card.classList.add('c-flash');
+      setTimeout(function () { card.classList.remove('c-flash'); }, 2200);
+    }, 80);
+  }
+
   /* ---------- theme ---------- */
   function applyTheme() {
     if (state.theme) document.documentElement.setAttribute('data-theme', state.theme);
@@ -846,6 +970,19 @@
   $('backBtn').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('backBtn2').addEventListener('click', function () { renderHome(); show('view-home'); });
   $('progressBtn').addEventListener('click', renderProgress);
+  $('formulaBtn').addEventListener('click', renderFormulas);
+  $('fmBack').addEventListener('click', function () { renderHome(); show('view-home'); });
+  $('searchBtn').addEventListener('click', function () {
+    show('view-search');
+    doSearch($('searchInput').value || '');
+    $('searchInput').focus();
+  });
+  $('searchBack').addEventListener('click', function () { renderHome(); show('view-home'); });
+  var schTimer = null;
+  $('searchInput').addEventListener('input', function () {
+    clearTimeout(schTimer);
+    schTimer = setTimeout(function () { doSearch($('searchInput').value); }, 200);
+  });
   /* ℹ️ 使用說明與版本紀錄（資料在 js/versions.js） */
   var helpRendered = false;
   $('helpBtn').addEventListener('click', function () {

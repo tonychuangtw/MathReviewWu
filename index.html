@@ -12,6 +12,8 @@
 <header class="topbar">
   <h1 id="homeLink">國中數學總複習</h1>
   <div class="topbar-controls">
+    <button id="searchBtn" class="chip" title="搜尋觀念與例題">🔍</button>
+    <button id="formulaBtn" class="chip" title="公式速查">📐</button>
     <button id="helpBtn" class="chip" title="使用說明與版本紀錄">ℹ️</button>
     <button id="themeBtn" class="chip" title="選擇色系">🎨</button>
     <button id="progressBtn" class="chip" title="學習進度總覽">📊</button>
@@ -53,6 +55,26 @@
   <div id="progressGrid"></div>
 </section>
 
+<!-- 公式速查 -->
+<section id="view-formulas" class="view hidden">
+  <div class="unit-head">
+    <button id="fmBack" class="chip">← 返回</button>
+    <h2>📐 公式速查</h2>
+  </div>
+  <div id="fmTabs" class="book-tabs"></div>
+  <div id="fmList"></div>
+</section>
+
+<!-- 搜尋 -->
+<section id="view-search" class="view hidden">
+  <div class="unit-head">
+    <button id="searchBack" class="chip">← 返回</button>
+    <h2>🔍 搜尋</h2>
+  </div>
+  <input id="searchInput" class="search-input" type="search" placeholder="搜尋觀念、公式、例題…（如：畢氏定理）" autocomplete="off">
+  <div id="searchResults"></div>
+</section>
+
 <!-- 使用說明與版本紀錄 -->
 <section id="view-help" class="view hidden">
   <div class="unit-head">
@@ -67,6 +89,7 @@
     <p><b>4 · 老師標進度</b>：單元右上可標「已教過／需加強／已精熟」，📊 進度總覽一眼看完六冊。</p>
     <p><b>5 · 做自己的筆記</b>：選取文字畫螢光重點；觀念卡可開手寫畫布；右下 ✍️ 直接寫在整頁重點旁。</p>
     <p><b>6 · 家長與老師</b>：👥 授權面板可讓家長「檢視」進度、老師「共編」標記，被授權人登入後切換檢視對象。</p>
+    <p><b>7 · 搜尋與公式速查</b>：頂欄 🔍 輸入關鍵字直達任何觀念與例題；📐 六冊重要公式一頁掃完，考前快速複習。</p>
   </div>
   <div class="concept">
     <h3>🗒️ 版本紀錄</h3>
@@ -81,6 +104,8 @@
 <script src="js/vendor/katex/katex.min.js"></script>
 <script src="js/vendor/katex/auto-render.min.js"></script>
 <script src="js/data/units.js"></script>
+<script src="js/data/formulas.js"></script>
+<script src="js/interactive.js"></script>
 <script src="js/versions.js"></script>
 <script src="js/app.js"></script>
 <script src="js/sync.js"></script>
