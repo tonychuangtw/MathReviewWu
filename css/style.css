@@ -197,6 +197,7 @@ body.write-mode .ol-btn{background:var(--ok)}
 .sync-status{font-size:.72rem;color:var(--fg-dim)}
 .sync-login-wrap{position:relative}
 .gsi-slot{position:absolute;inset:0;opacity:.011;overflow:hidden}
+.gsi-slot:empty{pointer-events:none}
 
 @media (max-width:520px){
   .status-btns{width:100%;justify-content:flex-start}
