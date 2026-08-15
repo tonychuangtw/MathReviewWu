@@ -144,7 +144,7 @@
   function enterViewAs(email, role) {
     function proceed() {
       api("GET", null, function (err, res) {
-        if (err) { alert(err === "forbidden" ? "對方尚未授權你（或授權已移除）" : "讀取失敗：" + err); return; }
+        if (err) { UIDialog.alert(err === "forbidden" ? "對方尚未授權你（或授權已移除）" : "讀取失敗：" + err); return; }
         try {
           localStorage.setItem(BACKUP_KEY, localStorage.getItem(MAIN_KEY) || "");
           var blob = (res && res.blob) || {};
@@ -254,18 +254,19 @@
         panel.remove(); panel = null;
         if (!email) { if (cur) exitViewAs(); return; }
         if (cur && cur.email === email) return;
-        if (cur) { alert("請先「返回自己」再切換其他對象"); return; }
+        if (cur) { UIDialog.alert("請先「返回自己」再切換其他對象"); return; }
         enterViewAs(email, row.getAttribute("data-role"));
       });
     });
     panel.querySelectorAll(".gp-del").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
-        if (!confirm("移除對 " + btn.getAttribute("data-email") + " 的授權？")) return;
-        grantsApi("DELETE", "/api/grants?app=mathwu&viewerEmail=" + encodeURIComponent(btn.getAttribute("data-email")), null, function (err, data) {
-          if (err) { alert("移除失敗：" + err); return; }
-          grants.granted = data.granted;
-          panel.remove(); panel = null; togglePanel();
+        UIDialog.confirm("移除對 " + btn.getAttribute("data-email") + " 的授權？", function () {
+          grantsApi("DELETE", "/api/grants?app=mathwu&viewerEmail=" + encodeURIComponent(btn.getAttribute("data-email")), null, function (err, data) {
+            if (err) { UIDialog.alert("移除失敗：" + err); return; }
+            grants.granted = data.granted;
+            panel.remove(); panel = null; togglePanel();
+          });
         });
       });
     });
@@ -274,7 +275,7 @@
       var role = panel.querySelector("#gpRole").value;
       if (!email) return;
       grantsApi("POST", "/api/grants?app=mathwu", { viewerEmail: email, role: role }, function (err, data) {
-        if (err) { alert("授權失敗：" + err); return; }
+        if (err) { UIDialog.alert("授權失敗：" + err); return; }
         grants.granted = data.granted;
         panel.remove(); panel = null; togglePanel();
       });
@@ -302,10 +303,10 @@
       chip.title = (p.email || "") + " — 點擊登出";
       chip.textContent = (p.given_name || p.name || "?").charAt(0).toUpperCase();
       chip.addEventListener("click", function () {
-        if (confirm("登出雲端同步？（本機進度會保留在此裝置）")) {
+        UIDialog.confirm("登出雲端同步？（本機進度會保留在此裝置）", function () {
           if (viewAs()) { exitViewAs(true); return; }
           clearToken(); lastPushedHash = null; renderUi();
-        }
+        });
       });
       ui.appendChild(chip);
     } else {
@@ -324,7 +325,7 @@
         if (window.google && google.accounts && google.accounts.id) {
           google.accounts.id.prompt();
         } else {
-          alert("這個 App 內建瀏覽器擋住了 Google 登入元件。\n請用右下角選單選「用 Safari／瀏覽器開啟」，再登入即可同步進度。");
+          UIDialog.alert("這個 App 內建瀏覽器擋住了 Google 登入元件。\n請用右下角選單選「用 Safari／瀏覽器開啟」，再登入即可同步進度。");
         }
       });
       var slot = document.createElement("div");

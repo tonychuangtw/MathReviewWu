@@ -564,11 +564,13 @@
       commit();
     });
     mkTool('🗑️', '全部清除', function () {
-      if (!rec.s.length || !confirm('清除這個觀念的手寫筆記？')) return;
-      pushUndo();
-      rec.s = [];
-      redraw();
-      commit();
+      if (!rec.s.length) return;
+      UIDialog.confirm('清除這個觀念的手寫筆記？', function () {
+        pushUndo();
+        rec.s = [];
+        redraw();
+        commit();
+      });
     });
     wrap.appendChild(tools);
     wrap.appendChild(canvas);
