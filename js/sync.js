@@ -8,6 +8,16 @@
 
   if (!CLIENT_ID || !API_BASE || typeof window === "undefined") return;
 
+  // App 內建瀏覽器（LINE/Telegram/FB 等 webview）偵測：Google 封鎖 webview 內的 OAuth，
+  // GSI 元件就算載得進來，點登入也只會開出一片空白的 accounts.google.com（2026-08-15 Tony 實測）。
+  var IN_WEBVIEW = (function () {
+    var ua = navigator.userAgent || "";
+    return /\bwv\b/.test(ua) ||
+      (/iPhone|iPad|iPod/.test(ua) && !/Safari\//.test(ua)) ||
+      /Line\/|FBAN|FBAV|Instagram|MicroMessenger|Telegram/i.test(ua);
+  })();
+  var WEBVIEW_MSG = "Google 不允許在 App 內建瀏覽器（LINE／Telegram 等）裡登入，硬走只會看到空白頁。\n請點畫面角落的選單（⋯ 或分享鈕），選「用 Safari／Chrome 開啟」，再登入即可同步進度。";
+
   var TOKEN_KEY = "sync.token";
   var PREFIX = "mathwu";              // 同步所有這個前綴的 key（主 state 在 mathwu-v1）
   var MAIN_KEY = "mathwu-v1";
@@ -322,10 +332,10 @@
       // GSI 載入後，透明的官方按鈕會蓋在 pill 上接走點擊；
       // 沒載入（App 內建瀏覽器常擋 accounts.google.com）時 pill 仍可點，給指引
       pill.addEventListener("click", function () {
-        if (window.google && google.accounts && google.accounts.id) {
+        if (!IN_WEBVIEW && window.google && google.accounts && google.accounts.id) {
           google.accounts.id.prompt();
         } else {
-          UIDialog.alert("這個 App 內建瀏覽器擋住了 Google 登入元件。\n請用右下角選單選「用 Safari／瀏覽器開啟」，再登入即可同步進度。");
+          UIDialog.alert(WEBVIEW_MSG);
         }
       });
       var slot = document.createElement("div");
@@ -333,7 +343,8 @@
       wrap.appendChild(pill);
       wrap.appendChild(slot);
       ui.appendChild(wrap);
-      if (window.google && google.accounts && google.accounts.id) {
+      // webview 裡不掛官方按鈕：它會蓋在 pill 上把點擊帶進空白登入頁
+      if (!IN_WEBVIEW && window.google && google.accounts && google.accounts.id) {
         google.accounts.id.renderButton(slot, { type: "icon", shape: "circle", size: "large" });
       }
     }
@@ -380,11 +391,13 @@
 
     renderBanner();
 
-    var s = document.createElement("script");
-    s.src = "https://accounts.google.com/gsi/client";
-    s.async = true;
-    s.onload = initGis;
-    document.head.appendChild(s);
+    if (!IN_WEBVIEW) {
+      var s = document.createElement("script");
+      s.src = "https://accounts.google.com/gsi/client";
+      s.async = true;
+      s.onload = initGis;
+      document.head.appendChild(s);
+    }
 
     if (signedIn()) loadGrants();
 
