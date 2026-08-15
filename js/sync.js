@@ -20,6 +20,10 @@
   })();
   var WEBVIEW_MSG = "Google 不允許在 App 內建瀏覽器（LINE／Telegram 等）裡登入，硬走只會看到空白頁。\n請點畫面角落的選單（⋯ 或分享鈕），選「用 Safari／Chrome 開啟」，再登入即可同步進度。";
 
+  // UIDialog 可能因混版快取（舊 HTML 沒載 dialog.js + 新 sync.js）不存在——退回原生框保底
+  function dlgAlert(msg) { if (window.UIDialog) UIDialog.alert(msg); else alert(msg); }
+  function dlgConfirm(msg, ok) { if (window.UIDialog) UIDialog.confirm(msg, ok); else if (confirm(msg)) ok(); }
+
   var TOKEN_KEY = "sync.token";
   var PREFIX = "mathwu";              // 同步所有這個前綴的 key（主 state 在 mathwu-v1）
   var MAIN_KEY = "mathwu-v1";
@@ -156,7 +160,7 @@
   function enterViewAs(email, role) {
     function proceed() {
       api("GET", null, function (err, res) {
-        if (err) { UIDialog.alert(err === "forbidden" ? "對方尚未授權你（或授權已移除）" : "讀取失敗：" + err); return; }
+        if (err) { dlgAlert(err === "forbidden" ? "對方尚未授權你（或授權已移除）" : "讀取失敗：" + err); return; }
         try {
           localStorage.setItem(BACKUP_KEY, localStorage.getItem(MAIN_KEY) || "");
           var blob = (res && res.blob) || {};
@@ -266,16 +270,16 @@
         panel.remove(); panel = null;
         if (!email) { if (cur) exitViewAs(); return; }
         if (cur && cur.email === email) return;
-        if (cur) { UIDialog.alert("請先「返回自己」再切換其他對象"); return; }
+        if (cur) { dlgAlert("請先「返回自己」再切換其他對象"); return; }
         enterViewAs(email, row.getAttribute("data-role"));
       });
     });
     panel.querySelectorAll(".gp-del").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
-        UIDialog.confirm("移除對 " + btn.getAttribute("data-email") + " 的授權？", function () {
+        dlgConfirm("移除對 " + btn.getAttribute("data-email") + " 的授權？", function () {
           grantsApi("DELETE", "/api/grants?app=mathwu&viewerEmail=" + encodeURIComponent(btn.getAttribute("data-email")), null, function (err, data) {
-            if (err) { UIDialog.alert("移除失敗：" + err); return; }
+            if (err) { dlgAlert("移除失敗：" + err); return; }
             grants.granted = data.granted;
             panel.remove(); panel = null; togglePanel();
           });
@@ -287,7 +291,7 @@
       var role = panel.querySelector("#gpRole").value;
       if (!email) return;
       grantsApi("POST", "/api/grants?app=mathwu", { viewerEmail: email, role: role }, function (err, data) {
-        if (err) { UIDialog.alert("授權失敗：" + err); return; }
+        if (err) { dlgAlert("授權失敗：" + err); return; }
         grants.granted = data.granted;
         panel.remove(); panel = null; togglePanel();
       });
@@ -315,7 +319,7 @@
       chip.title = (p.email || "") + " — 點擊登出";
       chip.textContent = (p.given_name || p.name || "?").charAt(0).toUpperCase();
       chip.addEventListener("click", function () {
-        UIDialog.confirm("登出雲端同步？（本機進度會保留在此裝置）", function () {
+        dlgConfirm("登出雲端同步？（本機進度會保留在此裝置）", function () {
           if (viewAs()) { exitViewAs(true); return; }
           clearToken(); lastPushedHash = null; renderUi();
         });
@@ -337,7 +341,7 @@
         if (!IN_WEBVIEW && window.google && google.accounts && google.accounts.id) {
           google.accounts.id.prompt();
         } else {
-          UIDialog.alert(WEBVIEW_MSG);
+          dlgAlert(WEBVIEW_MSG);
         }
       });
       var slot = document.createElement("div");
