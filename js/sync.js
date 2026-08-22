@@ -25,6 +25,14 @@
   function dlgConfirm(msg, ok) { if (window.UIDialog) UIDialog.confirm(msg, ok); else if (confirm(msg)) ok(); }
 
   var TOKEN_KEY = "sync.token";
+  // 長效 session（2026-08-22 Tony：「不要一直要求登入」）：Google ID token 只有 1 小時，
+  // 又存在 sessionStorage，關掉分頁就沒了 → 手機幾乎每次開站都要重登。
+  // 改成登入後打 POST /api/session 換一顆後端簽的 30 天 token 存 localStorage，
+  // 每次開頁再換新（滾動續期，30 天內有用過就不會過期）。後端本來就有這支。
+  // ⚠️ 這兩個 key 不能用 PREFIX 開頭：gatherKeys() 會把 PREFIX 開頭的 key 整包推上雲端，
+  //    再同步到別台裝置 —— token 會跟著跑到別人的瀏覽器。
+  var SESS_KEY = "sync.sess";
+  var PROFILE_KEY = "sync.profile";
   var PREFIX = "mathwu";              // 同步所有這個前綴的 key（主 state 在 mathwu-v1）
   var MAIN_KEY = "mathwu-v1";
   var SYNC_TS_KEY = "mathwu.sync_ts";
@@ -34,9 +42,17 @@
   var lastPushedHash = null;
   var grants = { granted: [], received: [] };
 
-  function token() { try { return sessionStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; } }
+  function ls(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
+  // 長效 token 優先；剛登入還沒換到手時才用 sessionStorage 裡的 Google ID token
+  function token() { try { return ls(SESS_KEY) || sessionStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; } }
   function setToken(t) { try { sessionStorage.setItem(TOKEN_KEY, t); } catch (e) {} }
-  function clearToken() { try { sessionStorage.removeItem(TOKEN_KEY); } catch (e) {} }
+  function setSess(t) {
+    try { localStorage.setItem(SESS_KEY, t); sessionStorage.removeItem(TOKEN_KEY); } catch (e) {}
+  }
+  function clearToken() {
+    try { sessionStorage.removeItem(TOKEN_KEY); } catch (e) {}
+    try { localStorage.removeItem(SESS_KEY); localStorage.removeItem(PROFILE_KEY); } catch (e) {}
+  }
 
   function viewAs() {
     try { return JSON.parse(sessionStorage.getItem(VIEWAS_KEY) || "null"); } catch (e) { return null; }
@@ -48,13 +64,35 @@
     } catch (e) {}
   }
 
-  function jwtPayload(t) {
-    try { return JSON.parse(atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))); }
+  function b64Payload(seg) {
+    try { return JSON.parse(atob(seg.replace(/-/g, "+").replace(/_/g, "/"))); }
     catch (e) { return null; }
   }
+  function jwtPayload(t) { return t ? b64Payload(String(t).split(".")[1] || "") : null; }
+  function profile() { try { return JSON.parse(ls(PROFILE_KEY) || "null"); } catch (e) { return null; } }
+  // 兩種 token 格式都吃：sess.<payload>.<sig>（後端 HMAC，payload {e:email, s:sub, x:到期毫秒}）
+  // 與 Google ID token（JWT）
   function signedIn() {
-    var p = jwtPayload(token());
+    var t = token();
+    if (!t) return null;
+    if (t.indexOf("sess.") === 0) {
+      var s = b64Payload(t.split(".")[1] || "");
+      if (!s || !s.e || !(s.x > Date.now())) return null;
+      var pr = profile() || {};
+      return { email: s.e, sub: s.s, exp: Math.floor(s.x / 1000), name: pr.name, given_name: pr.given_name };
+    }
+    var p = jwtPayload(t);
     return p && p.exp * 1000 > Date.now() ? p : null;
+  }
+
+  // 拿現有 token（Google ID token 或還沒過期的 sess）換一顆新的 30 天 token。
+  // 登入當下呼叫一次，之後每次開頁再呼叫一次 → 只要 30 天內開過站就永遠不用重登。
+  function refreshSession(done) {
+    if (!token()) { if (done) done("no token"); return; }
+    grantsApi("POST", "/api/session", {}, function (err, res) {
+      if (!err && res && res.token) { setSess(res.token); renderUi(); }
+      if (done) done(err || null);
+    });
   }
 
   function gatherKeys() {
@@ -317,7 +355,7 @@
       var chip = document.createElement("button");
       chip.className = "chip sync-chip";
       chip.title = (p.email || "") + " — 點擊登出";
-      chip.textContent = (p.given_name || p.name || "?").charAt(0).toUpperCase();
+      chip.textContent = (p.given_name || p.name || p.email || "?").charAt(0).toUpperCase();
       chip.addEventListener("click", function () {
         dlgConfirm("登出雲端同步？（本機進度會保留在此裝置）", function () {
           if (viewAs()) { exitViewAs(true); return; }
@@ -364,13 +402,23 @@
   function onCredential(resp) {
     if (!resp || !resp.credential) return;
     setToken(resp.credential);
+    // sess token 裡只有 email，頭像字母要用的名字先留一份在本機
+    var p = jwtPayload(resp.credential) || {};
+    try {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify({
+        email: p.email || "", name: p.name || "", given_name: p.given_name || "",
+      }));
+    } catch (e) {}
     renderUi();
     setStatus("同步中…");
     loadGrants();
-    if (viewAs()) return;   // 檢視模式中重新登入（token 過期），不動資料
-    pull(function (err, applied) {
-      if (applied) { location.reload(); return; }
-      push();
+    if (viewAs()) { refreshSession(); return; }   // 檢視模式中重新登入（token 過期），不動資料
+    // 先換長效 token 再同步：換到手才算真的「登入一次就好」
+    refreshSession(function () {
+      pull(function (err, applied) {
+        if (applied) { location.reload(); return; }
+        push();
+      });
     });
   }
 
@@ -410,7 +458,12 @@
       document.head.appendChild(s);
     }
 
-    if (signedIn()) loadGrants();
+    // 開頁時若已是登入狀態（30 天 sess token）：續期一次再拉雲端進度
+    if (signedIn()) {
+      refreshSession();
+      loadGrants();
+      if (!viewAs()) pull(function (err, applied) { if (applied) location.reload(); });
+    }
 
     setInterval(function () {
       if (!signedIn()) return;
