@@ -174,11 +174,48 @@
   }
 
   /* ---------------- 自己帳號的同步 ---------------- */
+  // 內容比對（2026-08-28）：K12Review／LanExamMock 出過「雲端比較新但內容一模一樣，
+  // 卻照樣 location.reload()，把使用者做到一半的練習打斷」的問題（Tony 兒子回報）。
+  // 這站的 pull 只在開頁與登入時跑，不會在切回分頁時觸發，但同樣先擋掉沒必要的重載。
+  function sameAsLocal(blob) {
+    if (!blob) return false;
+    var local = gatherKeys(), k;
+    for (k in blob) {
+      if (!Object.prototype.hasOwnProperty.call(blob, k)) continue;
+      if (k.indexOf(PREFIX) !== 0 || k === BACKUP_KEY) continue;
+      if (local[k] !== blob[k]) return false;
+    }
+    for (k in local) {
+      if (!Object.prototype.hasOwnProperty.call(local, k)) continue;
+      if (local[k] !== blob[k]) return false;
+    }
+    return true;
+  }
+  // 單元頁（含互動練習）進行中不重載，等使用者離開再更新
+  var reloadTimer = null;
+  function busyNow() {
+    try {
+      var el = document.getElementById("view-unit");
+      return !!(el && !el.classList.contains("hidden"));
+    } catch (e) { return false; }
+  }
+  function safeReload() {
+    if (!busyNow()) { location.reload(); return; }
+    if (reloadTimer) return;
+    setStatus("雲端有新進度，離開這頁後更新");
+    reloadTimer = setInterval(function () {
+      if (busyNow()) return;
+      clearInterval(reloadTimer); reloadTimer = null;
+      location.reload();
+    }, 3000);
+  }
+
   function pull(done) {
     api("GET", null, function (err, res) {
       if (err || !res || !res.blob) { if (done) done(err); return; }
       var serverTs = res.updatedAt || 0;
       if (serverTs > syncTs()) {
+        if (sameAsLocal(res.blob)) { setSyncTs(serverTs); if (done) done(null, false); return; }
         try {
           Object.keys(res.blob).forEach(function (k) {
             if (k.indexOf(PREFIX) === 0 && k !== BACKUP_KEY) localStorage.setItem(k, res.blob[k]);
@@ -431,7 +468,7 @@
     // 先換長效 token 再同步：換到手才算真的「登入一次就好」
     refreshSession(function () {
       pull(function (err, applied) {
-        if (applied) { location.reload(); return; }
+        if (applied) { safeReload(); return; }
         push();
       });
     });
@@ -494,7 +531,7 @@
     if (signedIn()) {
       refreshSession();
       loadGrants();
-      if (!viewAs()) pull(function (err, applied) { if (applied) location.reload(); });
+      if (!viewAs()) pull(function (err, applied) { if (applied) safeReload(); });
     }
 
     setInterval(function () {
